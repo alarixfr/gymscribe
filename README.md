@@ -1,7 +1,7 @@
 # Gymscribe
-## An open source gym membership management app
+An open source gym membership management app
 
-Features:
+## Features:
 - Landing page
 - Add and manage gyms
 - Supabase database
@@ -10,7 +10,7 @@ Features:
 - Track members
 - Paid plans
 
-# DONATE
+## DONATE
 BTC:
 bc1que4da8sfzt25e2x72j9yx6vvxzepug97rszcls
 
