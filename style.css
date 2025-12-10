@@ -7,6 +7,10 @@
   -webkit-tap-hightlight-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 a:focus, a:active {
   outline: none;
   box-sizing: none;

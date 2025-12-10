@@ -9,7 +9,7 @@ ScrollReveal({
 ScrollReveal().reveal('.load-hidden');
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("Gymscribe")
+  console.log("Gymscribe");
 
   const menu = document.querySelector('.menu');
       
