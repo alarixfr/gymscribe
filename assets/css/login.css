@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-hightlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a:focus, a:active {
+  outline: none;
+  box-sizing: none;
+}
+
+body {
+  font-family: 'Outfit', Sans-Serif;
+  background-color: #151515
+}
+
+html.sr .load-hidden {
+  visibility: hidden;
+}
