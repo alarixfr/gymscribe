@@ -12,7 +12,7 @@
 
     <link rel="icon" type="image/x-icon" href="assets/Gymscribe.png">
     
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -20,8 +20,25 @@
     <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body>
-    <div>
-      
+    <div id="main">
+      <img id="logo" src="assets/Gymscribe.png">
+      <h1 id="form-info">Welcome Back!</h1>
+      <div id="form-select">
+        <button id="login-btn">Login</button>
+        <button id="register-btn">Register</button>
+      </div>
+      <div id="form-container">
+        <form>
+          <label for="email-input">Email</label>
+          <input id="email-input" type="email" placeholder="Type email here..." required>
+          <label for="password-input">Password</label>
+          <input id="password-input" type="password" placeholder="Secret password here..." required>
+          <button id="form-submit" type="submit">Login</button>
+          <div id="error-container">
+            <p>Error: 1234567890 :></p>
+          </div>
+        </form>
+      </div>
     </div>
 </body>
 </html>
