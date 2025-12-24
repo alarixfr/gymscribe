@@ -18,7 +18,8 @@ a:focus, a:active {
 
 body {
   font-family: 'Outfit', Sans-Serif;
-  background-color: #151515
+  background-color: #151515;
+  height: 100vh;
 }
 
 html.sr .load-hidden {
