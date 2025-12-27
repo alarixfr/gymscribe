@@ -112,7 +112,11 @@ button:hover {
   background: rgba(255, 255, 255, 0.7);
 }
 
-#active-btn {
+#form-submit:hover {
+  background: #2E8B57;
+}
+
+.active-btn {
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 2px #fff;
 }
