@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
     <script src="assets/js/dashboard.js" defer></script>
 </head>
 <body>
@@ -31,26 +32,27 @@
         <div class="burger" onclick="toggleMenu()">☰</div>
       </div>
       
-      <nav>
+      <div class="menu">
         <a href="#members">Members</a>
         <a href="#gym">Gym</a>
         <a href="#api">API</a>
         <div class="account">
           <h2>account@email.com</h2>
-          <button class="logout">LOG</button>
+          <button class="logout">LOG OUT</button>
         </div>
-      </nav>
+      </div>
     </div>
     
     <div class="main">
       <div class="dash-gym-info">
         <h1>Analytics</h1>
         <div class="gym-info-container">
-          <p class="gym-name">Gym Name</p>
+          <p class="gym-name">Untitled Gym</p>
           <p class="gym-id">Gym ID: 1234567890</p>
-          <p class="date-gym-info">01/01/2025</p>
+          <p class="date-gym-info">Monday, 01/01/2025</p>
         </div>
       </div>
+      
       <div class="analytics">
         <div class="box-container">
           <div class="box">
@@ -66,32 +68,27 @@
             <p class="box-count">100</p>
           </div>
         </div>
-        <div class="chart-data-container">
-          
-        </div>
         <div class="data-container">
-          <div class="raw-data">
-            <p class="raw-active">Active: 100</p>
-            <p class="raw-soon">Expires Soon: 100</p>
-            <p class="raw-expired">Expired: 100</p>
-            <p class="raw-all">All Members: 100</p>
+          <div class="chart-container">
+            <canvas id="chart" class="chart"></canvas>
+          </div>
+          <div class="raw-data-container">
+            <p class="raw-data">Active: 100</p>
+            <p class="raw-data">Expires Soon: 100</p>
+            <p class="raw-data">Expired: 100</p>
+            <p class="raw-data">All Members: 100</p>
+            <a class="raw-data-button" href="#member">Manage</a>
           </div>
         </div>
       </div>
+      
       <div class="list-container">
-        </div>
+        <h1>Expires Soon</h1>
         <div class="member">
-          <div class="member-data">
-            <h3>Name</h3>
-            <p>Expires in 67h</p>
-          </div>
-        </div>
-        <div class="list-container-footer">
-          <button class="list-buttons">Manage</button>
+          <h3>Name</h3>
+          <p>Expires in 67h</p>
         </div>
       </div>
     </div>
-    
-    <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

@@ -3,6 +3,11 @@ let method = 'login';
 const message = document.getElementById('form-info');
 const loginBtn = document.getElementById('login-btn');
 const registerBtn = document.getElementById('register-btn');
+const submitButton = document.getElementById('form-submit');
+
+function openDashboard() {
+  window.location.replace("https://gymscribe.vercel.app/dashboard.html")
+}
 
 function toggleMethod(method) {
   if (method === "register") {
@@ -13,6 +18,7 @@ function toggleMethod(method) {
       loginBtn.classList.remove('active-btn');
     }
     message.textContent = "Hello!";
+    submitButton.textContent = "Register";
     method = "register"
   } else {
     loginBtn.disabled = true;
@@ -22,17 +28,23 @@ function toggleMethod(method) {
       registerBtn.classList.remove('active-btn');
     }
     message.textContent = "Welcome Back!";
+    submitButton.textContent = "Login";
     method = "login"
   }
 }
 
 loginBtn.addEventListener("click", (event) => {
-  toggleMethod("login");
   event.preventDefault();
+  toggleMethod("login");
 });
 registerBtn.addEventListener("click", (event) => {
-  toggleMethod("register");
   event.preventDefault();
+  toggleMethod("register");
+});
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  openDashboard();
 });
 
 document.addEventListener("DOMContentLoaded", (event) => {

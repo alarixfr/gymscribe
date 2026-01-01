@@ -91,29 +91,41 @@ label {
   color: white;
 }
 
-#form-submit {
-  margin-top: 0.4rem;
-  width: 100%;
-  padding: 0.6rem;
-  font-size: 1.1rem;
-}
-
 button {
-  background: rgba(255, 255, 255, 1);
   border: 2px solid #000;
   box-shadow: 2px 2px #000;
   display: inline-block;
-  padding: 0.5rem;
   transition: all 0.2s ease-out;
-  font-size: 1rem;
 }
 
-button:hover {
-  background: rgba(255, 255, 255, 0.7);
+.select-button {
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  background: background: rgba(255,255,255,1);;
+}
+
+.select-button:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.select-button:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+#form-submit {
+  background: rgba(46,139,87,1);
+  margin-top: 0.4rem;
+  width: 100%;
+  padding: 0.8rem 0.4rem;
+  font-size: 1.4rem;
 }
 
 #form-submit:hover {
-  background: #2E8B57;
+  background: rgba(46,139,87,0.6);
+}
+
+#form-submit:active {
+  background: rgba(46,139,87,0.25);
 }
 
 .active-btn {
