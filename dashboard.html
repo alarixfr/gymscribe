@@ -33,6 +33,7 @@
       </div>
       
       <div class="menu">
+        <a href="/dashboard.html">Analytics</a>
         <a href="#members">Members</a>
         <a href="#gym">Gym</a>
         <a href="#api">API</a>
@@ -48,13 +49,17 @@
         <h1>Analytics</h1>
         <div class="gym-info-container">
           <p class="gym-name">Untitled Gym</p>
-          <p class="gym-id">Gym ID: 1234567890</p>
+          <p class="gym-id">ID: 010120251234567890</p>
           <p class="date-gym-info">Monday, 01/01/2025</p>
         </div>
       </div>
       
       <div class="analytics">
         <div class="box-container">
+          <div class="box">
+            <p class="box-title">All Members</p>
+            <p class="box-count">100</p>
+          </div>
           <div class="box">
             <p class="box-title">Active</p>
             <p class="box-count">100</p>
@@ -73,20 +78,46 @@
             <canvas id="chart" class="chart"></canvas>
           </div>
           <div class="raw-data-container">
-            <p class="raw-data">Active: 100</p>
-            <p class="raw-data">Expires Soon: 100</p>
-            <p class="raw-data">Expired: 100</p>
-            <p class="raw-data">All Members: 100</p>
+            <p class="raw-data">Today Stats:</p>
+            <p class="raw-data">Attended: 100</p>
+            <p class="raw-data">Absence: 100</p>
             <a class="raw-data-button" href="#member">Manage</a>
           </div>
         </div>
       </div>
       
-      <div class="list-container">
-        <h1>Expires Soon</h1>
-        <div class="member">
-          <h3>Name</h3>
-          <p>Expires in 67h</p>
+      <div class="lower-section">
+        <div class="expires-soon">
+          <h1>Expires Soon</h1>
+          <div class="member-container">
+            <div class="member">
+              <h3>Alarixfr for real</h3>
+              <p>Expires in 67h</p>
+              <p>ID: 010120351234567890</p>
+            </div>
+            <div class="member">
+              <h3>Alarixfr for real</h3>
+              <p>Expires in 67h</p>
+              <p>ID: 010120351234567890</p>
+            </div>
+            <div class="member">
+              <h3>Alarixfr for real</h3>
+              <p>Expires in 67h</p>
+              <p>ID: 010120351234567890</p>
+            </div>
+          </div>
+        </div>
+        <div class="journals">
+          <h1>Journals</h1>
+          <div class="journal-container">
+            <div class="journal">
+              <h3>This day is so busy</h3>
+              <p>Very busy day for some gym out there i guess</p>
+              <p>ID: 010120251234567890</p>
+              <button class="remove-journal">Remove</button>
+            </div>
+            <button class="add-journal">New Journal</button>
+          </div>
         </div>
       </div>
     </div>

@@ -103,7 +103,7 @@ button {
   gap: 0.8rem;
 }
 
-.menu a, .logout {
+.menu a, .logout, .remove-journal {
   color: black;
   text-decoration: none;
   font-weight: 500;
@@ -116,18 +116,18 @@ button {
   display: inline-block;
 }
   
-.menu a:hover, .logout:hover {
+.menu a:hover, .logout:hover, .remove-journal:hover {
   border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow: none;
   background: none;
   color: black;
 }
 
-.logout {
+.logout, .remove-journal {
   background: rgba(237,75,75, 0.9);
 }
 
-.logout:hover {
+.logout:hover, .remove-journal:hover {
   border: 2px solid rgba(237,75,75, 0.9);
 }
 
@@ -239,7 +239,7 @@ button {
   border-radius: 8px;
 }
 
-.raw-data-button {
+.raw-data-button, .add-journal {
   display: block;
   color: black;
   margin-top: auto;
@@ -256,20 +256,73 @@ button {
   transition: all 0.2s ease;
 }
 
-.raw-data-button:hover {
+.raw-data-button:hover, .add-journal:hover {
   background: rgba(60,179,113,0.6);
   border: 2px solid #2E8B57;
 }
 
-.raw-data-button:active {
+.raw-data-button:active, .add-journal:active {
   background: rgba(60,179,113,0.25);
   border: 2px solid #2E8B57;
 }
 
-.list-container {
+.lower-section {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-flow: row;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
 }
 
-.list-container h1 {
+.journals, .expires-soon {
+  padding: 0.8rem 1.2rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.journals h1, .expires-soon h1  {
   font-size: 2.2rem;
+}
+
+.journals h3, .expires-soon h3 {
+  font-size: 1.6rem;
+}
+
+.journals p, .expires-soon p {
+  font-size: 1.25rem;
+}
+
+.expires-soon {
+  flex: 1;
+}
+
+.journals {
+  align-self: flex-start;
+  flex: 0 0 70%;
+}
+
+.journal-container, .member-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.journal, .member {
+  border-bottom: 2px solid white;
+}
+
+.remove-journal {
+  font-size: 1.4rem;
+  margin: 0.4rem 0rem;
+  padding: 0.8rem 1rem;
+}
+
+.remove-journal:hover {
+  color: white;
 }

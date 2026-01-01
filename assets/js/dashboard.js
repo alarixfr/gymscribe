@@ -1,7 +1,7 @@
 const ctx = document.getElementById('chart');
 
-const xValues = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const yValues = [0, 10, 20, 30, 40, 50];
+const xValues = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Today"];
+const yValues = [0, 30, 15, 25, 50, 25, 45];
 
 new Chart(ctx, {
   type: "line",
@@ -9,20 +9,20 @@ new Chart(ctx, {
     labels: xValues,
     datasets: [{
       fill: false,
-      lineTension: 0,
       backgroundColor: "rgba(255,255,255,1)",
       borderColor: "rgba(255,255,255,0.4)",
       data: yValues
     }]
   },
   options: {
+    responsive: true,
     plugins: {
       legend: {display:false},
       title: {
         display: true,
-        text: "Last 7 Days Data",
+        text: "Last 7 Days Attendance",
         color: "rgba(255,255,255,1)",
-        font: {size: 22}
+        font: {size: 28}
       }
     },
     scales: {
