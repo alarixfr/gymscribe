@@ -53,6 +53,8 @@ html.sr .load-hidden {
 .logo img {
   height: 4rem;
   margin-top: 0.2rem;
+  pointer-events: none;
+  user-select: none;
 }
 
 .logo-container span {
@@ -423,6 +425,10 @@ html.sr .load-hidden {
   
   .cta h1 {
     font-size: 1.9rem;
+  }
+  
+  .cta p {
+    margin: 0.2rem;
   }
   
   .footer {
