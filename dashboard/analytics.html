@@ -22,7 +22,8 @@
     <script src="/assets/js/scrollReveal.js" defer></script>
     <script src="/assets/js/navbarResponsive.js" defer></script>
     <script src="/assets/js/chart.js" defer></script>
-    <script src="/assets/js/dashboard.js" defer></script>
+    <script src="/assets/js/journals.js" defer></script>
+    <script src="/assets/js/analytics.js" defer></script>
 </head>
 <body>
     <div class="navbar">
@@ -36,13 +37,13 @@
       </div>
       
       <div class="menu">
-        <a href="/dashboard.html">Analytics</a>
-        <a href="#members">Members</a>
-        <a href="#gym">Gym</a>
-        <a href="#api">API</a>
+        <a href="/dashboard/analytics.html">Analytics</a>
+        <a href="/dashboard/members.html">Members</a>
+        <a href="/dashboard/gym.html">Gym</a>
+        <a href="/dashboard/api.html">API</a>
         <div class="account">
-          <h2>account@email.com</h2>
-          <button class="logout">LOG OUT</button>
+          <h2 id="accountEmail">account@email.com</h2>
+          <button id="logout" class="logout">LOG OUT</button>
         </div>
       </div>
     </div>
@@ -120,11 +121,11 @@
               <button class="remove-journal">Remove</button>
             </div>
           </div>
-          <div class="journal-manager">
-            <input id="journalName"  maxlength="20" placeholder="Add new journal..." type="text" required>
-            <textarea id="journalDesc" maxlength="80" cols="40" placeholder="Add journal description..." required></textarea>
-            <button class="add-journal">New Journal</button>
-          </div>
+          <form class="journal-manager">
+            <input id="journalTitleInput"  maxlength="20" placeholder="Add journal title..." type="text" required>
+            <textarea id="journalDescInput" maxlength="50" cols="40" placeholder="Add journal description..." required></textarea>
+            <button type="submit" class="add-journal">New Journal</button>
+          </form>
         </div>
       </div>
     </div>

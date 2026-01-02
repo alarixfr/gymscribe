@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members - Gymscribe</title>
+    
+    <meta name="description" content="An open source gym membership management app.">
+    <meta name="keywords" content="gym, gym management, gym members">
+    <meta name="author" content="Alaric Abyasa">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
+    
+    <link rel="stylesheet" href="/assets/css/members.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
+    <script src="/assets/js/scrollReveal.js" defer></script>
+    <script src="/assets/js/navbarResponsive.js" defer></script>
+    <script src="/assets/js/members.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+      <div class="logo-container">
+        <a href="/" class="logo"><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"></a>
+        <span>Dashboard</span>
+      </div>
+      
+      <div class="burger-container">
+        <div class="burger" onclick="toggleMenu()">☰</div>
+      </div>
+      
+      <div class="menu">
+        <a href="/dashboard/analytics.html">Analytics</a>
+        <a href="/dashboard/members.html">Members</a>
+        <a href="/dashboard/gym.html">Gym</a>
+        <a href="/dashboard/api.html">API</a>
+        <div class="account">
+          <h2 id="accountEmail">account@email.com</h2>
+          <button id="logout" class="logout">LOG OUT</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main">
+      <div class="dash-gym-info">
+        <h1>Members</h1>
+        <div class="gym-info-container">
+          <p class="gym-name">Untitled Gym</p>
+          <p class="gym-id">ID: 010120251234567890</p>
+          <p class="date-gym-info">Monday, 01/01/2025</p>
+        </div>
+      </div>
+      
+      <div class="members">
+        <div class="manager">
+          <form id="memberForm" class="member-form">
+            <label for="memberNameInput">Member Full Name:</label>
+            <input id="memberNameInput"  maxlength="20" placeholder="Member name...*" type="text" required>
+            <label for="memberEmailInput">Member Email: (optional)</label>
+            <input id="memberEmailInput" placeholder="Member email..." type="email">
+            <label for="memberPhoneInput">Member Phone Number: (optional)</label>
+            <input id="memberPhoneInput" placeholder="Member phone number..." type="number">
+            <label for="memberBirthdayInput">Member Birthday:</label>
+            <input id="memberBirthdayInput" placeholder="Select Date*" type="date" required>
+            <label for="memberNoteInput">Member Note: (optional)</label>
+            <textarea id="memberNoteInput" maxlength="30" cols="20" placeholder="Add note..."></textarea>
+            <label for="plansInput">Member Plans:</label>
+            <select id="plansInput">
+              <option value="monthly">Monthly (30d)</option>
+              <option value="yearly">Yearly (365d)</option>
+              <option value="lifetime">Lifetime (Inf)</option>
+            </select>
+            <label for="memberJoinInput">Member Join Date: (optional)</label>
+            <input id="memberJoinInput" placeholder="Select Date" type="date">
+            <button id="submit" type="submit" class="add-member">Add Member</button>
+          </form>
+          <div class="manager-notes">
+            <p>Member join date default is member data creation date</p>
+            <p>Plans are calculated after member data creation</p>
+          </div>
+        </div>
+        
+        <div class="members-container">
+          <div class="filter">
+            <div id="filterForm" class="filter-form">
+              <label for="filterInput">Search for members:</label>
+              <input id="filterInput" placeholder="Filters by name or id..." type="text">
+              <label for="filterStatusInput">Search by status:</label>
+              <select id="filterStatusInput">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="expiressoon">Expires Soon</option>
+                <option value="expired">Expired</option>
+              </select>
+            </div>
+          </div>
+          <div class="member-list">
+              <div class="member">
+                <div class="member-info">
+                  <h3 id="member-name">Alarixfr for real</h3>
+                  <p id="member-id">ID: 010120351234567890</p>
+                  <p id="member-duration">Expires in 67h</p>
+                  <p id="member-status">Status: Active</p>
+                </div>
+                <div class="member-buttons">
+                  <button id="viewBtn" class="view-button">View Details</button>
+                  <button id="editBtn" class="edit-button">Edit</button>
+                  <button id="renewBtn" class="renew-btn">Renew</button>
+                  <button id="removeBtn" class="remove-btn">Remove</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
