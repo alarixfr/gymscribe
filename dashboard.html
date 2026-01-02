@@ -19,6 +19,9 @@
     
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
+    <script src="assets/js/scrollReveal.js" defer></script>
+    <script src="assets/js/navbarResponsive.js" defer></script>
+    <script src="assets/js/chart.js" defer></script>
     <script src="assets/js/dashboard.js" defer></script>
 </head>
 <body>
@@ -116,6 +119,10 @@
               <p>ID: 010120251234567890</p>
               <button class="remove-journal">Remove</button>
             </div>
+          </div>
+          <div class="journal-manager">
+            <input id="journalName"  maxlength="40" placeholder="Add new journal..." type="text" required>
+            <textarea id="journalDesc" maxlength="100" cols="30" placeholder="Add journal description..." required></textarea>
             <button class="add-journal">New Journal</button>
           </div>
         </div>

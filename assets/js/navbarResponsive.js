@@ -1,16 +1,4 @@
-ScrollReveal({
-  reset: false,
-  delay: 100,
-  origin: 'bottom',
-  distance: '40px',
-  easing: 'ease-out'
-});
-
-ScrollReveal().reveal('.load-hidden');
-
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("Gymscribe");
-
   const menu = document.querySelector('.menu');
       
   function toggleMenu() {
