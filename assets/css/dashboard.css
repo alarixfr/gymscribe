@@ -349,7 +349,7 @@ button {
   padding: 0.35rem;
   font-size: 1.45rem;
   text-align: left;
-  font: Outfit;
+  font: 'Outfit';
 }
 
 .journal-manager input {
@@ -362,6 +362,18 @@ button {
 
 .add-journal {
   margin-top: 6px;
+}
+
+textarea {
+  resize: vertical;
+  padding: 0.35rem;
+  font-size: 1.45rem;
+  font-family: 'Outfit';
+}
+
+textarea::placeholder {
+  font-size: 1.45rem;
+  font-family: 'Outfit';
 }
 
 @media (max-width: 1024px) {
