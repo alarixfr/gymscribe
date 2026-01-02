@@ -220,7 +220,7 @@ button {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  width: fit-children;
+  width: 100%;
 }
 
 .raw-data-container {
@@ -231,8 +231,7 @@ button {
 }
 
 .chart {
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   padding: 0.4rem;
 }
 
@@ -365,7 +364,7 @@ button {
   margin-top: 6px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .logo img {
     height: 2.2rem;
   }
@@ -489,8 +488,6 @@ button {
   
   .chart {
     width: 100%;
-    height: auto;
-    max-height: none;
-    max-width: none;
+    height: 100%;
   }
 }
