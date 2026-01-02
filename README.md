@@ -1,7 +1,8 @@
 # Gymscribe
 An open source gym membership management app for gym owners and everyone with supabase integration for database.
 
-![Gymscribe Logo](assets/GymscribeBanner.png "Gymscribe Logo")
+![Gymscribe Logo](/assets/img/GymscribeBanner.png "Gymscribe Logo")
+
 ![Hakatime Stats](https://hackatime-badge.hackclub.com/U09EB9V2NBB/gymscribe "Hakatime Stats")
 
 ## Features:
@@ -9,6 +10,7 @@ An open source gym membership management app for gym owners and everyone with su
 - Track attendace
 - Journals
 - Gym RESTAPI
+- Altcha captcha
 - Supabase database
 
 ## DONATE
