@@ -216,6 +216,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .filter {
@@ -607,5 +608,36 @@ textarea::placeholder {
   
   .account {
     flex-direction: column;
+  }
+  
+  .members {
+    flex-direction: column;
+  }
+  
+  .container-header {
+    flex-direction: column;
+  }
+  
+  .manager {
+    flex: 1;
+  }
+  
+  .members-container {
+    flex: 1;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .container-header {
+    justify-content: center;
+  }
+  
+  .export-button {
+    margin-left: none;
+    margin-right: none;
+    flex-grow: 1;
+    width: 100%;
   }
 }
