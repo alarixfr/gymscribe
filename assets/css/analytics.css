@@ -365,7 +365,6 @@ button {
 }
 
 textarea {
-  resize: vertical;
   padding: 0.35rem;
   font-size: 1.45rem;
   font-family: 'Outfit';

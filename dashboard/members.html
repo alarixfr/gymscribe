@@ -58,44 +58,54 @@
       
       <div class="members">
         <div class="manager">
+          <h1 class="container-title">Add New Member</h1>
           <form id="memberForm" class="member-form">
-            <label for="memberNameInput">Member Full Name:</label>
-            <input id="memberNameInput"  maxlength="20" placeholder="Member name...*" type="text" required>
-            <label for="memberEmailInput">Member Email: (optional)</label>
+            <label for="memberNameInput">Full Name:</label>
+            <input id="memberNameInput"  maxlength="20" placeholder="Member name..." type="text" required>
+            <label for="memberEmailInput">Email: (optional)</label>
             <input id="memberEmailInput" placeholder="Member email..." type="email">
-            <label for="memberPhoneInput">Member Phone Number: (optional)</label>
+            <label for="memberPhoneInput">Phone Number: (optional)</label>
             <input id="memberPhoneInput" placeholder="Member phone number..." type="number">
-            <label for="memberBirthdayInput">Member Birthday:</label>
-            <input id="memberBirthdayInput" placeholder="Select Date*" type="date" required>
-            <label for="memberNoteInput">Member Note: (optional)</label>
+            <label for="memberBirthdayInput">Birthday: (optional)</label>
+            <input id="memberBirthdayInput" type="date">
+            <label for="memberNoteInput">Note: (optional)</label>
             <textarea id="memberNoteInput" maxlength="30" cols="20" placeholder="Add note..."></textarea>
-            <label for="plansInput">Member Plans:</label>
+            <label for="plansInput">Select Plans:</label>
             <select id="plansInput">
               <option value="monthly">Monthly (30d)</option>
               <option value="yearly">Yearly (365d)</option>
               <option value="lifetime">Lifetime (Inf)</option>
             </select>
-            <label for="memberJoinInput">Member Join Date: (optional)</label>
-            <input id="memberJoinInput" placeholder="Select Date" type="date">
-            <button id="submit" type="submit" class="add-member">Add Member</button>
+            <button id="submit" type="submit" class="submit-button">Add Member</button>
           </form>
           <div class="manager-notes">
-            <p>Member join date default is member data creation date</p>
-            <p>Plans are calculated after member data creation</p>
+            <p class="info">Plans are calculated after member data creation</p>
           </div>
         </div>
         
         <div class="members-container">
+          <div class="container-header">
+            <h1 class="container-title">Member List</h1>
+            <button id="exportBtn" class="export-button">Export To .CSV</button>
+          </div>
           <div class="filter">
             <div id="filterForm" class="filter-form">
               <label for="filterInput">Search for members:</label>
               <input id="filterInput" placeholder="Filters by name or id..." type="text">
+              
               <label for="filterStatusInput">Search by status:</label>
               <select id="filterStatusInput">
                 <option value="all">All</option>
                 <option value="active">Active</option>
                 <option value="expiressoon">Expires Soon</option>
                 <option value="expired">Expired</option>
+              </select>
+              
+              <label for="filterAttendanceInput">Search by attendance:</label>
+              <select id="filterAttendanceInput">
+                <option value="all">All</option>
+                <option value="true">Checked-In</option>
+                <option value="false">Absence</option>
               </select>
             </div>
           </div>
@@ -106,12 +116,38 @@
                   <p id="member-id">ID: 010120351234567890</p>
                   <p id="member-duration">Expires in 67h</p>
                   <p id="member-status">Status: Active</p>
+                  <p id="member-attendance">Attendance: Checked-In</p>
                 </div>
                 <div class="member-buttons">
-                  <button id="viewBtn" class="view-button">View Details</button>
-                  <button id="editBtn" class="edit-button">Edit</button>
-                  <button id="renewBtn" class="renew-btn">Renew</button>
-                  <button id="removeBtn" class="remove-btn">Remove</button>
+                  <div class="action-buttons">
+                    <button id="viewBtn" class="yellow-button">View Details</button>
+                    <button id="editBtn" class="blue-button">Edit</button>
+                    <button id="renewBtn" class="cyan-button">Renew</button>
+                    <button id="removeBtn" class="red-button">Remove</button>
+                  </div>
+                  <div class="attendance-buttons">
+                    <button id="attendanceBtn">Mark As Attended</button>
+                  </div>
+                </div>
+              </div>
+              <div class="member">
+                <div class="member-info">
+                  <h3 id="member-name">Alarixfr for real</h3>
+                  <p id="member-id">ID: 010120351234567890</p>
+                  <p id="member-duration">Expires in 67h</p>
+                  <p id="member-status">Status: Active</p>
+                  <p id="member-attendance">Attendance: Checked-in</p>
+                </div>
+                <div class="member-buttons">
+                  <div class="action-buttons">
+                    <button id="viewBtn" class="yellow-button">View Details</button>
+                    <button id="editBtn" class="blue-button">Edit</button>
+                    <button id="renewBtn" class="cyan-button">Renew</button>
+                    <button id="removeBtn" class="red-button">Remove</button>
+                  </div>
+                  <div class="attendance-buttons">
+                    <button id="attendanceBtn">Mark As Attended</button>
+                  </div>
                 </div>
               </div>
           </div>

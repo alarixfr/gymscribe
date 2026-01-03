@@ -232,14 +232,290 @@ button {
 }
 
 .member-list {
+  margin-top: 0.6rem;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+label {
+  font-size: 1.6rem;
+  width: 100%;
+}
+
+input {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  margin-bottom: 0.2rem;
+  border: 2px solid white;
+  background: none;
+  border-radius: none;
+  color: white;
+  width: 100%;
+}
+
+select {
+  padding: 0.5rem 0.2rem;
+  font-size: 1.3rem;
+  background: rgba(255,255,255,0.8);
+  width: 100%
+}
+
+textarea {
+  padding: 0.35rem;
+  font-size: 1.45rem;
+  font-family: 'Outfit';
+  background: rgba(255,255,255,0.8);
+  width: 100%;
+}
+
+textarea::placeholder {
+  color: black;
+  font-size: 1.45rem;
+  font-family: 'Outfit';
+}
+
+.submit-button, .export-button {
+  display: block;
+  color: black;
+  margin-top: auto;
+  flex-grow: 1;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem;
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(60,179,113,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover, .export-button:hover {
+  background: rgba(60,179,113,0.6);
+  border: 2px solid #2E8B57;
+}
+
+.submit-button:active, .export-button:active {
+  background: rgba(60,179,113,0.25);
+  border: 2px solid #2E8B57;
+}
+
+.info {
+  font-size: 1.1rem;
+}
+
+#memberNoteInput, #plansInput {
+  margin-bottom: 0.2rem;
+  width: 100%;
+}
+
+#plansInput {
+  margin-bottom: 0.4rem;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.65rem 0.45rem;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
   gap: 2px;
   width: 100%;
 }
 
-.member {
-  border-bottom: 2px solid white;
+.member-info {
+  width: 100%;
+}
+
+.export-button {
+  font-size: 1.4rem;
+  padding: 0.4rem 0.2rem;
+}
+
+.member-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.member-buttons .action-buttons, .member-buttons .attendance-buttons {
+  flex-grow: 1;
+  padding: 0.2rem;
+  font-size: 1.4rem;
+}
+
+.action-buttons, .attendance-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.attendance-buttons button {
+  flex-grow: 1;
+  padding: 0.4rem;
+  font-size: 1.25rem;
+  display: block;
+  color: black;
+  font: 'Outfit';
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(60,179,113,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.attendance-buttons button:hover {
+  background: rgba(60,179,113,0.6);
+  border: 2px solid #2E8B57;
+}
+
+.attendance-buttons button:active {
+  background: rgba(60,179,113,0.25);
+  border: 2px solid #2E8B57;
+}
+
+.container-header {
+  font-family: 'Outfit';
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.export-button {
+  flex: none;
+  margin-left: auto;
+  padding: 0.6rem;
+}
+
+#member-name {
+  font-size: 1.8rem;
+}
+
+#member-id, #member-duration, #member-status, #member-attendance {
+  font-size: 1.4rem;
+}
+
+.blue-button {
+  flex-grow: 1;
+  padding: 0.4rem;
+  font-size: 1.25rem;
+  display: block;
+  color: black;
+  font: 'Outfit';
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(53,102,207,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.blue-button:hover {
+  background: rgba(53,102,207, 0.6);
+  border: 2px solid #4488e699;
+}
+
+.blue-button:active {
+  background: rgba(53,102,207,0.25);
+  border: 2px solid #4488e699;
+}
+
+.red-button {
+  flex-grow: 1;
+  padding: 0.4rem;
+  font-size: 1.25rem;
+  display: block;
+  color: black;
+  font: 'Outfit';
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(243,80,80,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.red-button:hover {
+  background: rgba(243,80,80,0.6);
+  border: 2px solid #ff6b6b;
+}
+
+.red-button:active {
+  background: rgba(243,80,80,0.25);
+  border: 2px solid #ff6b6b;
+}
+
+.yellow-button {
+  flex-grow: 1;
+  padding: 0.4rem;
+  font-size: 1.25rem;
+  display: block;
+  color: black;
+  font: 'Outfit';
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(233,198,44,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.yellow-button:hover {
+  background: rgba(233,198,44,0.6);
+  border: 2px solid #F4D750;
+}
+
+.yellow-button:active {
+  background: rgba(233,198,44,0.25);
+  border: 2px solid #F4D750;
+}
+
+.cyan-button {
+  flex-grow: 1;
+  padding: 0.4rem;
+  font-size: 1.25rem;
+  display: block;
+  color: black;
+  font: 'Outfit';
+  border-radius: 0px;
+  text-decoration: none;
+  background: rgba(117,236,150,1);
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.cyan-button:hover {
+  background: rgba(117,236,150,0.6);
+  border: 2px solid #4ce9ac;
+}
+
+.cyan-button:active {
+  background: rgba(117,236,150,0.25);
+  border: 2px solid #4ce9ac;
 }
 
 @media (max-width: 1024px) {
