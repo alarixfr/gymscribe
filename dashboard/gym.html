@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym - Gymscribe</title>
+    
+    <meta name="description" content="An open source gym membership management app.">
+    <meta name="keywords" content="gym, gym management, gym members">
+    <meta name="author" content="Alaric Abyasa">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
+    
+    <link rel="stylesheet" href="/assets/css/gym.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
+    <script src="/assets/js/scrollReveal.js" defer></script>
+    <script src="/assets/js/navbarResponsive.js" defer></script>
+    <script src="/assets/js/gym.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+      <div class="logo-container">
+        <a href="/" class="logo"><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"></a>
+        <span>Dashboard</span>
+      </div>
+      
+      <div class="burger-container">
+        <div class="burger" onclick="toggleMenu()">☰</div>
+      </div>
+      
+      <div class="menu">
+        <a href="/dashboard/analytics.html">Analytics</a>
+        <a href="/dashboard/members.html">Members</a>
+        <a href="/dashboard/gym.html">Gym</a>
+        <a href="/dashboard/api.html">API</a>
+        <div class="account">
+          <h2 id="accountEmail">account@email.com</h2>
+          <button id="logout" class="logout">LOG OUT</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main">
+      <div class="dash-gym-info">
+        <h1>Gym</h1>
+        <div class="gym-info-container">
+          <p class="gym-name">Untitled Gym</p>
+          <p class="gym-id">ID: 010120251234567890</p>
+          <p class="date-gym-info">Monday, 01/01/2025</p>
+        </div>
+      </div>
+      
+      <div class="form-container">
+        <h1>Update Gym Info</h1>
+        <form id="gymSettingForm">
+          <label for="settingNameInput">Gym Name:</label>
+          <input id="settingNameInput" type="text" placeholder="Gym name..." maxlength="15">
+          <label for="settingOwnerInput">Gym Owner:</label>
+          <input id="settingOwnerInput" type="text" placeholder="Gym owner..." maxlength="15">
+          <label for="settingAddressInput">Gym Address:</label>
+          <input id="settingAddressInput" type="text" placeholder="Gym address..." maxlength="15">
+          <label for="settingDescInput">Gym Description:</label>
+          <textarea id="settingDescInput" cols="30" maxlength="50" placeholder="Gym description..."></textarea>
+          <button id="form-submit" class="submit-button" type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+</body>
+</html>
