@@ -403,11 +403,11 @@ textarea::placeholder {
   padding: 0.6rem;
 }
 
-#member-name {
+.member-name {
   font-size: 1.8rem;
 }
 
-#member-id, #member-duration, #member-status, #member-attendance {
+.member-id, .member-duration, .member-status, .member-attendance {
   font-size: 1.4rem;
 }
 

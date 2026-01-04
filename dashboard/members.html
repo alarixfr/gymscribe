@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
     
     <link rel="stylesheet" href="/assets/css/members.css">
+    <link rel="stylesheet" href="/assets/css/modal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -21,7 +22,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
     <script src="/assets/js/scrollReveal.js" defer></script>
     <script src="/assets/js/navbarResponsive.js" defer></script>
-    <script src="/assets/js/members.js" defer></script>
+    <script type="module" src="/assets/js/modal.js"></script>
+    <script type="module" src="/assets/js/members.js" defer></script>
 </head>
 <body>
     <div class="navbar">
@@ -112,41 +114,21 @@
           <div class="member-list">
               <div class="member">
                 <div class="member-info">
-                  <h3 id="member-name">Alarixfr for real</h3>
-                  <p id="member-id">ID: 010120351234567890</p>
-                  <p id="member-status">Status: Active</p>
-                  <p id="member-duration">Expires in 67h</p>
-                  <p id="member-attendance">Attendance: Checked-In</p>
+                  <h3 class="member-name">Alarixfr for real</h3>
+                  <p class="member-id">ID: 010120351234567890</p>
+                  <p class="member-status">Status: Active</p>
+                  <p class="member-duration">Expires in 67h</p>
+                  <p class="member-attendance">Attendance: Checked-in</p>
                 </div>
                 <div class="member-buttons">
                   <div class="action-buttons">
-                    <button id="viewBtn" class="yellow-button">View Details</button>
-                    <button id="editBtn" class="blue-button">Edit</button>
-                    <button id="renewBtn" class="cyan-button">Renew</button>
-                    <button id="removeBtn" class="red-button">Remove</button>
+                    <button class="view-btn yellow-button">View Details</button>
+                    <button class="edit-btn blue-button">Edit</button>
+                    <button class="renew-btn cyan-button">Renew</button>
+                    <button class="remove-btn red-button">Remove</button>
                   </div>
                   <div class="attendance-buttons">
-                    <button id="attendanceBtn">Mark As Attended</button>
-                  </div>
-                </div>
-              </div>
-              <div class="member">
-                <div class="member-info">
-                  <h3 id="member-name">Alarixfr for real</h3>
-                  <p id="member-id">ID: 010120351234567890</p>
-                  <p id="member-status">Status: Active</p>
-                  <p id="member-duration">Expires in 67h</p>
-                  <p id="member-attendance">Attendance: Checked-in</p>
-                </div>
-                <div class="member-buttons">
-                  <div class="action-buttons">
-                    <button id="viewBtn" class="yellow-button">View Details</button>
-                    <button id="editBtn" class="blue-button">Edit</button>
-                    <button id="renewBtn" class="cyan-button">Renew</button>
-                    <button id="removeBtn" class="red-button">Remove</button>
-                  </div>
-                  <div class="attendance-buttons">
-                    <button id="attendanceBtn">Mark As Attended</button>
+                    <button class="attendance-btn">Mark As Attended</button>
                   </div>
                 </div>
               </div>
@@ -154,5 +136,26 @@
         </div>
       </div>
     </div>
+    
+    <!--
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h1 class="modal-title">Details</h1>
+        <div class="modal-container">
+          <h3>Email:</h3>
+          <p>account@email.com</p>
+          <h3>Phone:</h3>
+          <p>1234567890</p>
+          <h3>Birthday:</h3>
+          <p>01/01/2026</p>
+          <h3>Note:</h3>
+          <p>Awawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawa</p>
+        </div>
+        <div class="modal-buttons">
+          <button class="red-button">Close</button>
+        </div>
+      </div>
+    </div>
+    -->
 </body>
 </html>

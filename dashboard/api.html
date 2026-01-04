@@ -84,32 +84,34 @@
           <p>Fetch the gym members data</p>
           <code>
 [
-  "membersCount":
   {
-    "all": "Integer",
-    "active": "Integer",
-    "expiresSoon": "Integer",
-    "expired": "Integer"
-  },
-  "membersList": 
-  [
+    "membersCount":
     {
-      "id": "Integer",
-      "name": "String",
-      "plan": "String",
-      "status": "String",
-      "duration": "Integer",
-      "isAttended": "Boolean",
-      "timestamp": "Integer",
-      "details": 
+      "all": "Integer",
+      "active": "Integer",
+      "expiresSoon": "Integer",
+      "expired": "Integer"
+    },
+    "membersList": 
+    [
       {
-        "email": "String",
-        "phone": "Integer",
-        "birthday': "Integer",
-        "note": "String"
+        "id": "Integer",
+        "name": "String",
+        "plan": "String",
+        "status": "String",
+        "duration": "Integer",
+        "isAttended": "Boolean",
+        "timestamp": "Integer",
+        "details": 
+        {
+          "email": "String",
+          "phone": "Integer",
+          "birthday': "Integer",
+          "note": "String"
+        }
       }
-    }
-  ]
+    ]
+  }
 ]
           </code>
         </div>
