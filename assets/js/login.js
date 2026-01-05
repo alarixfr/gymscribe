@@ -6,7 +6,7 @@ const registerBtn = document.getElementById('register-btn');
 const submitButton = document.getElementById('form-submit');
 
 function openDashboard() {
-  window.location.replace("https://gymscribe.vercel.app/dashboard/")
+  window.location.replace("https://gymscribe.vercel.app/dashboard/analytics.html");
 }
 
 function toggleMethod(method) {
