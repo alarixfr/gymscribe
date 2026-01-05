@@ -260,7 +260,7 @@ select {
   padding: 0.5rem 0.2rem;
   font-size: 1.3rem;
   background: rgba(255,255,255,0.8);
-  width: 100%
+  width: 100%;
 }
 
 textarea {
@@ -269,12 +269,17 @@ textarea {
   font-family: 'Outfit';
   background: rgba(255,255,255,0.8);
   width: 100%;
+  resize: none;
 }
 
 textarea::placeholder {
   color: black;
   font-size: 1.45rem;
   font-family: 'Outfit';
+}
+
+#submit {
+  margin-top: 0.4rem;
 }
 
 .submit-button, .export-button {
