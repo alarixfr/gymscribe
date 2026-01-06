@@ -19,17 +19,17 @@ function toggleMethod(method) {
     }
     message.textContent = "Hello!";
     submitButton.textContent = "Register";
-    method = "register"
+    method = "register";
   } else {
     loginBtn.disabled = true;
     registerBtn.disabled = false;
-    loginBtn.classList.add('active-btn')
+    loginBtn.classList.add('active-btn');
     if (registerBtn.classList.contains('active-btn')) {
       registerBtn.classList.remove('active-btn');
     }
     message.textContent = "Welcome Back!";
     submitButton.textContent = "Login";
-    method = "login"
+    method = "login";
   }
 }
 
@@ -49,4 +49,4 @@ submitButton.addEventListener("click", (event) => {
 
 document.addEventListener("DOMContentLoaded", (event) => {
   toggleMethod("login");
-})
+});
