@@ -18,7 +18,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="/assets/js/login.js" defer></script>
+    <script async defer src="https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.min.js" type="module"></script>
+    <script async defer src="/assets/js/altcha.js" type="module"></script>
+    <script async defer src="/assets/js/api.js" type="module"></script>
+    <script async defer src="/assets/js/login.js" type="module"></script>
 </head>
 <body>
     <div id="main">
@@ -34,9 +37,11 @@
           <input id="email-input" type="email" placeholder="Type email here..." required>
           <label for="password-input">Password</label>
           <input id="password-input" type="password" placeholder="Secret password here..." required>
+          <p>Captcha: (this might take a few minutes)</p>
+          <altcha-widget challengeurl="https://gymscribe.up.railway.app/auth/challenge" credentials="omit"></altcha-widget>
           <button id="form-submit" type="submit">Login</button>
           <div id="error-container">
-            <p>Error: 1234567890</p>
+            <p id="error-message">Error: 1234567890</p>
           </div>
         </form>
       </div>
