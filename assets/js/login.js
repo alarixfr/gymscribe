@@ -57,7 +57,7 @@ registerBtn.addEventListener("click", (event) => {
   toggleMethod("register");
 });
 
-submitButton.addEventListener("click", (event) => {
+submitButton.addEventListener("click", async (event) => {
   event.preventDefault();
   
   const emailInput = document.getElementById('email-input').value;
@@ -83,13 +83,27 @@ submitButton.addEventListener("click", (event) => {
     }
     
     if (method === 'register') {
-      register(emailInput, passwordInput, altchaPayload).then(result => {
-        console.log(`User Registered: ${result.user}`);
-      });
+      const result = await register(emailInput, passwordInput, altchaPayload.payload);
+      altchaPayload = null;
+      altchaWidget.reset();
+      
+      if (result.error) {
+        errorMessageToggle('block');
+        errorMessage.textContent = result.error;
+        return;
+      }
+      console.log(result.user);
     } else if (method === 'login') {
-      login(emailInput, passwordInput, altchaPayload).then(result => {
-        console.log(`Logged In: ${result.user}`);
-      });
+      const result = await login(emailInput, passwordInput, altchaPayload.payload);
+      altchaPayload = null;
+      altchaWidget.reset();
+      
+      if (result.error) {
+        errorMessageToggle('block');
+        errorMessage.textContent = result.error;
+        return;
+      }
+      console.log(result.user);
     } else {
       throw new Error('Invalid Method');
     }

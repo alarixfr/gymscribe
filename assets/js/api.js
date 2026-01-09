@@ -20,12 +20,12 @@ async function getChallenge() {
     const data = await response.json();
     
     if (!response.ok) {
-      throw new Error('Failed to fetch altcha challenge');
+      throw new Error(data.error || 'Failed to fetch altcha challenge');
     }
     
     return data.challenge;
   } catch (error) {
-    console.warn(`Error: ${error.message}`);
+    return { error: error.message };
   }
 }
 
@@ -46,7 +46,7 @@ async function register(email, password, altchaPayload) {
     const data = await response.json();
     
     if (!response.ok) {
-      throw new Error('Failed to fetch auth register');
+      throw new Error(data.error || 'Failed to fetch auth register');
     }
     
     if (isStorageExist()) {
@@ -55,7 +55,7 @@ async function register(email, password, altchaPayload) {
     
     return data;
   } catch (error) {
-    console.warn(`Error: ${error.message}`);
+    return { error: error.message };
   }
 }
 
@@ -76,7 +76,7 @@ async function login(email, password, altchaPayload) {
     const data = await response.json();
     
     if (!response.ok) {
-      throw new Error('Failed to fetch auth login');
+      throw new Error(data.error || 'Failed to fetch auth login');
     }
     
     if (isStorageExist()) {
@@ -85,7 +85,7 @@ async function login(email, password, altchaPayload) {
     
     return data;
   } catch (error) {
-    console.warn(`Error: ${error.message}`);
+    return { error: error.message };
   }
 }
 
