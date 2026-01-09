@@ -1,13 +1,15 @@
-import { API_URL, getChallenge } from './api.js';
+import { API_URL, register, login } from './api.js';
 const DASHBOARD_URL = 'https://gymscribe.vercel.app/dashboard/analytics.html';
 
 let method = 'login';
+let altchaPayload = '';
 
 const message = document.getElementById('form-info');
 const loginBtn = document.getElementById('login-btn');
 const registerBtn = document.getElementById('register-btn');
 const submitButton = document.getElementById('form-submit');
 const errorMessage = document.getElementById('error-message');
+const altchaWidget = document.querySelector('altcha-widget');
 
 function openDashboard() {
   window.location.replace(DASHBOARD_URL);
@@ -60,7 +62,6 @@ submitButton.addEventListener("click", (event) => {
   
   const emailInput = document.getElementById('email-input').value;
   const passwordInput = document.getElementById('password-input').value;
-  const altchaWidget = document.querySelector('altcha-widget');
   
   if (!emailInput.trim() || !passwordInput.trim()) {
     errorMessageToggle('block');
@@ -81,10 +82,16 @@ submitButton.addEventListener("click", (event) => {
   }
   
   try {
-    if (method === 'login') {
-      
-    } else if (method === 'register') {
-      
+    if (!altchaPayload) return;
+    
+    if (method === 'register') {
+      register(emailInput, passwordInput, altchaPayload).then(result => {
+        console.log(`User Registered: ${result.user}`);
+      });
+    } else if (method === 'login') {
+      login(emailInput, passwordInput, altchaPayload).then(result => {
+        console.log(`Logged In: ${result.user}`);
+      });
     } else {
       throw new Error('Invalid Method');
     }
@@ -93,6 +100,11 @@ submitButton.addEventListener("click", (event) => {
     errorMessage.textContent = `Error: ${error.message}`;
     if (altchaWidget) altchaWidget.reset();
   }
+});
+
+altchaWidget.addEventListener('verified', (event) => {
+  altchaPayload = event.detail;
+  errorMessageToggle('none');
 });
 
 toggleMethod("login");
