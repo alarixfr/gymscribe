@@ -1,4 +1,4 @@
-const API_URL = "https://gymscribe.up.railway.app/";
+const API_URL = "https://gymscribe.up.railway.app";
 const STORAGE_KEY = 'gymscribe-auth';
 
 function isStorageExist() {
@@ -86,6 +86,14 @@ async function login(email, password, altchaPayload) {
     return data;
   } catch (error) {
     console.warn(`Error: ${error.message}`);
+  }
+}
+
+async function getGym() {
+  try {
+    
+  } catch (error) {
+    
   }
 }
 

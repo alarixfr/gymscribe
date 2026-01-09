@@ -79,6 +79,7 @@ submitButton.addEventListener("click", (event) => {
     if (!altchaPayload) {
       errorMessageToggle('block');
       errorMessage.textContent = 'Please complete captcha';
+      return;
     }
     
     if (method === 'register') {
