@@ -31,7 +31,7 @@ async function getChallenge() {
 
 async function register(email, password, altchaPayload) {
   try {
-    const response = fetch(`${API_URL}/auth/register`, {
+    const response = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ async function register(email, password, altchaPayload) {
 
 async function login(email, password, altchaPayload) {
   try {
-    const response = fetch(`${API_URL}/auth/login`, {
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
