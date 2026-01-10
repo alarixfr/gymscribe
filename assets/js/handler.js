@@ -219,6 +219,38 @@ async function updateGymInfo(gymData) {
   }
 }
 
+async function getMembers() {
+  try {
+    requireAuth();
+    
+    const token = getToken();
+    const gymInfo = await getGymInfo();
+    
+    if (gymInfo.error) throw new Error(gymInfo.error);
+    
+    const timezone = gymInfo.timezone;
+    
+    const response = await fetch(`${API_URL}/members`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': "application/json",
+        "Authorization": `Bearer ${token}`,
+        "x-timezone": timezone
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to fetch gym members');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export {
   API_URL,
   DASHBOARD_URL,
@@ -232,5 +264,6 @@ export {
   register,
   login,
   getGymInfo,
-  updateGymInfo
+  updateGymInfo,
+  getMembers
 };
