@@ -1,3 +1,3 @@
-import { init } from './api.js';
+import { init } from './handler.js';
 
 init();

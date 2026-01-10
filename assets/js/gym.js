@@ -1,4 +1,4 @@
-import { init,updateGymInfo } from './api.js';
+import { init,updateGymInfo } from './handler.js';
 import { initGymInfo } from './getGymInfo.js';
 
 const form = document.getElementById('gymSettingForm');

@@ -1,4 +1,4 @@
-import { openDashboard, isAuthenticated, register, login } from './api.js';
+import { openDashboard, isAuthenticated, register, login } from './handler.js';
 
 let method = 'login';
 let altchaPayload = '';

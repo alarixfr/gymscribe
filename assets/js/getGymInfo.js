@@ -1,4 +1,4 @@
-import { getGymInfo } from './api.js';
+import { getGymInfo } from './handler.js';
 
 function getDate() {
   const now = new Date();

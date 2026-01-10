@@ -1,11 +1,5 @@
-const targetUrl = 'https://gymscribe.vercel.app/dashboard/analytics.html';
+import { openDashboard, requireAuth, init } from './handler.js';
 
-function redirect() {
-  setTimeout(() => {
-    window.location.replace(targetUrl);
-  }, 500);
-}
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  redirect();
-});
+setTimeout(() => {
+  if (requireAuth()) openDashboard();
+}, 1000);
