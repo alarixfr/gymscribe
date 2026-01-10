@@ -68,7 +68,7 @@ function requireAuth() {
   return true;
 }
 
-async function initDashboard() {
+async function init() {
   if (!requireAuth) {
     return;
   }
@@ -166,11 +166,56 @@ async function login(email, password, altchaPayload) {
   }
 }
 
-async function getGym() {
+async function getGymInfo() {
   try {
+    requireAuth();
     
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/gym`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to fetch gym details');
+    }
+    
+    return data;
   } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function updateGymInfo(gymData) {
+  try {
+    requireAuth();
     
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/gym`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(gymData)
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to update gym details');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
   }
 }
 
@@ -181,8 +226,10 @@ export {
   getToken,
   logout,
   requireAuth,
-  initDashboard,
+  init,
   getChallenge,
   register,
-  login
+  login,
+  getGymInfo,
+  updateGymInfo
 };
