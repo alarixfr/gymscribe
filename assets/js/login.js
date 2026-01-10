@@ -1,5 +1,4 @@
-import { API_URL, register, login } from './api.js';
-const DASHBOARD_URL = 'https://gymscribe.vercel.app/dashboard/analytics.html';
+import { openDashboard, isAuthenticated, register, login } from './api.js';
 
 let method = 'login';
 let altchaPayload = '';
@@ -12,10 +11,6 @@ const errorMessage = document.getElementById('error-message');
 const confirmPassword = document.querySelectorAll('.confirm-password');
 const confirmPasswordInput = document.getElementById('confirm-password');
 const altchaWidget = document.querySelector('altcha-widget');
-
-function openDashboard() {
-  window.location.replace(DASHBOARD_URL);
-}
 
 function errorMessageToggle(type) {
   if (type === "block") {
@@ -122,6 +117,7 @@ submitButton.addEventListener("click", async (event) => {
       confirmPasswordInput.value = '';
       
       console.log(result.user);
+      openDashboard();
     } else if (method === 'login') {
       const result = await login(emailInput, passwordInput, altchaPayload.payload);
       altchaPayload = null;
@@ -137,6 +133,7 @@ submitButton.addEventListener("click", async (event) => {
       confirmPasswordInput.value = '';
       
       console.log(result.user);
+      openDashboard();
     } else {
       throw new Error('Invalid Method');
     }
@@ -155,6 +152,8 @@ altchaWidget.addEventListener('verified', (event) => {
   altchaPayload = event.detail;
   errorMessageToggle('none');
 });
+
+if (isAuthenticated()) openDashboard();
 
 toggleMethod("login");
 errorMessageToggle("none");
