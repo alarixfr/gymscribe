@@ -80,11 +80,15 @@ label {
 }
 
 #email-input {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
 }
 
 #password-input {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+#confirm-password {
+  margin-bottom: 0.4rem;
 }
 
 #form-info {

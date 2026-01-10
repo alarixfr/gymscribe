@@ -9,6 +9,8 @@ const loginBtn = document.getElementById('login-btn');
 const registerBtn = document.getElementById('register-btn');
 const submitButton = document.getElementById('form-submit');
 const errorMessage = document.getElementById('error-message');
+const confirmPassword = document.querySelectorAll('.confirm-password');
+const confirmPasswordInput = document.getElementById('confirm-password');
 const altchaWidget = document.querySelector('altcha-widget');
 
 function openDashboard() {
@@ -25,6 +27,10 @@ function errorMessageToggle(type) {
 
 function toggleMethod(type) {
   if (type === "register") {
+    confirmPassword.forEach((element) => {
+      element.style.display = 'block';
+    });
+    
     registerBtn.disabled = true;
     loginBtn.disabled = false;
     registerBtn.classList.add('active-btn');
@@ -35,6 +41,10 @@ function toggleMethod(type) {
     submitButton.textContent = "Register";
     method = "register";
   } else {
+    confirmPassword.forEach((element) => {
+      element.style.display = 'none';
+    });
+    
     loginBtn.disabled = true;
     registerBtn.disabled = false;
     loginBtn.classList.add('active-btn');
@@ -69,11 +79,26 @@ submitButton.addEventListener("click", async (event) => {
     return;
   }
   
+  if (method === 'register' && confirmPasswordInput.style.display === 'block') {
+    if (confirmPasswordInput.value.trim() !== passwordInput.trim()){
+      errorMessageToggle('block');
+      errorMessage.textContent = 'Confirm password is different';
+      return;
+    }
+  }
+  
   if (passwordInput.length < 6) {
     errorMessageToggle('block');
     errorMessage.textContent = 'Password need to be 6 characters or more!';
     return;
   }
+  
+  submitButton.disabled = true;
+  loginBtn.disabled = true;
+  registerBtn.disabled = true;
+  errorMessageToggle('none');
+  
+  submitButton.textContent = method === 'register' ? 'Registering...' : 'Logging In...';
   
   try {
     if (!altchaPayload) {
@@ -92,6 +117,10 @@ submitButton.addEventListener("click", async (event) => {
         errorMessage.textContent = result.error;
         return;
       }
+      
+      document.getElementById('password-input').value = '';
+      confirmPasswordInput.value = '';
+      
       console.log(result.user);
     } else if (method === 'login') {
       const result = await login(emailInput, passwordInput, altchaPayload.payload);
@@ -103,6 +132,10 @@ submitButton.addEventListener("click", async (event) => {
         errorMessage.textContent = result.error;
         return;
       }
+      
+      document.getElementById('password-input').value = '';
+      confirmPasswordInput.value = '';
+      
       console.log(result.user);
     } else {
       throw new Error('Invalid Method');
@@ -111,6 +144,10 @@ submitButton.addEventListener("click", async (event) => {
     errorMessageToggle('block');
     errorMessage.textContent = `Error: ${error.message}`;
     if (altchaWidget) altchaWidget.reset();
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = method === 'register' ? 'Register' : 'Login';
+    toggleMethod(method);
   }
 });
 
@@ -121,3 +158,7 @@ altchaWidget.addEventListener('verified', (event) => {
 
 toggleMethod("login");
 errorMessageToggle("none");
+
+confirmPassword.forEach((element) => {
+  element.style.display = 'none';
+});
