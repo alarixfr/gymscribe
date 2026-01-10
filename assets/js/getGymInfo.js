@@ -19,6 +19,7 @@ async function initGymInfo() {
   const date = document.getElementById('gymInfoDate');
   
   try {
+    date.textContent = getDate();
     gymName.textContent = 'Fetching gym data...';
     gymId.textContent = 'Fetching gym data...';
     
@@ -30,10 +31,11 @@ async function initGymInfo() {
       gymName.textContent = gym.name;
     }
     gymId.textContent = `ID: ${gym.id}`;
-    date.textContent = getDate();
   } catch (error) {
     console.error(`Error fetching gym info: ${error.message}`);
   }
 }
 
 initGymInfo();
+
+export { initGymInfo };
