@@ -1,4 +1,4 @@
-import { init } from './handler.js';
+import { init, getMembers } from './handler.js';
 
 const allCount = document.getElementById('allCount');
 const activeCount = document.getElementById('activeCount');
@@ -7,25 +7,27 @@ const expiredCount = document.getElementById('expiredCount');
 const attendedCount = document.getElementById('attendedCount');
 const absenceCount = document.getElementById('absenceCount');
 
-let member;
+let members;
 
 async function loadMembers() {
   try {
     await init();
-    allCount.textContent = 'Fetching...';
-    activeCount.textContent = 'Fetching...';
-    expiresSoonCount.textContent = 'Fetching...';
-    expiredCount.textContent = 'Fetching...';
     
-    await init();
-    members = await getMembers();
+    allCount.textContent = 'Fetching';
+    activeCount.textContent = 'Fetching';
+    expiresSoonCount.textContent = 'Fetching';
+    expiredCount.textContent = 'Fetching';
+    
+    const memberData = await getMembers();
     
     if (members?.error) throw new Error(members.error);
     
-    allCount.textContent = members.membersCount.all;
-    activeCount.textContent = members.membersCount.active;
-    expiresSoonCount.textContent = members.membersCount.expiresSoon;
-    expiredCount.textContent = members.membersCount.expired;
+    allCount.textContent = memberData.membersCount.all;
+    activeCount.textContent = memberData.membersCount.active;
+    expiresSoonCount.textContent = memberData.membersCount.expiresSoon;
+    expiredCount.textContent = memberData.membersCount.expired;
+    
+    members = memberData.membersList;
   } catch (error) {
     console.error(error.message);
   }
