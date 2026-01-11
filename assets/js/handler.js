@@ -2,6 +2,9 @@ const API_URL = "https://gymscribe.up.railway.app";
 const DASHBOARD_URL = 'https://gymscribe.vercel.app/dashboard/analytics.html';
 const LOGIN_URL = 'https://gymscribe.vercel.app/login.html';
 const STORAGE_KEY = 'gymscribe-auth';
+const EMAIL_KEY = 'gymscribe-email';
+const ATTENDANCE_KEY = 'gymscribe-attendance';
+const ATTENDANCE_LAST_KEY = 'gymscribe-attendance-last';
 
 function openDashboard() {
   window.location.replace(DASHBOARD_URL);
@@ -56,7 +59,11 @@ async function verifyToken() {
 }
 
 function logout() {
-  localStorage.removeItem(gymscribe-auth);
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(EMAIL_KEY);
+  localStorage.removeItem(ATTENDANCE_KEY);
+  localStorage.removeItem(ATTENDANCE_LAST_KEY);
+  
   openLogin();
 }
 
@@ -128,6 +135,7 @@ async function register(email, password, altchaPayload) {
     
     if (isStorageExist()) {
       localStorage.setItem(STORAGE_KEY, data.token);
+      localStorage.setItem(EMAIL_KEY, data.user.email);
     }
     
     return data;
@@ -158,6 +166,7 @@ async function login(email, password, altchaPayload) {
     
     if (isStorageExist()) {
       localStorage.setItem(STORAGE_KEY, data.token);
+      localStorage.setItem(EMAIL_KEY, data.user.email);
     }
     
     return data;
@@ -254,7 +263,11 @@ async function getMembers() {
 export {
   API_URL,
   DASHBOARD_URL,
+  EMAIL_KEY,
+  ATTENDANCE_KEY,
+  ATTENDANCE_LAST_KEY,
   openDashboard,
+  isStorageExist,
   isAuthenticated,
   getToken,
   logout,

@@ -74,6 +74,12 @@ submitButton.addEventListener("click", async (event) => {
     return;
   }
   
+  if (emailInput.length > 100 || passwordInput.length > 100) {
+    errorMessageToggle('block');
+    errorMessage.textContent = 'Max 100 characters!';
+    return;
+  }
+  
   if (method === 'register' && confirmPasswordInput.style.display === 'block') {
     if (confirmPasswordInput.value.trim() !== passwordInput.trim()){
       errorMessageToggle('block');
@@ -99,6 +105,7 @@ submitButton.addEventListener("click", async (event) => {
     if (!altchaPayload) {
       errorMessageToggle('block');
       errorMessage.textContent = 'Please complete captcha';
+      
       return;
     }
     

@@ -1,4 +1,5 @@
 import { init, getMembers } from './handler.js';
+import { saveTodayAttendance, createAttendanceChart, updateAttendanceChart } from './attendance.js';
 
 const expiresSoonContainer = document.getElementById('expiresSoonContainer');
 const allCount = document.getElementById('allCount');
@@ -7,6 +8,7 @@ const expiresSoonCount = document.getElementById('expiresSoonCount');
 const expiredCount = document.getElementById('expiredCount');
 const attendedCount = document.getElementById('attendedCount');
 const absenceCount = document.getElementById('absenceCount');
+const chart = 'attendanceChart';
 
 let members;
 
@@ -40,6 +42,9 @@ async function loadMembers() {
     
     attendedCount.textContent = `Attended: ${attendedToday.length}`;
     absenceCount.textContent = `Absence: ${absenceToday.length}`;
+    
+    saveTodayAttendance(attendedToday.length);
+    updateAttendanceChart(chart);
     
     if (expiresSoonMember.length <= 0) {
       const noneElement = document.createElement('p');
@@ -81,3 +86,4 @@ function generateMember(name, expires, id) {
 }
 
 loadMembers();
+createAttendanceChart(chart);

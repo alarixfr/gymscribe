@@ -1,4 +1,4 @@
-import { getGymInfo } from './handler.js';
+import { getGymInfo, logout, EMAIL_KEY } from './handler.js';
 
 function getDate() {
   const now = new Date();
@@ -11,6 +11,25 @@ function getDate() {
   });
   
   return formattedDate;
+}
+
+function account() {
+  const email = document.getElementById('accountEmail');
+  const logoutBtn = document.getElementById('logout');
+  
+  if (email) {
+    const userEmail = localStorage.getItem(EMAIL_KEY);
+    
+    if (userEmail) {
+      email.textContent = userEmail.split('@')[0].slice(0, 16);
+    }
+  }
+  
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (event) => {
+      logout();
+    });
+  }
 }
 
 async function initGymInfo() {
@@ -36,6 +55,7 @@ async function initGymInfo() {
   }
 }
 
+account();
 initGymInfo();
 
 export { initGymInfo };
