@@ -24,6 +24,7 @@
     <script src="/assets/js/journals.js" defer></script>
     <script async type="module" src="/assets/js/handler.js" defer></script>
     <script async type="module" src="/assets/js/getGymInfo.js" defer></script>
+    <script async type="module" src="/assets/js/attendance.js" defer></script>
     <script async type="module" src="/assets/js/analytics.js" defer></script>
 </head>
 <body>
@@ -63,19 +64,19 @@
         <div class="box-container">
           <div class="box">
             <p class="box-title">All Members</p>
-            <p id="allCount" class="box-count">100</p>
+            <p id="allCount" class="box-count">Loading</p>
           </div>
           <div class="box">
             <p class="box-title">Active</p>
-            <p id="activeCount" class="box-count">100</p>
+            <p id="activeCount" class="box-count">Loading</p>
           </div>
           <div class="box">
             <p class="box-title">Expires Soon</p>
-            <p id="expiresSoonCount" class="box-count">100</p>
+            <p id="expiresSoonCount" class="box-count">Loading</p>
           </div>
           <div class="box">
             <p class="box-title">Expired</p>
-            <p id="expiredCount" class="box-count">100</p>
+            <p id="expiredCount" class="box-count">Loading</p>
           </div>
         </div>
         <div class="data-container">
@@ -84,9 +85,9 @@
           </div>
           <div class="raw-data-container">
             <p class="raw-data">Today Stats:</p>
-            <p id="attendedCount" class="raw-data">Attended: 100</p>
-            <p id="absenceCount" class="raw-data">Absence: 100</p>
-            <a class="raw-data-button" href="/dashboard/analytics.html">Manage</a>
+            <p id="attendedCount" class="raw-data">Attended: Loading</p>
+            <p id="absenceCount" class="raw-data">Absence: Loading</p>
+            <a class="raw-data-button" href="/dashboard/members.html">Manage</a>
           </div>
         </div>
       </div>
@@ -94,31 +95,15 @@
       <div class="lower-section">
         <div class="expires-soon">
           <h1>Expires Soon</h1>
-          <div class="member-container">
-            <div class="member">
-              <h3>Alarixfr for real</h3>
-              <p>Expires in 67h</p>
-              <p>ID: 010120351234567890</p>
-            </div>
-            <div class="member">
-              <h3>Alarixfr for real</h3>
-              <p>Expires in 67h</p>
-              <p>ID: 010120351234567890</p>
-            </div>
-            <div class="member">
-              <h3>Alarixfr for real</h3>
-              <p>Expires in 67h</p>
-              <p>ID: 010120351234567890</p>
-            </div>
+          <div id="expiresSoonContainer" class="member-container">
+            
           </div>
         </div>
         <div class="journals">
           <h1>Journals</h1>
           <div id="journalContainer" class="journal-container">
             <div class="journal">
-              <h3>This day is so busy</h3>
-              <p>Very busy day for some gym out there i guess</p>
-              <p>ID: 010120251234567890</p>
+              
               <button class="remove-journal">Remove</button>
             </div>
           </div>

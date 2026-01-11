@@ -1,4 +1,14 @@
-const ctx = document.getElementById('chart');
+const STORAGE_KEY = 'gymscribe-attendance';
+const STORAGE_KEY_LAST = 'gymscribe-attendance-last';
+
+function getLast7Days() {
+  
+}
+
+
+
+
+/*const ctx = document.getElementById('chart');
 
 const xValues = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Today"];
 const yValues = [0, 30, 15, 25, 50, 25, 45];
@@ -40,3 +50,4 @@ new Chart(ctx, {
     }
   }
 });
+*/
