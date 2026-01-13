@@ -7,9 +7,14 @@ let members;
 
 async function loadMembers() {
   try {
-    await init();
-    
     membersContainer.innerHTML = '';
+    
+    const noneElement = document.createElement('p');
+    noneElement.style.display = 'block';
+    noneElement.textContent = 'Loading members...';
+    membersContainer.append(noneElement);
+    
+    await init();
     
     const memberData = await getMembers();
     
@@ -18,12 +23,12 @@ async function loadMembers() {
     members = memberData.membersList;
     
     if (members.length <= 0) {
-      const noneElement = document.createElement('p');
       noneElement.textContent = 'No members found!';
       
-      membersContainer.append(noneElement);
       return;
     }
+    
+    noneElement.remove();
     
     members.forEach((member) => {
       const memberElement = generateMember(
