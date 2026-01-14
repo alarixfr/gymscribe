@@ -14,8 +14,6 @@ let members;
 
 async function loadMembers() {
   try {
-    await init();
-    
     allCount.textContent = 'Loading';
     activeCount.textContent = 'Loading';
     expiresSoonCount.textContent = 'Loading';
@@ -85,5 +83,6 @@ function generateMember(name, expires, id) {
   return memberContainer;
 }
 
+init();
 loadMembers();
 createAttendanceChart(chart);

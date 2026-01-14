@@ -1,20 +1,48 @@
-import { init, getMembers } from './handler.js';
+import { init, getMembers, createMember } from './handler.js';
 import { createModal, deleteModal } from './modal.js';
 
 const membersContainer = document.getElementById('member-list');
 
 let members;
+console.log('debug 0')
+const form = document.getElementById('memberForm');
+const nameInput = document.getElementById('memberNameInput');
+const emailInput = document.getElementById('memberEmailInput');
+const phoneInput = document.getElementById('memberPhoneInput');
+const birthdayInput = document.getElementById('memberBirthdayInput');
+const noteInput = document.getElementById('memberNoteInput');
+const plansInput = document.getElementById('memberPlansInput');
+
+async function newMember() {
+  try {
+    const memberJSON = {
+      fullname: nameInput.value,
+      email: emailInput.value,
+      phone: phoneInput.value,
+      birthday: birthdayInput.value,
+      note: noteInput.value,
+      plans: plansInput.value
+    };
+    
+    const newMember = await createMember(memberJSON);
+    
+    if (newMember?.error) throw new Error(newMember.error);
+  } catch (error) {
+    console.error(error.message);
+  } finally {
+    await loadMembers();
+  }
+}
 
 async function loadMembers() {
   try {
+    console.log('debug 1')
     membersContainer.innerHTML = '';
     
     const noneElement = document.createElement('p');
     noneElement.style.display = 'block';
     noneElement.textContent = 'Loading members...';
     membersContainer.append(noneElement);
-    
-    await init();
     
     const memberData = await getMembers();
     
@@ -30,6 +58,8 @@ async function loadMembers() {
     
     noneElement.remove();
     
+    console.log('debug 2')
+    
     members.forEach((member) => {
       const memberElement = generateMember(
         member.id,
@@ -41,6 +71,7 @@ async function loadMembers() {
       
       membersContainer.append(memberElement);
     });
+    console.log('debug 3')
   } catch (error) {
     console.error(error.message);
   }
@@ -127,5 +158,12 @@ function generateMember(id, name, status, duration, isAttended) {
   
   return memberContainer;
 }
+  
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  newMember();
+})
 
+init();
 loadMembers();

@@ -76,7 +76,7 @@ function requireAuth() {
 }
 
 async function init() {
-  if (!requireAuth) {
+  if (!requireAuth()) {
     return;
   }
   
@@ -177,7 +177,7 @@ async function login(email, password, altchaPayload) {
 
 async function getGymInfo() {
   try {
-    requireAuth();
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
     const token = getToken();
     
@@ -203,7 +203,7 @@ async function getGymInfo() {
 
 async function updateGymInfo(gymData) {
   try {
-    requireAuth();
+    if (!requireAuth()) return { error: 'Not authenticated'};
     
     const token = getToken();
     
@@ -230,7 +230,7 @@ async function updateGymInfo(gymData) {
 
 async function getMembers() {
   try {
-    requireAuth();
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
     const token = getToken();
     const gymInfo = await getGymInfo();
@@ -260,6 +260,33 @@ async function getMembers() {
   }
 }
 
+async function createMember(memberData) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/members`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(memberData)
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to add gym member');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export {
   API_URL,
   DASHBOARD_URL,
@@ -278,5 +305,6 @@ export {
   login,
   getGymInfo,
   updateGymInfo,
-  getMembers
+  getMembers,
+  createMember
 };
