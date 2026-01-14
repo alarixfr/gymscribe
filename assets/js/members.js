@@ -12,9 +12,13 @@ const phoneInput = document.getElementById('memberPhoneInput');
 const birthdayInput = document.getElementById('memberBirthdayInput');
 const noteInput = document.getElementById('memberNoteInput');
 const plansInput = document.getElementById('memberPlansInput');
+const submitBtn = document.getElementById('submit');
 
 async function newMember() {
   try {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Adding Member...';
+    
     const memberJSON = {
       fullname: nameInput.value,
       email: emailInput.value,
@@ -30,6 +34,9 @@ async function newMember() {
   } catch (error) {
     console.error(error.message);
   } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Add Member';
+    
     await loadMembers();
   }
 }
@@ -158,12 +165,14 @@ function generateMember(id, name, status, duration, isAttended) {
   
   return memberContainer;
 }
-  
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  
-  newMember();
-})
 
-init();
-loadMembers();
+document.addEventListener('DOMContentLoaded', async () => {
+  await init();
+  await loadMembers();
+  
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+  
+    newMember();
+  });
+});
