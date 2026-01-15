@@ -89,9 +89,7 @@ async function loadMembers() {
   }
 }
 
-function generateMember(id, name, status, duration, isAttended, ...details) {
-  const [phone, birthday, note] = details;
-  
+function generateMember(id, name, status, duration, isAttended, phone, birthday, note) {
   const memberContainer = document.createElement('div');
   const memberInfo = document.createElement('div');
   const memberButtons = document.createElement('div');
@@ -145,7 +143,7 @@ function generateMember(id, name, status, duration, isAttended, ...details) {
   if (!isAttended) {
     attendanceBtn.textContent = 'Mark As Attended';
   } else {
-    attendanceBtn.textContent = 'Mark as Absence';
+    attendanceBtn.textContent = 'Mark As Absence';
   }
   
   viewBtn.addEventListener('click', (e) => {
@@ -167,23 +165,26 @@ function generateMember(id, name, status, duration, isAttended, ...details) {
   attendanceBtn.addEventListener('click', async (e) => {
     try {
       attendanceBtn.disabled = true;
+      attendanceBtn.textContent = 'Updating...';
       const toggleStatus = await toggleAttendance(id);
       if (toggleStatus?.error) throw new Error(toggleStatus.error);
       isAttended = toggleStatus.isAttended;
     } catch (error) {
       console.error(error.message);
     } finally {
-      if (isAttended) {
-        attendanceBtn.textContent = 'Mark As Absence';
-      } else {
-        attendanceBtn.textContent = 'Mark as Attended';
-      }
-      if (isAttended) {
-        memberAttendance.textContent = 'Attendance: Checked-in';
-      } else {
-        memberAttendance.textContent = 'Attendance: Absence';
-      }
-      attendanceBtn.disabled = false;
+      setTimeout(() => {
+        if (isAttended) {
+          attendanceBtn.textContent = 'Mark As Absence';
+        } else {
+          attendanceBtn.textContent = 'Mark As Attended';
+        }
+        if (isAttended) {
+          memberAttendance.textContent = 'Attendance: Checked-in';
+        } else {
+          memberAttendance.textContent = 'Attendance: Absence';
+        }
+        attendanceBtn.disabled = false;
+      }, 2000);
     }
   });
   
@@ -202,7 +203,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-  
     newMember();
   });
 });
