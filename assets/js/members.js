@@ -73,7 +73,10 @@ async function loadMembers() {
         member.name,
         member.status,
         member.duration,
-        member.isAttended
+        member.isAttended,
+        member.phone,
+        member.birthday,
+        member.note
       );
       
       membersContainer.append(memberElement);
@@ -162,11 +165,8 @@ function generateMember(id, name, status, duration, isAttended, ...details) {
   });
   
   attendanceBtn.addEventListener('click', async (e) => {
-    if (attendanceBtn.disabled) return;
-    
-    attendanceBtn.disabled = true;
-    await Promise.resolve();
     try {
+      attendanceBtn.disabled = true;
       const toggleStatus = await toggleAttendance(id);
       if (toggleStatus?.error) throw new Error(toggleStatus.error);
       isAttended = toggleStatus.isAttended;
