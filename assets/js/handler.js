@@ -379,7 +379,7 @@ async function toggleAttendance(memberId) {
     
     const timezone = gymInfo.timezone;
     
-    const response = await fetch(`${API_URL}/members/${memberId}`, {
+    const response = await fetch(`${API_URL}/members/${memberId}/attendance`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

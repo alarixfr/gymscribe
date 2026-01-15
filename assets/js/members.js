@@ -43,7 +43,6 @@ async function newMember() {
 
 async function loadMembers() {
   try {
-    console.log('debug 1')
     membersContainer.innerHTML = '';
     
     const noneElement = document.createElement('p');
@@ -65,8 +64,6 @@ async function loadMembers() {
     
     noneElement.remove();
     
-    console.log('debug 2')
-    
     members.forEach((member) => {
       const memberElement = generateMember(
         member.id,
@@ -78,7 +75,6 @@ async function loadMembers() {
       
       membersContainer.append(memberElement);
     });
-    console.log('debug 3')
   } catch (error) {
     console.error(error.message);
   }
@@ -92,7 +88,7 @@ function generateMember(id, name, status, duration, isAttended) {
   const attendanceButtons = document.createElement('div');
   
   memberContainer.classList.add('member');
-  memberInfo.classList.add('member-info')
+  memberInfo.classList.add('member-info');
   const memberName = document.createElement('h3');
   const memberId = document.createElement('p');
   const memberStatus = document.createElement('p');
@@ -117,7 +113,7 @@ function generateMember(id, name, status, duration, isAttended) {
   
   memberInfo.append(memberName, memberId, memberStatus, memberDuration, memberAttendance);
   
-  memberButtons.classList.add('member-buttons')
+  memberButtons.classList.add('member-buttons');
   actionButtons.classList.add('action-buttons');
   attendanceButtons.classList.add('attendance-buttons');
   const viewBtn = document.createElement('button');
@@ -138,24 +134,24 @@ function generateMember(id, name, status, duration, isAttended) {
   if (!isAttended) {
     attendanceBtn.textContent = 'Mark As Attended';
   } else {
-    attendanceBtn.textContent = 'Mark as Absence'
+    attendanceBtn.textContent = 'Mark as Absence';
   }
   
   viewBtn.addEventListener('click', (e) => {
     createModal('memberView', 'Alarixfr', '123', '67/67/6767', "very nice modal i guess");
-  })
+  });
   
   editBtn.addEventListener('click', (e) => {
     createModal('memberEdit');
-  })
+  });
   
   renewBtn.addEventListener('click', (e) => {
     createModal('memberRenew');
-  })
+  });
   
   removeBtn.addEventListener('click', (e) => {
     createModal('memberRemove');
-  })
+  });
   
   actionButtons.append(viewBtn, editBtn, renewBtn, removeBtn);
   attendanceButtons.append(attendanceBtn);
