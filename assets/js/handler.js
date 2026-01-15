@@ -288,6 +288,118 @@ async function createMember(memberData) {
   }
 }
 
+async function updateMember(memberId, memberData) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/members/${memberId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(memberData)
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to update member');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function deleteMember(memberId) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/members/${memberId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to delete member');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function renewMember(memberId, plan) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/members/${memberId}/renew`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ plan })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to renew member plans');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function toggleAttendance(memberId) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    const gymInfo = await getGymInfo();
+    
+    if (gymInfo.error) throw new Error(gymInfo.error);
+    
+    const timezone = gymInfo.timezone;
+    
+    const response = await fetch(`${API_URL}/members/${memberId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'x-timezone': timezone
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to toggle member attendance');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export {
   API_URL,
   DASHBOARD_URL,
@@ -307,5 +419,9 @@ export {
   getGymInfo,
   updateGymInfo,
   getMembers,
-  createMember
+  createMember,
+  updateMember,
+  deleteMember,
+  renewMember,
+  toggleAttendance
 };
