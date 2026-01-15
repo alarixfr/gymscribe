@@ -86,7 +86,9 @@ async function loadMembers() {
   }
 }
 
-function generateMember(id, name, status, duration, isAttended) {
+function generateMember(id, name, status, duration, isAttended, ...details) {
+  const [phone, birthday, note] = details;
+  
   const memberContainer = document.createElement('div');
   const memberInfo = document.createElement('div');
   const memberButtons = document.createElement('div');
@@ -144,7 +146,7 @@ function generateMember(id, name, status, duration, isAttended) {
   }
   
   viewBtn.addEventListener('click', (e) => {
-    createModal('memberView', 'Alarixfr', '123', '67/67/6767', "very nice modal i guess");
+    createModal('memberView', name, phone, birthday, note);
   });
   
   editBtn.addEventListener('click', (e) => {
@@ -160,8 +162,11 @@ function generateMember(id, name, status, duration, isAttended) {
   });
   
   attendanceBtn.addEventListener('click', async (e) => {
+    if (attendanceBtn.disabled) return;
+    
+    attendanceBtn.disabled = true;
+    await Promise.resolve();
     try {
-      attendanceBtn.disabled = true;
       const toggleStatus = await toggleAttendance(id);
       if (toggleStatus?.error) throw new Error(toggleStatus.error);
       isAttended = toggleStatus.isAttended;
