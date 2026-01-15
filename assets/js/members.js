@@ -1,10 +1,10 @@
-import { init, getMembers, createMember } from './handler.js';
+import { init, getMembers, createMember, updateMember, deleteMember, renewMember, toggleAttendance } from './handler.js';
 import { createModal, deleteModal } from './modal.js';
 
 const membersContainer = document.getElementById('member-list');
 
 let members;
-console.log('debug 0')
+
 const form = document.getElementById('memberForm');
 const nameInput = document.getElementById('memberNameInput');
 const emailInput = document.getElementById('memberEmailInput');
@@ -18,6 +18,8 @@ async function newMember() {
   try {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Adding Member...';
+    
+    if (nameInput.value === '') throw new Error('Name is required');
     
     const memberJSON = {
       fullname: nameInput.value,
@@ -47,6 +49,7 @@ async function loadMembers() {
     
     const noneElement = document.createElement('p');
     noneElement.style.display = 'block';
+    noneElement.classList.add('member-list-info');
     noneElement.textContent = 'Loading members...';
     membersContainer.append(noneElement);
     
@@ -87,7 +90,7 @@ function generateMember(id, name, status, duration, isAttended) {
   const actionButtons = document.createElement('div');
   const attendanceButtons = document.createElement('div');
   
-  memberContainer.classList.add('member');
+  memberContainer.classList.add('member', 'load-hidden');
   memberInfo.classList.add('member-info');
   const memberName = document.createElement('h3');
   const memberId = document.createElement('p');
@@ -121,8 +124,8 @@ function generateMember(id, name, status, duration, isAttended) {
   const renewBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
   const attendanceBtn = document.createElement('button');
-  viewBtn.classList.add('view-btn', 'yellow-btn');
-  editBtn.classList.add('edit-btn', 'blue-btn');
+  viewBtn.classList.add('view-btn', 'yellow-button');
+  editBtn.classList.add('edit-btn', 'blue-button');
   renewBtn.classList.add('renew-btn', 'cyan-button');
   removeBtn.classList.add('remove-btn', 'red-button');
   attendanceBtn.classList.add('attendance-btn');
@@ -151,6 +154,23 @@ function generateMember(id, name, status, duration, isAttended) {
   
   removeBtn.addEventListener('click', (e) => {
     createModal('memberRemove');
+  });
+  
+  attendanceButtons.addEventListener('click', async (e) => {
+    try {
+      attendanceBtn.disabled = true;
+      const toggled = await toggleAttendance(id);
+      if (toggled?.error) throw new Error(toggled.error);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      if (isAttended) {
+        attendanceBtn.textContent = 'Mark As Absence';
+      } else {
+        attendanceBtn.textContent = 'Mark as Attended';
+      }
+      attendanceBtn.disabled = false;
+    }
   });
   
   actionButtons.append(viewBtn, editBtn, renewBtn, removeBtn);
