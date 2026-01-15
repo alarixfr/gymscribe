@@ -80,6 +80,9 @@ async function loadMembers() {
     });
   } catch (error) {
     console.error(error.message);
+  } finally {
+    ScrollReveal().clean('.load-hidden');
+    ScrollReveal().reveal('.load-hidden');
   }
 }
 
@@ -156,11 +159,12 @@ function generateMember(id, name, status, duration, isAttended) {
     createModal('memberRemove');
   });
   
-  attendanceButtons.addEventListener('click', async (e) => {
+  attendanceBtn.addEventListener('click', async (e) => {
     try {
       attendanceBtn.disabled = true;
-      const toggled = await toggleAttendance(id);
-      if (toggled?.error) throw new Error(toggled.error);
+      const toggleStatus = await toggleAttendance(id);
+      if (toggleStatus?.error) throw new Error(toggleStatus.error);
+      isAttended = toggleStatus.isAttended;
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -168,6 +172,11 @@ function generateMember(id, name, status, duration, isAttended) {
         attendanceBtn.textContent = 'Mark As Absence';
       } else {
         attendanceBtn.textContent = 'Mark as Attended';
+      }
+      if (isAttended) {
+        memberAttendance.textContent = 'Attendance: Checked-in';
+      } else {
+        memberAttendance.textContent = 'Attendance: Absence';
       }
       attendanceBtn.disabled = false;
     }
@@ -177,7 +186,7 @@ function generateMember(id, name, status, duration, isAttended) {
   attendanceButtons.append(attendanceBtn);
   memberButtons.append(actionButtons, attendanceButtons);
   memberContainer.append(memberInfo, memberButtons);
-  memberContainer.id = id;
+  memberContainer.id = `member-${id}`;
   
   return memberContainer;
 }

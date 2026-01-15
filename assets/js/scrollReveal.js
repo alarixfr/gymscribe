@@ -5,5 +5,3 @@ ScrollReveal({
   distance: '40px',
   easing: 'ease-out'
 });
-
-ScrollReveal().reveal('.load-hidden');
