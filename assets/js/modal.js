@@ -1,3 +1,5 @@
+import { updateMember, deleteMember, renewMember } from './handler.js';
+
 function deleteModal() {
   const existedModal = document.querySelector('.modal-backdrop');
   if (existedModal) {
@@ -43,6 +45,9 @@ function createModal(modalType, ...options) {
   
   
   if (modalType === "memberView") {
+    const nameTitle = document.createElement('h3');
+    const nameContent = document.createElement('p');
+    
     const emailTitle = document.createElement('h3');
     const emailContent = document.createElement('p');
     
@@ -56,13 +61,16 @@ function createModal(modalType, ...options) {
     const noteContent = document.createElement('p');
     
     title.textContent = "Details";
+    nameTitle.textContent = 'Name:';
     emailTitle.textContent = 'Email:';
     phoneTitle.textContent = 'Phone:';
     birthdayTitle.textContent = 'Birthday:';
     noteTitle.textContent = 'Note:';
     
-    const [email, phone, birthday, note] = options;
+    const [name, email, phone, birthday, note] = options;
     
+    title.textContent = `Details`;
+    nameContent.textContent = name;
     emailContent.textContent = email;
     phoneContent.textContent = phone;
     birthdayContent.textContent = birthday;
@@ -70,10 +78,15 @@ function createModal(modalType, ...options) {
     
     actionButton.remove();
     
-    modalContainer.append(emailTitle, emailContent, phoneTitle, phoneContent, birthdayTitle, birthdayContent, noteTitle, noteContent);
+    modalContainer.append(nameTitle, nameContent, emailTitle, emailContent, phoneTitle, phoneContent, birthdayTitle, birthdayContent, noteTitle, noteContent);
     
     backdrop.style.display = "flex";
   } else if (modalType === "memberEdit") {
+    title.textContent = 'Edit Member';
+    actionButton.textContent = 'Save';
+    
+    const [id, name, email, phone, birthday, note, loadMembers] = options;
+    
     const form = document.getElementById('memberForm');
     const clonedForm = form.cloneNode(true);
     clonedForm.id = "memberEditForm";
@@ -110,11 +123,56 @@ function createModal(modalType, ...options) {
       e.preventDefault();
       clonedForm.requestSubmit();
     });
-      
+    
     modalContainer.append(clonedForm);
-  
-    title.textContent = 'Edit Member';
+    
+    const nameInput = clonedForm.querySelector('#editMemberNameInput');
+    const emailInput = clonedForm.querySelector('#editMemberEmailInput');
+    const phoneInput = clonedForm.querySelector('#editMemberPhoneInput');
+    const birthdayInput = clonedForm.querySelector('#editMemberBirthdayInput');
+    const noteInput = clonedForm.querySelector('#editMemberNoteInput');
+    
+    if (nameInput) nameInput.value = name || '';
+    if (emailInput) emailInput.value = email || '';
+    if (phoneInput) phoneInput.value = phone || '';
+    if (birthdayInput) birthdayInput.value = birthday || '';
+    if (noteInput) noteInput.value = note || '';
+    
+    clonedForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      actionButton.disabled = true;
+      actionButton.textContent = 'Updating...';
+      
+      try {
+        const updatedData = {
+          fullname:  nameInput.value,
+          email: emailInput.value,
+          phone: phoneInput.value,
+          birthday: birthdayInput.value,
+          note: noteInput.value
+        };
+      
+        const result = await updateMember(id, updatedData);
+      
+        if (result?.error) throw new Error(result.error);
+        
+        await loadMembers();
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setTimeout(() => {
+          actionButton.textContent = 'Save';
+          actionButton.disabled = false;
+          backdrop.remove();
+        }, 2000);
+      }
+    });
   } else if (modalType === "memberRenew") {
+    const [id, loadMembers] = options;
+    actionButton.textContent = 'Confirm';
+    title.textContent = 'Renew';
+    
     const plansOptions = [
       {value: 'monthly', text:'Monthly (30d)'},
       {value: 'yearly', text: 'Yearly (365d)'},
@@ -143,21 +201,67 @@ function createModal(modalType, ...options) {
       renewSelect.append(optionElement);
     });
     
-    actionButton.textContent = 'Confirm';
-    title.textContent = 'Renew';
-    
     actionButton.addEventListener('click', (e) => {
       e.preventDefault();
       renewForm.requestSubmit();
     });
+    
+    renewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      actionButton.disabled = true;
+      actionButton.textContent = 'Updating...';
+      
+      try {
+        const selectedPlan = renewSelect.value;
+        
+        const result = await renewMember(id, selectedPlan);
+        
+        if (result?.error) throw new Error(result.error);
+        
+        await loadMembers();
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setTimeout(() => {
+          actionButton.textContent = 'Renew';
+          actionButton.disabled = false;
+          backdrop.remove();
+        }, 2000);
+      }
+    })
   } else if (modalType === 'memberRemove') {
+    const [id, name, loadMembers] = options;
+    actionButton.textContent = 'Remove';
+    title.textContent = 'Remove';
+    
     const removeWarning = document.createElement('h3');
-    removeWarning.textContent = 'Are you sure?';
+    removeWarning.textContent = `Are you sure want to remove ${name}?`;
     
     modalContainer.append(removeWarning);
     
-    actionButton.textContent = 'Remove';
-    title.textContent = 'Remove';
+    actionButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      actionButton.disabled = true;
+      actionButton.textContent = 'Removing...';
+      
+      try {
+        const result = await deleteMember(id);
+        
+        if (result?.error) throw new Error(result.error);
+        
+        await loadMembers();
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setTimeout(() => {
+          actionButton.textContent = 'Remove';
+          actionButton.disabled = false;
+          backdrop.remove();
+        }, 2000);
+      }
+    })
   } else {
     throw new Error('No type found: ' + Error);
   }

@@ -38,6 +38,7 @@ async function newMember() {
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = 'Add Member';
+    form.reset();
     
     await loadMembers();
   }
@@ -74,9 +75,10 @@ async function loadMembers() {
         member.status,
         member.duration,
         member.isAttended,
-        member.phone,
-        member.birthday,
-        member.note
+        member.details.email,
+        member.details.phone,
+        member.details.birthday,
+        member.details.note
       );
       
       membersContainer.append(memberElement);
@@ -89,7 +91,7 @@ async function loadMembers() {
   }
 }
 
-function generateMember(id, name, status, duration, isAttended, phone, birthday, note) {
+function generateMember(id, name, status, duration, isAttended, email, phone, birthday, note) {
   const memberContainer = document.createElement('div');
   const memberInfo = document.createElement('div');
   const memberButtons = document.createElement('div');
@@ -147,19 +149,19 @@ function generateMember(id, name, status, duration, isAttended, phone, birthday,
   }
   
   viewBtn.addEventListener('click', (e) => {
-    createModal('memberView', name, phone, birthday, note);
+    createModal('memberView', name, email, phone, birthday, note, loadMembers);
   });
   
   editBtn.addEventListener('click', (e) => {
-    createModal('memberEdit');
+    createModal('memberEdit', id, name, email, phone, birthday, note);
   });
   
   renewBtn.addEventListener('click', (e) => {
-    createModal('memberRenew');
+    createModal('memberRenew', id, loadMembers);
   });
   
   removeBtn.addEventListener('click', (e) => {
-    createModal('memberRemove');
+    createModal('memberRemove', id, name, loadMembers);
   });
   
   attendanceBtn.addEventListener('click', async (e) => {
