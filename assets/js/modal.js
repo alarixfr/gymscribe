@@ -1,4 +1,5 @@
 import { updateMember, deleteMember, renewMember } from './handler.js';
+import { loadMembers } from './members.js';
 
 function deleteModal() {
   const existedModal = document.querySelector('.modal-backdrop');
@@ -85,7 +86,7 @@ function createModal(modalType, ...options) {
     title.textContent = 'Edit Member';
     actionButton.textContent = 'Save';
     
-    const [id, name, email, phone, birthday, note, loadMembers] = options;
+    const [id, name, email, phone, birthday, note] = options;
     
     const form = document.getElementById('memberForm');
     const clonedForm = form.cloneNode(true);
@@ -169,7 +170,7 @@ function createModal(modalType, ...options) {
       }
     });
   } else if (modalType === "memberRenew") {
-    const [id, loadMembers] = options;
+    const [id] = options;
     actionButton.textContent = 'Confirm';
     title.textContent = 'Renew';
     
@@ -231,7 +232,7 @@ function createModal(modalType, ...options) {
       }
     })
   } else if (modalType === 'memberRemove') {
-    const [id, name, loadMembers] = options;
+    const [id, name] = options;
     actionButton.textContent = 'Remove';
     title.textContent = 'Remove';
     

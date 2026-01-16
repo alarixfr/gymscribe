@@ -114,7 +114,13 @@ function generateMember(id, name, status, duration, isAttended, email, phone, bi
   memberName.textContent = name;
   memberId.textContent = `ID: ${id}`;
   memberStatus.textContent = `Status: ${status}`;
-  memberDuration.textContent = `Expires In ${duration}`;
+  if (duration === null) {
+    memberDuration.textContent = 'Expires in: Never (Lifetime)';
+  } else if (duration < 0) {
+    memberDuration.textContent = `Expired ${Math.abs(duration)} days ago`;
+  } else {
+    memberDuration.textContent = `Expires in ${duration} days`;
+  }
   
   if (isAttended) {
     memberAttendance.textContent = 'Attendance: Checked-in';
@@ -149,7 +155,7 @@ function generateMember(id, name, status, duration, isAttended, email, phone, bi
   }
   
   viewBtn.addEventListener('click', (e) => {
-    createModal('memberView', name, email, phone, birthday, note, loadMembers);
+    createModal('memberView', name, email, phone, birthday, note);
   });
   
   editBtn.addEventListener('click', (e) => {
@@ -157,11 +163,11 @@ function generateMember(id, name, status, duration, isAttended, email, phone, bi
   });
   
   renewBtn.addEventListener('click', (e) => {
-    createModal('memberRenew', id, loadMembers);
+    createModal('memberRenew', id);
   });
   
   removeBtn.addEventListener('click', (e) => {
-    createModal('memberRemove', id, name, loadMembers);
+    createModal('memberRemove', id, name);
   });
   
   attendanceBtn.addEventListener('click', async (e) => {
@@ -208,3 +214,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     newMember();
   });
 });
+
+export { loadMembers };
