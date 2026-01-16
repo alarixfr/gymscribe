@@ -27,7 +27,7 @@ async function convertToCSV(list) {
     "status",
     "duration",
     "isAttended",
-    "createdAt"
+    "timestamp"
   ];
   
   const rows = [
@@ -39,11 +39,11 @@ async function convertToCSV(list) {
       m.details?.phone ?? "",
       m.details?.birthday ?? "",
       m.details?.note ?? "",
-      m.plans ?? "",
+      m.plan ?? "",
       m.status ?? "",
       m.duration ?? "",
       m.isAttended ?? "",
-      m.createdAt ?? ""
+      m.timestamp ?? ""
     ])
   ];
   
