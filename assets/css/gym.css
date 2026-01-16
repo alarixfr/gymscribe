@@ -167,7 +167,7 @@ button {
   font-size: 1.2rem;
 }
 
-.form-container {
+.form-container, .sync-container {
   border: 2px solid white;
   display: flex;
   flex-direction: column;
@@ -245,6 +245,70 @@ textarea::placeholder {
 .submit-button:active {
   background: rgba(60,179,113,0.25);
   border: 2px solid #2E8B57;
+}
+
+.red-button {
+  width: 100%;
+  display: block;
+  color: black;
+  margin-top: auto;
+  flex-grow: 1;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem;
+  border-radius: 0px;
+  text-decoration: none;
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+  background: rgba(243,80,80,1);
+}
+
+.red-button:hover {
+  background: rgba(243,80,80,0.6);
+  border: 2px solid #ff6b6b;
+}
+
+.red-button:active {
+  background: rgba(243,80,80,0.25);
+  border: 2px solid #ff6b6b;
+}
+
+.yellow-button {
+  width: 100%;
+  display: block;
+  color: black;
+  margin-top: auto;
+  flex-grow: 1;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem;
+  border-radius: 0px;
+  text-decoration: none;
+  box-shadow: 2px 2px #000;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+  background: rgba(233,198,44,1);
+}
+
+.yellow-button:hover {
+  background: rgba(233,198,44,0.6);
+  border: 2px solid #F4D750;
+}
+
+.yellow-button:active {
+  background: rgba(233,198,44,0.25);
+  border: 2px solid #F4D750;
+}
+
+.sync-journals-container, .sync-attendance-container {
+  gap: 2px;
+}
+
+.sync-journals-container {
+  margin-bottom: 0.4rem;
 }
 
 #descInput {

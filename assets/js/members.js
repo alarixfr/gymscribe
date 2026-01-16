@@ -13,6 +13,56 @@ const birthdayInput = document.getElementById('memberBirthdayInput');
 const noteInput = document.getElementById('memberNoteInput');
 const plansInput = document.getElementById('memberPlansInput');
 const submitBtn = document.getElementById('submit');
+const exportBtn = document.getElementById('exportBtn');
+
+async function convertToCSV(list) {
+  const headers = [
+    "id",
+    "name",
+    "email",
+    "phone",
+    "birthday",
+    "note",
+    "plans",
+    "status",
+    "duration",
+    "isAttended",
+    "createdAt"
+  ];
+  
+  const rows = [
+    headers,
+    ...list.map(m => [
+      m.id ?? "",
+      m.name ?? "",
+      m.details?.email ?? "",
+      m.details?.phone ?? "",
+      m.details?.birthday ?? "",
+      m.details?.note ?? "",
+      m.plans ?? "",
+      m.status ?? "",
+      m.duration ?? "",
+      m.isAttended ?? "",
+      m.createdAt ?? ""
+    ])
+  ];
+  
+  const csv = rows.map(row => row
+    .map(value => `"${String(value).replace(/"/g, '""')}"`)
+    .join(",")
+  )
+  .join("\n");
+  
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "members.csv";
+  a.click();
+  
+  URL.revokeObjectURL(url);
+}
 
 async function newMember() {
   try {
@@ -212,6 +262,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     newMember();
+  });
+  
+  exportBtn.addEventListener('click', async (event) => {
+    exportBtn.disabled = true
+    try {
+      if (!members || members.length === 0) {
+        exportBtn.textContent = 'Members list is blank!';
+        throw new Error('Members list is blank');
+      } 
+      
+      exportBtn.textContent = 'Downloading...';
+      await convertToCSV(members);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        exportBtn.textContent = 'Export To .CSV';
+        exportBtn.disabled = false;
+      }, 2000);
+    }
   });
 });
 
