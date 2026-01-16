@@ -149,10 +149,9 @@ function createAttendanceChart(canvasId) {
         },
         y: {
           beginAtZero: true,
-          min: 0,
-          suggestedMax: 100,
+          grace: '10%',
           ticks: {
-            stepSize: 5,
+            stepSize: 1,
             font: {size: 28}
           }
         }
