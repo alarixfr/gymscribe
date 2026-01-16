@@ -41,7 +41,7 @@ async function loadMembers() {
     attendedCount.textContent = `Attended: ${attendedToday.length}`;
     absenceCount.textContent = `Absence: ${absenceToday.length}`;
     
-    saveTodayAttendance(attendedToday.length);
+    saveTodayAttendance(attendedToday.length, absenceToday.length);
     updateAttendanceChart(chart);
     
     if (expiresSoonMember.length <= 0) {
@@ -76,13 +76,26 @@ function generateMember(name, expires, id) {
   memberContainer.id = id;
   
   memberName.textContent = name;
-  memberExpires.textContent = `Expires in ${expires}`;
   memberId.textContent = `ID: ${id}`;
+  memberExpires.textContent = `Expires in ${expires}`;
+  if (expires === null) {
+    memberExpires.textContent = 'Expires in: Never (Lifetime)';
+  } else if (expires < 0) {
+    memberExpires.textContent = `Expired ${Math.abs(expires)} days ago`;
+  } else {
+    memberExpires.textContent = `Expires in ${expires} days`;
+  }
   memberContainer.append(memberName, memberExpires, memberId);
   
   return memberContainer;
 }
 
-init();
-loadMembers();
-createAttendanceChart(chart);
+document.addEventListener('DOMContentLoaded', async (e) => {
+  await init();
+  createAttendanceChart(chart);
+  await loadMembers();
+  
+  setInterval(async () => {
+    await loadMembers();
+  }, 20000);
+});
