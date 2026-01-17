@@ -1,6 +1,7 @@
+import { JOURNALS_KEY as STORAGE_KEY } from './handler.js';
+
 let journals = [];
 let search = '';
-const STORAGE_KEY = 'gymscribe-journals';
 
 function isStorageExist() {
   if (typeof(Storage) === undefined) {

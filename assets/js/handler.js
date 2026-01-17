@@ -5,6 +5,7 @@ const STORAGE_KEY = 'gymscribe-auth';
 const EMAIL_KEY = 'gymscribe-email';
 const ATTENDANCE_KEY = 'gymscribe-attendance';
 const ATTENDANCE_LAST_KEY = 'gymscribe-attendance-last';
+const JOURNALS_KEY = 'gymscribe-journals';
 
 function openDashboard() {
   window.location.replace(DASHBOARD_URL);
@@ -400,12 +401,86 @@ async function toggleAttendance(memberId) {
   }
 }
 
+async function journalsSave(journalsData) {
+  try {
+    
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function journalsLoad() {
+  try {
+    
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+function journalsClear() {
+  try {
+    if (!isStorageExist()) throw new Error('Storage error');
+    
+    localStorage.removeItem(JOURNALS_KEY);
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function journalsReset() {
+  try {
+    
+    
+    journalsReset();
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function attendanceSave(attendanceData) {
+  try {
+    
+  } catch {
+    return { error: error.message };
+  }
+}
+
+async function attendanceLoad() {
+  try {
+    
+  } catch {
+    return { error: error.message };
+  }
+}
+
+function attendanceClear() {
+  try {
+    if (!isStorageExist()) throw new Error('Storage error');
+    
+    localStorage.removeItem(ATTENDANCE_KEY);
+    localStorage.removeItem(ATTENDANCE_LAST_KEY);
+  } catch(error) {
+    return { error: error.message };
+  }
+}
+
+async function attendanceReset() {
+  try {
+    
+    
+    attendanceClear();
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export {
   API_URL,
   DASHBOARD_URL,
   EMAIL_KEY,
   ATTENDANCE_KEY,
   ATTENDANCE_LAST_KEY,
+  JOURNALS_KEY,
   openDashboard,
   isStorageExist,
   isAuthenticated,
@@ -423,5 +498,11 @@ export {
   updateMember,
   deleteMember,
   renewMember,
-  toggleAttendance
+  toggleAttendance,
+  journalsSave,
+  journalsLoad,
+  attendanceSave,
+  attendanceLoad,
+  attendanceClear,
+  attendanceReset
 };
