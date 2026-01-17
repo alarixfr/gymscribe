@@ -7,6 +7,8 @@ const ATTENDANCE_KEY = 'gymscribe-attendance';
 const ATTENDANCE_LAST_KEY = 'gymscribe-attendance-last';
 const JOURNALS_KEY = 'gymscribe-journals';
 
+let gymCache = null;
+
 function openDashboard() {
   window.location.replace(DASHBOARD_URL);
 }
@@ -16,7 +18,7 @@ function openLogin() {
 }
 
 function isStorageExist() {
-  if (typeof(Storage) === 'undefined') {
+  if (typeof(Storage) === "undefined") {
     return false;
   }
   return true;
@@ -60,6 +62,8 @@ async function verifyToken() {
 }
 
 function logout() {
+  gymCache = null;
+  
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(EMAIL_KEY);
   localStorage.removeItem(ATTENDANCE_KEY);
@@ -178,6 +182,8 @@ async function login(email, password, altchaPayload) {
 }
 
 async function getGymInfo() {
+  if (gymCache) return gymCache;
+  
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
     
@@ -197,6 +203,7 @@ async function getGymInfo() {
       throw new Error(data.error || 'Failed to fetch gym details');
     }
     
+    gymCache = data;
     return data;
   } catch (error) {
     return { error: error.message };
@@ -401,9 +408,12 @@ async function toggleAttendance(memberId) {
   }
 }
 
-async function journalsSave(journalsData) {
+async function journalsSave() {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    if (!isStorageExist()) throw new Error('Storage unavailable');
+    const journalsData = JSON.parse(localStorage.getItem(JOURNALS_KEY) ?? "[]");
     
     const token = getToken();
     
@@ -489,9 +499,12 @@ async function journalsReset() {
   }
 }
 
-async function attendanceSave(attendanceData) {
+async function attendanceSave() {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    if (!isStorageExist()) throw new Error('Storage unavailable');
+    const attendanceData = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) ?? "[]");
     
     const token = getToken();
     
@@ -602,6 +615,8 @@ export {
   toggleAttendance,
   journalsSave,
   journalsLoad,
+  journalsClear,
+  journalsReset,
   attendanceSave,
   attendanceLoad,
   attendanceClear,

@@ -1,4 +1,4 @@
-import { init, updateGymInfo, journalsSave, journalsLoad, attendanceSave, attendanceLoad, attendanceClear, attendanceReset } from './handler.js';
+import { init, updateGymInfo, journalsSave, journalsLoad, journalsClear, journalsReset, attendanceSave, attendanceLoad, attendanceClear, attendanceReset } from './handler.js';
 import { initGymInfo } from './getGymInfo.js';
 
 const form = document.getElementById('gymSettingForm');
@@ -18,6 +18,7 @@ const attendanceLoadBtn = document.getElementById('attendance-load');
 const attendanceClearBtn = document.getElementById('attendance-clear');
 const attendanceResetBtn = document.getElementById('attendance-reset');
 
+let allowClick = true;
 
 document.addEventListener('DOMContentLoaded', async (e) => {
   await init();
@@ -58,34 +59,114 @@ document.addEventListener('DOMContentLoaded', async (e) => {
   });
   
   journalsSaveBtn.addEventListener('click', async () => {
-    //journals save
+    if (!allowClick) return;
+    
+    allowClick = false;
+    journalsSaveBtn.disabled = true;
+    journalsSaveBtn.textContent = 'Loading...';
+    await journalsSave();
+    setTimeout(() => {
+      journalsSaveBtn.textContent = 'Save data to server';
+      journalsSaveBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   journalsLoadBtn.addEventListener('click', async () => {
-    //journals load
+    if (!allowClick) return;
+    
+    allowClick = false;
+    journalsLoadBtn.disabled = true;
+    journalsLoadBtn.textContent = 'Loading...';
+    await journalsLoad();
+    setTimeout(() => {
+      journalsLoadBtn.textContent = 'Load data from server';
+      journalsLoadBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   journalsClearBtn.addEventListener('click', () => {
-    //journals clear
+    if (!allowClick) return;
+    
+    allowClick = false;
+    journalsClearBtn.disabled = true;
+    journalsClearBtn.textContent = 'Loading...';
+    journalsClear();
+    setTimeout(() => {
+      journalsClearBtn.textContent = 'Clear local data';
+      journalsClearBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   journalsResetBtn.addEventListener('click', async () => {
-    //journals reset
+    if (!allowClick) return;
+    
+    allowClick = false;
+    journalsResetBtn.disabled = true;
+    journalsResetBtn.textContent = 'Loading...';
+    await journalsReset();
+    setTimeout(() => {
+      journalsResetBtn.textContent = 'Clear local and server data';
+      journalsResetBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   attendanceSaveBtn.addEventListener('click', async () => {
-    //attendance save
+    if (!allowClick) return;
+    
+    allowClick = false;
+    attendanceSaveBtn.disabled = true;
+    attendanceSaveBtn.textContent = 'Loading...';
+    await attendanceSave();
+    setTimeout(() => {
+      attendanceSaveBtn.textContent = 'Save data to server';
+      attendanceSaveBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   attendanceLoadBtn.addEventListener('click', async () => {
-    //attendance load
+    if (!allowClick) return;
+    
+    allowClick = false;
+    attendanceLoadBtn.disabled = true;
+    attendanceLoadBtn.textContent = 'Loading...';
+    await attendanceLoad();
+    setTimeout(() => {
+      attendanceLoadBtn.textContent = 'Load data from server';
+      attendanceLoadBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   attendanceClearBtn.addEventListener('click', () => {
-    //attendance clear
+    if (!allowClick) return;
+    
+    allowClick = false;
+    attendanceClearBtn.disabled = true;
+    attendanceClearBtn.textContent = 'Loading...';
+    attendanceClear();
+    setTimeout(() => {
+      attendanceClearBtn.textContent = 'Clear local data';
+      attendanceClearBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
   
   attendanceResetBtn.addEventListener('click', async () => {
-    //attendance reset
+    if (!allowClick) return;
+    
+    allowClick = false;
+    attendanceResetBtn.disabled = true;
+    attendanceResetBtn.textContent = 'Loading...';
+    await attendanceReset();
+    setTimeout(() => {
+      attendanceResetBtn.textContent = 'Clear local and server data';
+      attendanceResetBtn.disabled = false;
+      allowClick = true;
+    }, 2000);
   });
 });
