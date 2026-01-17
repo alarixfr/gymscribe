@@ -16,7 +16,7 @@ function openLogin() {
 }
 
 function isStorageExist() {
-  if (typeof(Storage) === undefined) {
+  if (typeof(Storage) === 'undefined') {
     return false;
   }
   return true;
@@ -403,7 +403,26 @@ async function toggleAttendance(memberId) {
 
 async function journalsSave(journalsData) {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/storage/journals`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ journals: journalsData })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to save journals');
+    }
+    
+    return data;
   } catch (error) {
     return { error: error.message };
   }
@@ -411,7 +430,23 @@ async function journalsSave(journalsData) {
 
 async function journalsLoad() {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/storage/journals`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Failed to load journals');
+    
+    return data;
   } catch (error) {
     return { error: error.message };
   }
@@ -419,56 +454,122 @@ async function journalsLoad() {
 
 function journalsClear() {
   try {
-    if (!isStorageExist()) throw new Error('Storage error');
-    
+    if (!isStorageExist()) return false;
     localStorage.removeItem(JOURNALS_KEY);
+    
+    return true;
   } catch (error) {
-    return { error: error.message };
+    return false;
   }
 }
 
 async function journalsReset() {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
+    const token = getToken();
     
-    journalsReset();
+    const response = await fetch(`${API_URL}/storage/journals`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Failed to reset journals');
+    
+    journalsClear();
+    
+    return data;
   } catch (error) {
-    return { error: error.message };
+    return false;
   }
 }
 
 async function attendanceSave(attendanceData) {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
-  } catch {
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/storage/attendance`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ attendance: attendanceData })
+    })
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Failed to save attendance')
+    
+    return data;
+  } catch (error) {
     return { error: error.message };
   }
 }
 
 async function attendanceLoad() {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
-  } catch {
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/storage/attendance`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Failed to load attendance');
+    
+    return data;
+  } catch (error) {
     return { error: error.message };
   }
 }
 
 function attendanceClear() {
   try {
-    if (!isStorageExist()) throw new Error('Storage error');
-    
+    if (!isStorageExist()) return false;
     localStorage.removeItem(ATTENDANCE_KEY);
     localStorage.removeItem(ATTENDANCE_LAST_KEY);
-  } catch(error) {
-    return { error: error.message };
+    
+    return true;
+  } catch (error) {
+    return false;
   }
 }
 
 async function attendanceReset() {
   try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
     
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/storage/attendance`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Failed to reset attendance')
     
     attendanceClear();
+    
+    return data;
   } catch (error) {
     return { error: error.message };
   }
