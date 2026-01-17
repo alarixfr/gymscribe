@@ -64,12 +64,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     journalsSaveBtn.disabled = true;
     journalsSaveBtn.textContent = 'Loading...';
-    await journalsSave();
-    setTimeout(() => {
-      journalsSaveBtn.textContent = 'Save data to server';
-      journalsSaveBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await journalsSave();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        journalsSaveBtn.textContent = 'Save data to server';
+        journalsSaveBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   journalsLoadBtn.addEventListener('click', async () => {
@@ -78,12 +84,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     journalsLoadBtn.disabled = true;
     journalsLoadBtn.textContent = 'Loading...';
-    await journalsLoad();
-    setTimeout(() => {
-      journalsLoadBtn.textContent = 'Load data from server';
-      journalsLoadBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await journalsLoad();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        journalsLoadBtn.textContent = 'Load data from server';
+        journalsLoadBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   journalsClearBtn.addEventListener('click', () => {
@@ -92,12 +104,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     journalsClearBtn.disabled = true;
     journalsClearBtn.textContent = 'Loading...';
-    journalsClear();
-    setTimeout(() => {
-      journalsClearBtn.textContent = 'Clear local data';
-      journalsClearBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      journalsClear();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        journalsClearBtn.textContent = 'Clear local data';
+        journalsClearBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   journalsResetBtn.addEventListener('click', async () => {
@@ -106,12 +124,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     journalsResetBtn.disabled = true;
     journalsResetBtn.textContent = 'Loading...';
-    await journalsReset();
-    setTimeout(() => {
-      journalsResetBtn.textContent = 'Clear local and server data';
-      journalsResetBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await journalsReset();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        journalsResetBtn.textContent = 'Clear local and server data';
+        journalsResetBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   attendanceSaveBtn.addEventListener('click', async () => {
@@ -120,12 +144,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     attendanceSaveBtn.disabled = true;
     attendanceSaveBtn.textContent = 'Loading...';
-    await attendanceSave();
-    setTimeout(() => {
-      attendanceSaveBtn.textContent = 'Save data to server';
-      attendanceSaveBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await attendanceSave();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        attendanceSaveBtn.textContent = 'Save data to server';
+        attendanceSaveBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   attendanceLoadBtn.addEventListener('click', async () => {
@@ -134,12 +164,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     attendanceLoadBtn.disabled = true;
     attendanceLoadBtn.textContent = 'Loading...';
-    await attendanceLoad();
-    setTimeout(() => {
-      attendanceLoadBtn.textContent = 'Load data from server';
-      attendanceLoadBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await attendanceLoad();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        attendanceLoadBtn.textContent = 'Load data from server';
+        attendanceLoadBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   attendanceClearBtn.addEventListener('click', () => {
@@ -148,12 +184,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     attendanceClearBtn.disabled = true;
     attendanceClearBtn.textContent = 'Loading...';
-    attendanceClear();
-    setTimeout(() => {
-      attendanceClearBtn.textContent = 'Clear local data';
-      attendanceClearBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      attendanceClear();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        attendanceClearBtn.textContent = 'Clear local data';
+        attendanceClearBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
   
   attendanceResetBtn.addEventListener('click', async () => {
@@ -162,11 +204,17 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     allowClick = false;
     attendanceResetBtn.disabled = true;
     attendanceResetBtn.textContent = 'Loading...';
-    await attendanceReset();
-    setTimeout(() => {
-      attendanceResetBtn.textContent = 'Clear local and server data';
-      attendanceResetBtn.disabled = false;
-      allowClick = true;
-    }, 2000);
+    
+    try {
+      await attendanceReset();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        attendanceResetBtn.textContent = 'Clear local and server data';
+        attendanceResetBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
   });
 });
