@@ -79,6 +79,7 @@ function generateElement(journal) {
   journalId.textContent = journal.id;
   removeButton.textContent = 'Remove';
   removeButton.classList.add('remove-journal');
+  removeButton.setAttribute('type', 'button');
   
   journalContainer.append(journalTitle, journalDescription, journalId, removeButton);
   journalContainer.classList.add('journal');
