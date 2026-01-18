@@ -167,7 +167,7 @@ button {
   font-size: 1.2rem;
 }
 
-.form-container, .sync-container {
+.form-container, .sync-container, .reset-container {
   border: 2px solid white;
   display: flex;
   flex-direction: column;

@@ -2,9 +2,6 @@ import { init, getMembers, createMember, updateMember, deleteMember, renewMember
 import { createModal, deleteModal } from './modal.js';
 
 const membersContainer = document.getElementById('member-list');
-
-let members;
-
 const form = document.getElementById('memberForm');
 const nameInput = document.getElementById('memberNameInput');
 const emailInput = document.getElementById('memberEmailInput');
@@ -14,6 +11,14 @@ const noteInput = document.getElementById('memberNoteInput');
 const plansInput = document.getElementById('memberPlansInput');
 const submitBtn = document.getElementById('submit');
 const exportBtn = document.getElementById('exportBtn');
+const filterInput = document.getElementById('filterInput');
+const filterStatusInput = document.getElementById('filterStatusInput');
+const filterAttendanceInput = document.getElementById('filterAttendanceInput');
+
+let member = [];
+let search = '';
+let statusFilter = '';
+let attendanceFilter = '';
 
 async function convertToCSV(list) {
   const headers = [
@@ -90,7 +95,44 @@ async function newMember() {
     submitBtn.textContent = 'Add Member';
     form.reset();
     
-    await loadMembers();
+    await fetchMembers();
+  }
+}
+
+async function fetchMembers() {
+  try {
+    const memberData = await getMembers();
+    if (memberData?.error) throw new Error(memberData.error || 'Failed to fetch memebers data');
+    
+    members = memberData.membersList;
+    renderMembers();
+  } catch (error) {
+    console.error(error.message);
+    members = [];
+    renderMembers();
+  }
+}
+
+function renderMembers() {
+  memberContainer.innerHTML = '';
+  
+  const filteredMembers = members.filter(member => {
+    if (search && !member.name.toLowerCase().includes(search)) return false;
+    
+    if (statusFilter && member.status.toLowerCase() !== statusFilter.toLowerCase()) return false;
+    
+    if (attendanceFilter) {
+      const attendedStatus = member.isAttended ? 'checkedin' : 'absence';
+      if (attendedStatus !== attendanceFilter) return false;
+    }
+    
+    return true;
+  });
+  
+  if (filteredMembers.length === 0) {
+    const noneElement = document.createElement('p');
+    noneElement.classList.add('member-list-infor');
+    noneElement.textContent = members
   }
 }
 
@@ -118,7 +160,19 @@ async function loadMembers() {
     
     noneElement.remove();
     
-    members.forEach((member) => {
+    for (const member in members) {
+      const attendedStatus;
+      if (search && !member.name.toLowerCase().includes(search)) continue;
+      if (statusFilter && !member.status.toLowerCase().includes(status)) continue;
+      if (member.isAttended === true) {
+        attendedStatus = 'checkedin';
+      } else {
+        attendedStatus = 'absence';
+      }
+      if (attendanceFilter) {
+        if (!attendedStatus === attendanceFilter) continue;
+      }
+      
       const memberElement = generateMember(
         member.id,
         member.name,
@@ -132,7 +186,7 @@ async function loadMembers() {
       );
       
       membersContainer.append(memberElement);
-    });
+    }
   } catch (error) {
     console.error(error.message);
   } finally {
@@ -262,6 +316,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     newMember();
+  });
+  
+  filterInput.addEventListener('input', () => {
+    const searchKeyword = filterInput.value.trim().toLowerCase();
+    search = searchKeyword;
+    loadMembers();
+  });
+  
+  filterStatusInput.addEventListener('change', () => {
+    if (filterStatusInput.value === 'active') {
+      statusFilter = 'active';
+    } else if (filterStatusInput.value === 'expiressoon') {
+      statusFilter = 'expiressoon';
+    } else {
+      statusFilter = '';
+    }
+    loadMembers();
+  });
+  
+  filterAttendanceInput.addEventListener('change', () => {
+    if (filterAttendanceInput.value === 'checkedin') {
+      attendanceFilter = 'checkedin';
+    } else if (filterAttendanceInput.value === 'absence') {
+      attendanceFilter = 'absence';
+    } else {
+      attendanceFilter = '';
+    }
+    loadMembers();
   });
   
   exportBtn.addEventListener('click', async (event) => {
