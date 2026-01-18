@@ -15,7 +15,7 @@ const filterInput = document.getElementById('filterInput');
 const filterStatusInput = document.getElementById('filterStatusInput');
 const filterAttendanceInput = document.getElementById('filterAttendanceInput');
 
-let member = [];
+let members = [];
 let search = '';
 let statusFilter = '';
 let attendanceFilter = '';
@@ -102,19 +102,20 @@ async function newMember() {
 async function fetchMembers() {
   try {
     const memberData = await getMembers();
-    if (memberData?.error) throw new Error(memberData.error || 'Failed to fetch memebers data');
+    if (memberData?.error) throw new Error(memberData.error || 'Failed to fetch members data');
     
     members = memberData.membersList;
     renderMembers();
   } catch (error) {
     console.error(error.message);
+    
     members = [];
     renderMembers();
   }
 }
 
 function renderMembers() {
-  memberContainer.innerHTML = '';
+  membersContainer.innerHTML = '';
   
   const filteredMembers = members.filter(member => {
     if (search && !member.name.toLowerCase().includes(search)) return false;
@@ -131,68 +132,31 @@ function renderMembers() {
   
   if (filteredMembers.length === 0) {
     const noneElement = document.createElement('p');
-    noneElement.classList.add('member-list-infor');
-    noneElement.textContent = members
-  }
-}
-
-async function loadMembers() {
-  try {
-    membersContainer.innerHTML = '';
-    
-    const noneElement = document.createElement('p');
-    noneElement.style.display = 'block';
     noneElement.classList.add('member-list-info');
-    noneElement.textContent = 'Loading members...';
+    noneElement.textContent = members.length === 0 ? 'No members found' : 'No members match the filters';
     membersContainer.append(noneElement);
     
-    const memberData = await getMembers();
-    
-    if (memberData?.error) throw new Error(memberData.error);
-    
-    members = memberData.membersList;
-    
-    if (members.length <= 0) {
-      noneElement.textContent = 'No members found!';
-      
-      return;
-    }
-    
-    noneElement.remove();
-    
-    for (const member in members) {
-      const attendedStatus;
-      if (search && !member.name.toLowerCase().includes(search)) continue;
-      if (statusFilter && !member.status.toLowerCase().includes(status)) continue;
-      if (member.isAttended === true) {
-        attendedStatus = 'checkedin';
-      } else {
-        attendedStatus = 'absence';
-      }
-      if (attendanceFilter) {
-        if (!attendedStatus === attendanceFilter) continue;
-      }
-      
-      const memberElement = generateMember(
-        member.id,
-        member.name,
-        member.status,
-        member.duration,
-        member.isAttended,
-        member.details.email,
-        member.details.phone,
-        member.details.birthday,
-        member.details.note
-      );
-      
-      membersContainer.append(memberElement);
-    }
-  } catch (error) {
-    console.error(error.message);
-  } finally {
-    ScrollReveal().clean('.load-hidden');
-    ScrollReveal().reveal('.load-hidden');
+    return;
   }
+  
+  filteredMembers.forEach(member => {
+    const memberElement = generateMember(
+      member.id,
+      member.name,
+      member.status,
+      member.duration,
+      member.isAttended,
+      member.details.email,
+      member.details.phone,
+      member.details.birthday,
+      member.details.note
+    );
+    
+    membersContainer.append(memberElement);
+  })
+  
+  ScrollReveal().clean('.load-hidden');
+  ScrollReveal().reveal('.load-hidden');
 }
 
 function generateMember(id, name, status, duration, isAttended, email, phone, birthday, note) {
@@ -280,6 +244,12 @@ function generateMember(id, name, status, duration, isAttended, email, phone, bi
       attendanceBtn.textContent = 'Updating...';
       const toggleStatus = await toggleAttendance(id);
       if (toggleStatus?.error) throw new Error(toggleStatus.error);
+      
+      const memberIndex = members.findIndex(m => m.id === id);
+      if (memberIndex !== -1) {
+        members[memberIndex].isAttended = toggleStatus.isAttended;
+      }
+      
       isAttended = toggleStatus.isAttended;
     } catch (error) {
       console.error(error.message);
@@ -311,7 +281,7 @@ function generateMember(id, name, status, duration, isAttended, email, phone, bi
 
 document.addEventListener('DOMContentLoaded', async () => {
   await init();
-  await loadMembers();
+  await fetchMembers();
   
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -319,20 +289,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   
   filterInput.addEventListener('input', () => {
-    const searchKeyword = filterInput.value.trim().toLowerCase();
-    search = searchKeyword;
-    loadMembers();
+    search = filterInput.value.trim().toLowerCase();
+    
+    renderMembers();
   });
   
   filterStatusInput.addEventListener('change', () => {
     if (filterStatusInput.value === 'active') {
       statusFilter = 'active';
     } else if (filterStatusInput.value === 'expiressoon') {
-      statusFilter = 'expiressoon';
+      statusFilter = 'expiresSoon';
+    } else if (filterStatusInput.value === 'expired') {
+      statusFilter = 'expired';
     } else {
       statusFilter = '';
     }
-    loadMembers();
+    
+    renderMembers();
   });
   
   filterAttendanceInput.addEventListener('change', () => {
@@ -343,7 +316,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       attendanceFilter = '';
     }
-    loadMembers();
+    
+    renderMembers();
   });
   
   exportBtn.addEventListener('click', async (event) => {
@@ -367,4 +341,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-export { loadMembers };
+export { renderMembers as loadMembers };
