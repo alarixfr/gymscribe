@@ -224,7 +224,9 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     }
   });
   
-  changePasswordForm.addEventListener('click', async () => {
+  changePasswordForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
     if (!oldPasswordInput.value) return;
     if (!newPasswordInput.value) return;
     if (!confirmPasswordInput.value) return;
@@ -235,12 +237,13 @@ document.addEventListener('DOMContentLoaded', async (e) => {
       
       if (newPasswordInput.value !== confirmPasswordInput.value) {
         passwordSubmit.textContent = 'Confirm password not match';
+        throw new Error('Confirm password not match');
       }
       
       const changePass = await changePassword(oldPasswordInput.value, newPasswordInput.value, confirmPasswordInput.value);
       
       if (changePass.error) {
-        passwordSubmit.textContent = error.message;
+        passwordSubmit.textContent = changePass.error;
         throw new Error('Failed to change password');
       }
     } catch (error) {

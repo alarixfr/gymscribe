@@ -181,22 +181,26 @@ async function login(email, password, altchaPayload) {
   }
 }
 
-async function changePassword(currentPassword, newPassword, confirmPassword) {
+async function changePassword(currentPassword, newPassword) {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
     
     const token = getToken();
     
     if (!currentPassword || !newPassword) {
-      return { error: 'Current password and new pwssword are required'};
+      return { error: 'Current password and new password are required' };
+    }
+    
+    if (newPassword.length < 6) {
+      return { error: 'Password min character is 6' };
     }
     
     if (newPassword.length > 100) {
       return { error: 'Password max character limit reached of 100' };
     }
     
-    if (newPassword !== confirmPassword) {
-      return { error: 'Confirm password not match' };
+    if (newPassword === currentPassword) {
+      return { error: 'New password must be different' };
     }
     
     const response = await fetch(`${API_URL}/auth/change-password`, {
