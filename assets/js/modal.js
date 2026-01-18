@@ -1,5 +1,5 @@
 import { updateMember, deleteMember, renewMember } from './handler.js';
-import { loadMembers } from './members.js';
+import { fetchMembers as loadMembers } from './members.js';
 
 function deleteModal() {
   const existedModal = document.querySelector('.modal-backdrop');

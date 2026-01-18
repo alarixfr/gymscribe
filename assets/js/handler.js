@@ -181,6 +181,48 @@ async function login(email, password, altchaPayload) {
   }
 }
 
+async function changePassword(currentPassword, newPassword, confirmPassword) {
+  try {
+    if (!requireAuth()) return { error: 'Not authenticated' };
+    
+    const token = getToken();
+    
+    if (!currentPassword || !newPassword) {
+      return { error: 'Current password and new pwssword are required'};
+    }
+    
+    if (newPassword.length > 100) {
+      return { error: 'Password max character limit reached of 100' };
+    }
+    
+    if (newPassword !== confirmPassword) {
+      return { error: 'Confirm password not match' };
+    }
+    
+    const response = await fetch(`${API_URL}/auth/change-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        currentPassword,
+        newPassword
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to change password');
+    }
+    
+    return data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 async function getGymInfo() {
   if (gymCache) return gymCache;
   
@@ -411,8 +453,8 @@ async function toggleAttendance(memberId) {
 async function journalsSave() {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
-    
     if (!isStorageExist()) throw new Error('Storage unavailable');
+    
     const journalsData = JSON.parse(localStorage.getItem(JOURNALS_KEY) ?? "[]");
     
     const token = getToken();
@@ -441,6 +483,7 @@ async function journalsSave() {
 async function journalsLoad() {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
+    if (!isStorageExist()) throw new Error('Storage unavailable');
     
     const token = getToken();
     
@@ -455,6 +498,8 @@ async function journalsLoad() {
     const data = await response.json();
     
     if (!response.ok) throw new Error(data.error || 'Failed to load journals');
+    
+    localStorage.setItem(JOURNALS_KEY, data);
     
     return data;
   } catch (error) {
@@ -529,6 +574,7 @@ async function attendanceSave() {
 async function attendanceLoad() {
   try {
     if (!requireAuth()) return { error: 'Not authenticated' };
+    if (!isStorageExist()) throw new Error('Storage unavailable');
     
     const token = getToken();
     
@@ -543,6 +589,8 @@ async function attendanceLoad() {
     const data = await response.json();
     
     if (!response.ok) throw new Error(data.error || 'Failed to load attendance');
+    
+    localStorage.setItem(ATTENDANCE_KEY, data);
     
     return data;
   } catch (error) {
@@ -605,6 +653,7 @@ export {
   getChallenge,
   register,
   login,
+  changePassword,
   getGymInfo,
   updateGymInfo,
   getMembers,

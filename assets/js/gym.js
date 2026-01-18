@@ -1,4 +1,4 @@
-import { init, updateGymInfo, journalsSave, journalsLoad, journalsClear, journalsReset, attendanceSave, attendanceLoad, attendanceClear, attendanceReset } from './handler.js';
+import { init, updateGymInfo, journalsSave, journalsLoad, journalsClear, journalsReset, attendanceSave, attendanceLoad, attendanceClear, attendanceReset, changePassword } from './handler.js';
 import { initGymInfo } from './getGymInfo.js';
 
 const form = document.getElementById('gymSettingForm');
@@ -17,6 +17,12 @@ const attendanceSaveBtn = document.getElementById('attendance-save');
 const attendanceLoadBtn = document.getElementById('attendance-load');
 const attendanceClearBtn = document.getElementById('attendance-clear');
 const attendanceResetBtn = document.getElementById('attendance-reset');
+
+const changePasswordForm = document.getElementById('changePasswordForm');
+const oldPasswordInput = document.getElementById('oldPasswordInput');
+const newPasswordInput = document.getElementById('newPasswordInput');
+const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+const passwordSubmit = document.getElementById('password-submit');
 
 let allowClick = true;
 
@@ -214,6 +220,35 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         attendanceResetBtn.textContent = 'Clear local and server data';
         attendanceResetBtn.disabled = false;
         allowClick = true;
+      }, 2000);
+    }
+  });
+  
+  changePasswordForm.addEventListener('click', async () => {
+    if (!oldPasswordInput.value) return;
+    if (!newPasswordInput.value) return;
+    if (!confirmPasswordInput.value) return;
+    
+    try {
+      passwordSubmit.disabled = true;
+      passwordSubmit.textContent = 'Loading...';
+      
+      if (newPasswordInput.value !== confirmPasswordInput.value) {
+        passwordSubmit.textContent = 'Confirm password not match';
+      }
+      
+      const changePass = await changePassword(oldPasswordInput.value, newPasswordInput.value, confirmPasswordInput.value);
+      
+      if (changePass.error) {
+        passwordSubmit.textContent = error.message;
+        throw new Error('Failed to change password');
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        passwordSubmit.textContent = 'Change Password';
+        passwordSubmit.disabled = false;
       }, 2000);
     }
   });

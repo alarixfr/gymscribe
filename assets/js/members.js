@@ -341,4 +341,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-export { renderMembers as loadMembers };
+export { fetchMembers };
