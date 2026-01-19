@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
   load();
   render();
   
-  journalForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  journalForm.addEventListener('submit', (event) => {
+    event.preventDefault();
     
     const journalTitleInput = document.getElementById('journalTitleInput').value;
     const journalDescInput = document.getElementById('journalDescInput').value;

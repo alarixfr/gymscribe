@@ -503,7 +503,7 @@ async function journalsLoad() {
     
     if (!response.ok) throw new Error(data.error || 'Failed to load journals');
     
-    localStorage.setItem(JOURNALS_KEY, data);
+    localStorage.setItem(JOURNALS_KEY, JSON.stringify(data));
     
     return data;
   } catch (error) {
@@ -594,7 +594,7 @@ async function attendanceLoad() {
     
     if (!response.ok) throw new Error(data.error || 'Failed to load attendance');
     
-    localStorage.setItem(ATTENDANCE_KEY, data);
+    localStorage.setItem(ATTENDANCE_KEY, JSON.stringify(data));
     
     return data;
   } catch (error) {
