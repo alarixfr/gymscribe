@@ -164,26 +164,6 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     }
   });
   
-  attendanceLoadBtn.addEventListener('click', async () => {
-    if (!allowClick) return;
-    
-    allowClick = false;
-    attendanceLoadBtn.disabled = true;
-    attendanceLoadBtn.textContent = 'Loading...';
-    
-    try {
-      await attendanceLoad();
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setTimeout(() => {
-        attendanceLoadBtn.textContent = 'Load data from server';
-        attendanceLoadBtn.disabled = false;
-        allowClick = true;
-      }, 2000);
-    }
-  });
-  
   attendanceClearBtn.addEventListener('click', () => {
     if (!allowClick) return;
     
@@ -227,20 +207,20 @@ document.addEventListener('DOMContentLoaded', async (e) => {
   changePasswordForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     
-    if (!oldPasswordInput.value) return;
-    if (!newPasswordInput.value) return;
-    if (!confirmPasswordInput.value) return;
+    passwordSubmit.disabled = true;
+    passwordSubmit.textContent = 'Loading...';
     
     try {
-      passwordSubmit.disabled = true;
-      passwordSubmit.textContent = 'Loading...';
+      if (!oldPasswordInput.value) throw new Error('Old password is required');
+      if (!newPasswordInput.value) throw new Error('New password is required');
+      if (!confirmPasswordInput.value) throw new Error('Confirm password is required');
       
       if (newPasswordInput.value !== confirmPasswordInput.value) {
         passwordSubmit.textContent = 'Confirm password not match';
         throw new Error('Confirm password not match');
       }
       
-      const changePass = await changePassword(oldPasswordInput.value, newPasswordInput.value, confirmPasswordInput.value);
+      const changePass = await changePassword(oldPasswordInput.value, newPasswordInput.value);
       
       if (changePass.error) {
         passwordSubmit.textContent = changePass.error;
@@ -248,6 +228,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
       }
     } catch (error) {
       console.error(error.message);
+      passwordSubmit.textContent = error.message;
     } finally {
       setTimeout(() => {
         passwordSubmit.textContent = 'Change Password';

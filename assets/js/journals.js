@@ -1,5 +1,7 @@
 import { JOURNALS_KEY as STORAGE_KEY } from './handler.js';
 
+const journalForm = document.getElementById('journalForm');
+
 let journals = [];
 let search = '';
 
@@ -106,8 +108,6 @@ function render() {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
-  const journalForm = document.getElementById('journalForm');
-  
   load();
   render();
   
