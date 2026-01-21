@@ -212,9 +212,9 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     passwordSubmit.disabled = true;
     passwordSubmit.textContent = 'Loading...';
     
-    oldPass = (oldPasswordInput.value || '').trim();
-    newPass = (newPasswordInput.value || '').trim();
-    confirmPass = (confirmPasswordInput.value || '').trim();
+    const oldPass = (oldPasswordInput.value || '').trim();
+    const newPass = (newPasswordInput.value || '').trim();
+    const confirmPass = (confirmPasswordInput.value || '').trim();
     
     console.log(`Debug: ${oldPass}, ${newPass}, ${confirmPass}`);
     
