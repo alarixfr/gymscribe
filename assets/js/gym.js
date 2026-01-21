@@ -206,21 +206,29 @@ document.addEventListener('DOMContentLoaded', async (e) => {
   
   changePasswordForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     
     passwordSubmit.disabled = true;
     passwordSubmit.textContent = 'Loading...';
     
+    oldPass = (oldPasswordInput.value || '').trim();
+    newPass = (newPasswordInput.value || '').trim();
+    confirmPass = (confirmPasswordInput.value || '').trim();
+    
+    console.log(`Debug: ${oldPass}, ${newPass}, ${confirmPass}`);
+    
     try {
-      if (!oldPasswordInput.value) throw new Error('Old password is required');
-      if (!newPasswordInput.value) throw new Error('New password is required');
-      if (!confirmPasswordInput.value) throw new Error('Confirm password is required');
+      if (!oldPass) throw new Error('Old password is required');
+      if (!newPass) throw new Error('New password is required');
+      if (!confirmPass) throw new Error('Confirm password is required');
       
-      if (newPasswordInput.value !== confirmPasswordInput.value) {
+      if (newPass !== confirmPass) {
         passwordSubmit.textContent = 'Confirm password not match';
         throw new Error('Confirm password not match');
       }
       
-      const changePass = await changePassword(oldPasswordInput.value, newPasswordInput.value);
+      const changePass = await changePassword(oldPass,newPass);
       
       if (changePass.error) {
         passwordSubmit.textContent = changePass.error;
