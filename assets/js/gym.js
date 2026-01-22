@@ -29,6 +29,8 @@ let allowClick = true;
 document.addEventListener('DOMContentLoaded', async (e) => {
   await init();
   
+  console.log(`Debug: ${typeof confirmPasswordInput}`);
+  
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     
@@ -159,6 +161,26 @@ document.addEventListener('DOMContentLoaded', async (e) => {
       setTimeout(() => {
         attendanceSaveBtn.textContent = 'Save data to server';
         attendanceSaveBtn.disabled = false;
+        allowClick = true;
+      }, 2000);
+    }
+  });
+  
+  attendanceLoadBtn.addEventListener('click', async () => {
+    if (!allowClick) return;
+    
+    allowClick = false;
+    attendanceLoadBtn.disabled = true;
+    attendanceLoadBtn.textContent = 'Loading...';
+    
+    try {
+      await attendanceLoad();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setTimeout(() => {
+        attendanceLoadBtn.textContent = 'Load data from server';
+        attendanceLoadBtn.disabled = false;
         allowClick = true;
       }, 2000);
     }
