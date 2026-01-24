@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
       passwordSubmit.textContent = error.message;
     } finally {
       setTimeout(() => {
+        changePasswordForm.reset();
         passwordSubmit.textContent = 'Change Password';
         passwordSubmit.disabled = false;
       }, 2000);

@@ -553,7 +553,7 @@ async function attendanceSave() {
     if (!requireAuth()) return { error: 'Not authenticated' };
     
     if (!isStorageExist()) throw new Error('Storage unavailable');
-    const attendanceData = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) ?? "[]");
+    const attendanceData = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) ?? "{}");
     
     const token = getToken();
     
