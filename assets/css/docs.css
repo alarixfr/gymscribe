@@ -39,6 +39,14 @@ a, button {
   border: none;
 }
 
+ol {
+  list-style: disc;
+}
+
+li {
+  margin-left: 1rem;
+}
+
 .navbar-container {
   display: none;
 }
@@ -64,10 +72,10 @@ a, button {
 }
 
 .main {
-  margin: 0.4rem;
+  margin: 0rem 1.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 2rem;
 }
 
 .section {
@@ -81,9 +89,50 @@ a, button {
 }
 
 .heading {
+  margin-top: 2rem;
   font-size: 2.1rem;
 }
 
 .subheading {
   font-size: 1.4rem;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.warning {
+  font-weight: 700;
+  color: rgb(250,180,20);
+}
+
+.error {
+  font-weight: 700;
+  color: rgb(255,78,78);
+}
+
+.page-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.page-button {
+  text-align: center;
+  background: rgb(63,150,120);
+  padding: 0.6rem 0.8rem;
+  box-shadow: 2px 2px white;
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
+  color: black;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: white;
 }

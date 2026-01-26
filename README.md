@@ -1,7 +1,7 @@
 <h1>Gymscribe</h1>
 <p>An open source gym membership management app for gym owners and everyone with PostgreSQL database.</p>
-<hr>
-<img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/36bf6a26b5a94709_untitled25_20260118234415.png" width="100%" alt="Gymscribe Banner">
+
+<img src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GymscribeBanner.png" width="100%" alt="Gymscribe Banner">
 <img src="https://hackatime-badge.hackclub.com/U09EB9V2NBB/gymscribe" alt="Hakatime Stats">
 
 ## Main Features:
@@ -20,9 +20,9 @@ The backend are open source and can be viewed in the github repo link here:
 <h1>FLAVORTOWN</h1>
 <p>This project was shipped in flavortown with total of 100 hours including the backend.</p>
 <a href="https://flavortown.hackclub.com/projects/32">https://flavortown.hackclub.com/projects/32</a>
+<img style="width:100%;margin-top:1rem;" src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GYMSCRIBEFLAVORTOWN.png" alt="Gymscribe Flavortown">
 <hr>
-<img style="width:100%;" src="https://raw.githubusercontent.com/hackclub/flavortown/refs/heads/main/app/assets/images/orpheus_sprites/12.png" alt="Flavortown">
-<br></br>
+<img style="width:30%;" src="https://raw.githubusercontent.com/hackclub/flavortown/refs/heads/main/app/assets/images/orpheus_sprites/12.png" alt="Flavortown">
 <p style="font-size:2rem">Welcome! :&#41</p>
 <h2>If you are reviewing this project:</h2>
 <p>there are some stuff you might want to know,<p/>
