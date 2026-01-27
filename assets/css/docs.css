@@ -111,6 +111,10 @@ li {
   color: rgb(255,78,78);
 }
 
+.italic {
+  font-style: italic
+}
+
 .page-button-container {
   width: 100%;
   display: flex;
