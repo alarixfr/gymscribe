@@ -340,6 +340,12 @@ html.sr .load-hidden {
   height: 4rem;
 }
 
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .logo img {
     height: 2.2rem;
@@ -413,10 +419,6 @@ html.sr .load-hidden {
     margin-right: 0.5rem;
   }
   
-  .hero h1 {
-    font-size: 2.1rem;
-  }
-  
   .hero p {
     font-size: 1.1rem;
     max-width: 30ch;
@@ -456,7 +458,7 @@ html.sr .load-hidden {
     gap: 2rem;
     justify-content: center;
     flex-direction: row;
-    width: 80vw;
+    width: 67vw;
     text-align: left;
     flex: 1;
     max-width: 1000px;
