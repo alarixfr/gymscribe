@@ -140,3 +140,34 @@ footer {
   padding: 1rem;
   background: white;
 }
+
+.code-block {
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  font-family: Monospace;
+  background: rgba(78,78,78, 0.3);
+  word-break: break-all;
+}
+
+@media (min-width: 768px) {
+  p {
+    font-size: 1.4rem;
+  }
+  
+  .heading {
+    font-size: 1.8rem;
+  }
+  
+  .subheading {
+    font-size: 1.6rem;
+  }
+  
+  .image-container {
+    width: 50%;
+    align-self: center;
+  }
+  
+  .code-block {
+    font-size: 1.6rem;
+  }
+}
