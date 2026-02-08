@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const menu = document.querySelector('.menu');
+  const menu = document.querySelector('.menu') || document.querySelector('.navbar-content');
       
   function toggleMenu() {
     menu.classList.toggle('show');
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   window.toggleMenu = toggleMenu;
   
-  document.querySelectorAll('.menu a').forEach(link => {
+  menu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => { menu.classList.remove('show');
     });
   });
