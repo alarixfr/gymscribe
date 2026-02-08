@@ -4,16 +4,61 @@
 <img src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GymscribeBanner.png" width="100%" alt="Gymscribe Banner">
 <img src="https://hackatime-badge.hackclub.com/U09EB9V2NBB/gymscribe" alt="Hakatime Stats">
 
-## Main Features:
-- Manage members
-- Track attendace
-- Gym RESTAPI
-- Altcha captcha
-- PostgreSQL database
+# Introduction
+**Gymscribe** is an open source advanced gym membership management app for gym owners to track and manage memberships easily. carefully created with vanilla css and PostgreSQL using various libraries.
+
+**Gymscribe** is different because you can run it locally by downloading the source code and host it on your own server.
+
+**Gymscribe** is *free* for everyone.
+
+# Features:
+**Gymscribe** have various of features enough to manage a small and scalable gyms.
+
+List of **Gymscribe** features:
+- JWT Authentication
+- PostgreSQL Database
+- Altcha Captcha
+- Manage Members (CRUD)
+- Members Data Analytics
+- Export Members To .CSV
+- Journals + Save To DB
+- Attendance System
+- Attendance Data Chart
+- /GET RESTAPI for the Gym data
+- And Many Other Stuff!
+
+# Tech Stack
+**Gymscribe** is made using standard and modern technology.
+
+List of tech stack used:
+- HTML
+- CSS
+- JavaScript
+- NodeJS
+- Express
+- Prisma
+- Neon
+- PostgreSQL
+- Altcha
+- Chart.JS
+- Vercel
+- Railway
+- etc.
+
+# Ideas
+The ideas and vision of **Gymscribe** :)
+
+I was wondering why there is no such thing as easy and quick gym manager for every gym owners? well, introducing...
+**Gymscribe**! a free and open source gym membership manager because we believe managing memberships doesn't requires a subscriptions. ♥️
+
+<p>Gymscribe is free and open source. Try it -> <a href="https://gymscribe.vercel.app">https://gymscribe.vercel.app/</a></p>
+
+<h1>Installation Guide<h1>
+<p>The complete guide to installing Gymscribe can be read <a href="https://gymscribe.vercel.app/docs.html/">here!</a></p>
 
 <h1>BACKEND</h1>
 <p>
-The backend are open source and can be viewed in the github repo link here:
+The backend are open source and can be found in the github repo below:
 </p>
 <a href="https://github.com/alarixfr/gymscribeBackend">https://github.com/alarixfr/gymscribeBackend</a>
 

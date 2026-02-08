@@ -11,6 +11,10 @@ html {
   scroll-behavior: smooth;
 }
 
+a {
+  color: white;
+}
+
 a:focus, a:active {
   outline: none;
   box-sizing: none;
