@@ -173,3 +173,57 @@ function glycemicLoad(gi, carbGrams) {
 }
 
 // BODY COMPOSITION
+
+function leanBodyMass(weightKg, bodyFatPercent) {
+  if (weightKg <= 0 || bodyFatPercent < 0 || bodyFatPercent > 100) {
+    throw new Error('Invalid Value');
+  }
+  
+  return (weightKg * (100 - bodyFatPercent)) / 100;
+}
+
+function FFMI(weightKg, heightCm, bodyFatPercent) {
+  if (weightKg <= 0 || heightCm <= 0 || bodyFatPercent < 0 || bodyFatPercent > 100) {
+    throw new Error('Invalid Value');
+  }
+  
+  const lbm = leanBodyMass(weightKg, bodyFatPercent);
+  const heightM = heightCm / 100;
+  
+  return lbm / (heightM * heightM);
+}
+
+function wilksScore(liftKg, bodyWeightKg, gender) {
+  if (liftKg <= 0 || bodyWeightKg <= 0) {
+    throw new Error('Invalid Value');
+  }
+  
+  const coeff =
+    gender === 'male'
+      ? [
+          -216.0475144,
+          16.2606339,
+          -0.002388645,
+          -0.00113732,
+          7.01863e-6,
+          -1.291e-8
+        ]
+      : [
+          594.31747775582,
+          -27.23842536447,
+          0.82112226871,
+          -0.00930733913,
+          4.731582e-5,
+          -9.054e-8
+        ];
+    
+  const denominator =
+    coeff[0] +
+    coeff[1] * bodyWeightKg +
+    coeff[2] * Math.pow(bodyWeightKg, 2) +
+    coeff[3] * Math.pow(bodyWeightKg, 3) +
+    coeff[4] * Math.pow(bodyWeightKg, 4) +
+    coeff[5] * Math.pow(bodyWeightKg, 5);
+  
+  return (liftKg * 500) / denominator;
+}
