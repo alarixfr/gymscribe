@@ -18,7 +18,7 @@ function BMR(weightKg, heightCm, age, gender) {
     : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
 }
 
-function tdee(bmrValue, activityMultiplier) {
+function TDEE(bmrValue, activityMultiplier) {
   if (bmrValue <= 0 || activityMultiplier <= 0) {
     throw new Error('Invalid Value');
   }
