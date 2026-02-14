@@ -1,11 +1,27 @@
-// HEALTH
+const output = document.getElementById("output");
 
-function BMI(weightKg, heightCm) {
-  if (weightKg <= 0 || heightCm <= 0) {
-    throw new Error('Invalid Value');
+function writeOutput(msg) {
+  output.textContent = `Output: ${msg}`;
+}
+
+// HEALTH
+function BMI() {
+  try {
+    const weightKg = document.getElementById('BMIWeight').value;
+    const heightCm = document.getElementById('BMIHeight').value;
+    
+    if (!weightKg && !heightCm) {
+      throw new Error('Not Found');
+    }
+    
+    if (weightKg <= 0 || heightCm <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    writeOutput((weightKg / Math.pow(heightCm / 100, 2)).toFixed(1));
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return weightKg / Math.pow(heightCm / 100, 2);
 }
 
 function BMR(weightKg, heightCm, age, gender) {
@@ -90,7 +106,6 @@ function FFMI(weightKg, heightCm, bodyFatPercent) {
 }
 
 // STRENGTH
-
 function oneRM(weightKg, reps, formula) {
   if (weightKg <= 0 || reps <= 0) {
     throw new Error('Invalid Value');
@@ -155,7 +170,6 @@ function wilksScore(liftKg, bodyWeightKg, gender) {
 }
 
 // NUTRITION
-
 function macros(calories, proteinRatio, carbRatio, fatRatio) {
   if (calories <= 0) {
     throw new Error('Invalid Value');
@@ -225,3 +239,22 @@ function glycemicLoad(gi, carbGrams) {
   
   return (gi * carbGrams) / 100;
 }
+
+class BMIFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>BMI Calculator</h2>
+        <input id="BMIWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="BMIHeight" type="number" placeholder="Height (cm)" required>
+        <button id="BMICalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#BMICalc').onclick = () => {
+      BMI();
+    };
+  }
+}
+
+customElements.define('bmi-formula', BMIFormula);

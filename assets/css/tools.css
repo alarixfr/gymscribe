@@ -228,6 +228,69 @@ footer {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.display-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.tool-input-container {
+  width: 95%;
+  border: 1px solid white;
+}
+
+.output-container {
+  width: 95%;
+  border: 1px solid white;
+  padding: 0.8rem;
+}
+
+.output {
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+
+.tools-element {
+  padding: 0.4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.tools-element h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tools-element input {
+  width: 100%;
+  font-size: 1.2rem;
+  border: none;
+  background: white;
+  padding: 1rem 2rem;
+}
+
+.tools-element button {
+  width: 100%;
+  font-size: 1.8rem;
+  border: none;
+  background: rgba(100, 250, 200, 0.8);
+  padding: 0.8rem 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.tools-element button:hover {
+  background: rgba(100, 250, 200, 0.6);
+}
+
 @media (max-width: 768px) {
   .logo img {
     height: 2.2rem;
@@ -330,6 +393,14 @@ footer {
   
   .select-tools-button {
     font-size: 1rem;
+  }
+  
+  .tool-input-container {
+    width: 90%;
+  }
+  
+  .output-container {
+    width: 90%;
   }
   
   footer {
