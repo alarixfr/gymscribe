@@ -28,6 +28,7 @@ body {
   font-family: 'Outfit', Sans-Serif;
   background-color: #151515;
   color: white;
+  padding-bottom: 5rem;
 }
 
 html.sr .load-hidden {
@@ -224,7 +225,7 @@ footer {
   grid-template-columns: repeat(4, 1fr);
   gap: 0.4rem;
   padding: 1rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
