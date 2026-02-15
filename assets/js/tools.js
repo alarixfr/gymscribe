@@ -18,50 +18,94 @@ function BMI() {
       throw new Error('Invalid Value');
     }
     
-    writeOutput((weightKg / Math.pow(heightCm / 100, 2)).toFixed(1));
+    writeOutput((weightKg / Math.pow(heightCm / 100, 2)).toFixed(2));
   } catch (e) {
     writeOutput(e.message);
   }
 }
 
-function BMR(weightKg, heightCm, age, gender) {
-  if (weightKg <= 0 || heightCm <= 0 || age <= 0) {
-    throw new Error("Invalid Value");
+function BMR() {
+  try {
+    const weightKg = document.getElementById('BMRWeight').value;
+    const heightCm = document.getElementById('BMRHeight').value;
+    const age = document.getElementById('BMRAge').value;
+    const gender = document.getElementById('BMRGender').value;
+    
+    let result = 0;
+    
+    if (weightKg <= 0 || heightCm <= 0 || age <= 0) {
+      throw new Error("Invalid Value");
+    }
+    
+    if (gender === "male") {
+      result = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+    } else if (gender === "female") {
+      result = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+    } else {
+      throw new Error('Invalid Value');
+    }
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return gender === "male"
-    ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
-    : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
 }
 
-function TDEE(bmrValue, activityMultiplier) {
-  if (bmrValue <= 0 || activityMultiplier <= 0) {
-    throw new Error('Invalid Value');
-  }
+function TDEE() {
+  try {
+    const bmrValue = document.getElementById('TDEEBMR').value;
+    const activityMultiplier = document.getElementById('TDEEActivity').value;
+    
+    let result = 0;
+    
+    if (bmrValue <= 0 || activityMultiplier <= 0) {
+      throw new Error('Invalid Value');
+    }
   
-  return bmrValue * activityMultiplier;
+    result = bmrValue * activityMultiplier;
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
+  }
 }
 
-function bodyFat(gender, waistCm, neckCm, heightCm, hipCm = 0) {
-  if (waistCm <= 0 || neckCm <= 0 || heightCm <= 0) {
-    throw new Error('Invalid Value');
+function bodyFat() {
+  try {
+    const gender = document.getElementById('bodyFatGender').value;
+    const heightCm = document.getElementById('bodyFatHeight').value;
+    const neckCm = document.getElementById('bodyFatNeck').value;
+    const waistCm = document.getElementById('bodyFatWaist').value;
+    const hipCm = document.getElementById('bodyFatHip').value || 0;
+    
+    let result = 0;
+    
+    if (waistCm <= 0 || neckCm <= 0 || heightCm <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    if (gender === 'female' && hipCm <= 0) {
+      throw new Error('Missing Required Value');
+    }
+    
+    if (gender === "male") {
+      result = 495 /
+        (1.0324 -
+          0.19077 * Math.log10(waistCm - neckCm) + 
+          0.15456 * Math.log10(heightCm)) -
+        450;
+    } else if (gender === "female") {
+      result = 495 /
+        (1.29579 -
+          0.35004 * Math.log10(waistCm + hipCm - neckCm) +
+          0.221 * Math.log10(heightCm)) -
+        450;
+    }
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  if (gender === 'female' && hipCm <= 0) {
-    throw new Error('Missing Required Value');
-  }
-  
-  return gender === "male"
-    ? 495  /
-      (1.0324 -
-        0.19077 * Math.log10(waistCm - neckCm) + 
-        0.15456 * Math.log10(heightCm)) -
-      450
-    : 495 /
-      (1.29579 -
-        0.35004 * Math.log10(waistCm + hipCm - neckCm) +
-        0.221 * Math.log10(heightCm)) -
-      450;
 }
 
 function waistToHeight(waistCm, heightCm) {
@@ -257,4 +301,84 @@ class BMIFormula extends HTMLElement {
   }
 }
 
+class BMRFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>BMR Calculator</h2>
+        <input id="BMRWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="BMRHeight" type="number" placeholder="Height (cm)" required>
+        <input id="BMRAge" type="number" placeholder="Age (years)" required>
+        <select id="BMRGender" name="Gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button id="BMRCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#BMRCalc').onclick = () => {
+      BMR();
+    };
+  }
+}
+
+class TDEEFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>TDEE Calculator</h2>
+        <p>You can check your BMR by choosing the "BMR" tool above. Activity: No Exercise 1.2 - 1.9 Extra Active</p>
+        <input id="TDEEBMR" type="number" placeholder="BMR" required>
+        <input id="TDEEActivity" type="number" placeholder="Activity Multiplier" required>
+        <button id="TDEECalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#TDEECalc').onclick = () => {
+      TDEE();
+    };
+  }
+}
+
+class bodyFatFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Body Fat Calculator</h2>
+        <input id="bodyFatHeight" type="number" placeholder="Height (cm)" required>
+        <input id="bodyFatNeck" type="number" placeholder="Neck (cm)" required>
+        <input id="bodyFatWaist" type="number" placeholder="Waist (cm)" required>
+        <input style="display:none;" id="bodyFatHip" type="number" placeholder="Hip (cm)">
+        <select id="bodyFatGender" name="Gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button id="bodyFatCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#bodyFatCalc').onclick = () => {
+      bodyFat();
+    }
+    
+    this.querySelector('#bodyFatGender').onchange = (e) => {
+      const hipInput = document.getElementById('bodyFatHip');
+      const gender = e.target.value;
+      
+      
+      if (gender === 'female') {
+        hipInput.style.display = 'block';
+        hipInput.required = true;
+      } else {
+        hipInput.style.display = 'none';
+        hipInput.required = false;
+      }
+    }
+  }
+}
+
 customElements.define('bmi-formula', BMIFormula);
+customElements.define('bmr-formula', BMRFormula);
+customElements.define('tdee-formula', TDEEFormula);
+customElements.define('bodyfat-formula', bodyFatFormula);

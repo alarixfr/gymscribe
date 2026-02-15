@@ -266,11 +266,16 @@ footer {
 }
 
 .tools-element h1 {
-  font-size: 2rem;
+  font-size: 3.2rem;
   text-align: center;
 }
 
-.tools-element input {
+.tools-element p {
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+.tools-element input, .tools-element select {
   width: 100%;
   font-size: 1.2rem;
   border: none;
@@ -401,6 +406,10 @@ footer {
   
   .output-container {
     width: 90%;
+  }
+  
+  .tools-element p {
+    font-size: 1rem;
   }
   
   footer {
