@@ -7,8 +7,8 @@ function writeOutput(msg) {
 // HEALTH
 function BMI() {
   try {
-    const weightKg = document.getElementById('BMIWeight').value;
-    const heightCm = document.getElementById('BMIHeight').value;
+    const weightKg = parseFloat(document.getElementById('BMIWeight').value) || 0;
+    const heightCm = parseFloat(document.getElementById('BMIHeight').value) || 0;
     
     if (!weightKg && !heightCm) {
       throw new Error('Not Found');
@@ -18,7 +18,9 @@ function BMI() {
       throw new Error('Invalid Value');
     }
     
-    writeOutput((weightKg / Math.pow(heightCm / 100, 2)).toFixed(2));
+    const result = weightKg / Math.pow(heightCm / 100, 2);
+    
+    writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
   }
@@ -26,23 +28,20 @@ function BMI() {
 
 function BMR() {
   try {
-    const weightKg = document.getElementById('BMRWeight').value;
-    const heightCm = document.getElementById('BMRHeight').value;
-    const age = document.getElementById('BMRAge').value;
+    const weightKg = parseFloat(document.getElementById('BMRWeight').value) || 0;
+    const heightCm = parseFloat(document.getElementById('BMRHeight').value) || 0;
+    const age = parseFloat(document.getElementById('BMRAge').value) || 0;
     const gender = document.getElementById('BMRGender').value;
-    
-    let result = 0;
     
     if (weightKg <= 0 || heightCm <= 0 || age <= 0) {
       throw new Error("Invalid Value");
     }
     
+    let result;
     if (gender === "male") {
       result = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
-    } else if (gender === "female") {
-      result = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
     } else {
-      throw new Error('Invalid Value');
+      result = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
     }
     
     writeOutput(result.toFixed(2));
@@ -53,16 +52,14 @@ function BMR() {
 
 function TDEE() {
   try {
-    const bmrValue = document.getElementById('TDEEBMR').value;
-    const activityMultiplier = document.getElementById('TDEEActivity').value;
+    const bmrValue = parseFloat(document.getElementById('TDEEBMR').value) || 0;
+    const activityMultiplier = parseFloat(document.getElementById('TDEEActivity').value) || 0;
     
-    let result = 0;
-    
-    if (bmrValue <= 0 || activityMultiplier <= 0) {
+    if (bmrValue <= 0 || activityMultiplier <= 1.2 || activityMultiplier >= 2.0) {
       throw new Error('Invalid Value');
     }
   
-    result = bmrValue * activityMultiplier;
+    const result = bmrValue * activityMultiplier;
     
     writeOutput(result.toFixed(2));
   } catch (e) {
@@ -72,35 +69,37 @@ function TDEE() {
 
 function bodyFat() {
   try {
+    const bmi = parseFloat(document.getElementById('bodyFatBMI').value) || 0;
+    const age = parseFloat(document.getElementById('bodyFatAge').value) || 0;
     const gender = document.getElementById('bodyFatGender').value;
-    const heightCm = document.getElementById('bodyFatHeight').value;
-    const neckCm = document.getElementById('bodyFatNeck').value;
-    const waistCm = document.getElementById('bodyFatWaist').value;
-    const hipCm = document.getElementById('bodyFatHip').value || 0;
     
-    let result = 0;
-    
-    if (waistCm <= 0 || neckCm <= 0 || heightCm <= 0) {
+    if (bmi <= 0 || age <= 0) {
       throw new Error('Invalid Value');
     }
     
-    if (gender === 'female' && hipCm <= 0) {
-      throw new Error('Missing Required Value');
+    let result;
+    if (gender === "male") {
+      result = 1.20 * bmi + 0.23 * age - 16.2;
+    } else {
+      result = 1.20 * bmi + 0.23 * age - 5.4;
     }
     
-    if (gender === "male") {
-      result = 495 /
-        (1.0324 -
-          0.19077 * Math.log10(waistCm - neckCm) + 
-          0.15456 * Math.log10(heightCm)) -
-        450;
-    } else if (gender === "female") {
-      result = 495 /
-        (1.29579 -
-          0.35004 * Math.log10(waistCm + hipCm - neckCm) +
-          0.221 * Math.log10(heightCm)) -
-        450;
+    writeOutput(`${result.toFixed(2)}%`);
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
+function waistToHeight() {
+  try {
+    const waistCm = parseFloat(document.getElementById('waistToHeightWaist').value) || 0;
+    const heightCm = parseFloat(document.getElementById('waistToHeightHeight').value) || 0;
+    
+    if (waistCm <= 0 || heightCm <= 0) {
+      throw new Error('Invalid Value');
     }
+    
+    const result = waistCm / heightCm;
     
     writeOutput(result.toFixed(2));
   } catch (e) {
@@ -108,45 +107,64 @@ function bodyFat() {
   }
 }
 
-function waistToHeight(waistCm, heightCm) {
-  if (waistCm <= 0 || heightCm <= 0) {
-    throw new Error('Invalid Value');
+function heartRateZones() {
+  try {
+    const age = parseFloat(document.getElementById('heartRateZonesAge').value) || 0;
+    
+    if (age <= 0 || age > 120) {
+      throw new Error('Invalid Value');
+    }
+    
+    const max = 220 - age;
+    
+    const result = {
+      fatBurn: [(max * 0.6).toFixed(0), (max * 0.7).toFixed(0)],
+      cardio: [(max * 0.7).toFixed(0), (max * 0.85).toFixed(0)],
+      peak: [(max * 0.85).toFixed(0), max]
+    };
+    
+    writeOutput(`Max: ${max} bpm, Fat Burn: ${result.fatBurn.join('-')} bpm, Cardio: ${result.cardio.join('-')} bpm, Peak: ${result.peak.join('-')} bpm`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return waistCm / heightCm;
 }
 
-function heartRateZones(age) {
-  if (age <= 0 || age > 120) {
-    throw new Error('Invalid Value');
+function leanBodyMass() {
+  try {
+    const weightKg = parseFloat(document.getElementById('leanBodyMassWeight').value) || 0;
+    const bodyFatPercent = parseFloat(document.getElementById('leanBodyMassBodyFat').value) || 0;
+    
+    if (weightKg <= 0 || bodyFatPercent <= 0 || bodyFatPercent >= 100) {
+      throw new Error('Invalid Value');
+    }
+  
+    const result = (weightKg * (100 - bodyFatPercent)) / 100;
+    
+    writeOutput(result.toFixed(2));
+  } catch(e) {
+    writeOutput(e.message);
   }
-  
-  const max = 220 - age;
-  
-  return {
-    fatBurn: [max * 0.6, max * 0.7],
-    cardio: [max * 0.7, max * 0.85],
-    peak: [max * 0.85, max]
-  };
 }
 
-function leanBodyMass(weightKg, bodyFatPercent) {
-  if (weightKg <= 0 || bodyFatPercent < 0 || bodyFatPercent > 100) {
-    throw new Error('Invalid Value');
+function FFMI() {
+  try {
+    const weightKg = parseFloat(document.getElementById('FFMIWeight').value) || 0;
+    const heightCm = parseFloat(document.getElementById('FFMIHeight').value) || 0;
+    const bodyFatPercent = parseFloat(document.getElementById('FFMIBodyFat').value) || 0;
+    
+    if (weightKg <= 0 || heightCm <= 0 || bodyFatPercent <= 0 || bodyFatPercent >= 100) {
+      throw new Error('Invalid Value');
+    }
+    
+    const lbm = (weightKg * (100 - bodyFatPercent)) / 100;
+    const heightM = heightCm / 100;
+    
+    const result = lbm / (heightM * heightM);
+    
+    writeOutput(result.toFixed(2));
+  } catch(e) {
+    writeOutput(e.message);
   }
-  
-  return (weightKg * (100 - bodyFatPercent)) / 100;
-}
-
-function FFMI(weightKg, heightCm, bodyFatPercent) {
-  if (weightKg <= 0 || heightCm <= 0 || bodyFatPercent < 0 || bodyFatPercent > 100) {
-    throw new Error('Invalid Value');
-  }
-  
-  const lbm = leanBodyMass(weightKg, bodyFatPercent);
-  const heightM = heightCm / 100;
-  
-  return lbm / (heightM * heightM);
 }
 
 // STRENGTH
@@ -329,7 +347,7 @@ class TDEEFormula extends HTMLElement {
       <div class="tools-element">
         <h2>TDEE Calculator</h2>
         <p>You can check your BMR by choosing the "BMR" tool above. Activity: No Exercise 1.2 - 1.9 Extra Active</p>
-        <input id="TDEEBMR" type="number" placeholder="BMR" required>
+        <input id="TDEEBMR" type="number" placeholder="BMR Score" required>
         <input id="TDEEActivity" type="number" placeholder="Activity Multiplier" required>
         <button id="TDEECalc">Calculate</button>
       </div>
@@ -345,11 +363,9 @@ class bodyFatFormula extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div class="tools-element">
-        <h2>Body Fat Calculator</h2>
-        <input id="bodyFatHeight" type="number" placeholder="Height (cm)" required>
-        <input id="bodyFatNeck" type="number" placeholder="Neck (cm)" required>
-        <input id="bodyFatWaist" type="number" placeholder="Waist (cm)" required>
-        <input style="display:none;" id="bodyFatHip" type="number" placeholder="Hip (cm)">
+        <h2>Body Fat Estimation</h2>
+        <input id="bodyFatBMI" type="number" placeholder="BMI Score" required>
+        <input id="bodyFatAge" type="number" placeholder="Age (years)" required>
         <select id="bodyFatGender" name="Gender" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -360,21 +376,75 @@ class bodyFatFormula extends HTMLElement {
     
     this.querySelector('#bodyFatCalc').onclick = () => {
       bodyFat();
-    }
+    };
+  }
+}
+
+class waistToHeightFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Waist To Height Ratio</h2>
+        <input id="waistToHeightWaist" type="number" placeholder="Waist (cm)" required>
+        <input id="waistToHeightHeight" type="number" placeholder="Height (cm)" required>
+        <button id="waistToHeightCalc">Calculate</button>
+      </div>
+    `;
     
-    this.querySelector('#bodyFatGender').onchange = (e) => {
-      const hipInput = document.getElementById('bodyFatHip');
-      const gender = e.target.value;
-      
-      
-      if (gender === 'female') {
-        hipInput.style.display = 'block';
-        hipInput.required = true;
-      } else {
-        hipInput.style.display = 'none';
-        hipInput.required = false;
-      }
-    }
+    this.querySelector('#waistToHeightCalc').onclick = () => {
+      waistToHeight();
+    };
+  }
+}
+
+class heartRateZonesFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Heart Rate Zones Checker</h2>
+        <input id="heartRateZonesAge" type="number" placeholder="Age (years)" required>
+        <button id="heartRateZonesCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#heartRateZonesCalc').onclick = () => {
+      heartRateZones();
+    };
+  }
+}
+
+class leanBodyMassFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Lean Body Mass Calculator</h2>
+        <input id="leanBodyMassWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="leanBodyMassBodyFat" type="number" placeholder="Body Fat (%)" required>
+        <button id="leanBodyMassCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#leanBodyMassCalc').onclick = () => {
+      leanBodyMass();
+    };
+  }
+}
+
+class FFMIFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>FFMI Calculator</h2>
+        <input id="FFMIWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="FFMIHeight" type="number" placeholder="Height (kg)" required>
+        <input id="FFMIBodyFat" type="number" placeholder="Body Fat (%)" required>
+        <button id="FFMICalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#FFMICalc').onclick = () => {
+      FFMI();
+    };
   }
 }
 
@@ -382,3 +452,7 @@ customElements.define('bmi-formula', BMIFormula);
 customElements.define('bmr-formula', BMRFormula);
 customElements.define('tdee-formula', TDEEFormula);
 customElements.define('bodyfat-formula', bodyFatFormula);
+customElements.define('waisttoheight-formula', waistToHeightFormula)
+customElements.define('heartratezones-formula', heartRateZonesFormula);
+customElements.define('leanbodymass-formula', leanBodyMassFormula)
+customElements.define('ffmi-formula', FFMIFormula);

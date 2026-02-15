@@ -205,10 +205,10 @@ footer {
   display: inline-block;
 }
 
-.tools a:hover, .select-tools-button:hover {
-  border: 4px solid rgba(67,135,250,0.8);
-  background: none;
-  color: white;
+.tools a:hover, .select-tools-button:hover, .selected-tool {
+  border: 4px solid rgba(67,135,250,0.8) !important;
+  background: none !important;
+  color: white !important;
 }
 
 .content-container {
