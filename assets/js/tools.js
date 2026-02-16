@@ -168,67 +168,113 @@ function FFMI() {
 }
 
 // STRENGTH
-function oneRM(weightKg, reps, formula) {
-  if (weightKg <= 0 || reps <= 0) {
-    throw new Error('Invalid Value');
-  }
-  
-  if (reps == 1) return weightKg;
-  
-  return formula === 'epley'
-    ? weightKg * (1 + reps / 30)
-    : weightKg * (36 / (37 - reps));
-}
-
-function relativeStrength(liftKg, bodyWeightKg) {
-  if (liftKg <= 0 || bodyWeightKg <= 0) {
-    throw new Error('Invalid Value');
-  }
-  
-  return liftKg / bodyWeightKg;
-}
-
-function intensityPercent(liftKg, oneRmKg) {
-  if (liftKg <= 0 || oneRmKg <= 0) {
-    throw new Error('Invalid Value');
-  }
-  
-  return (liftKg / oneRmKg) * 100;
-}
-
-function wilksScore(liftKg, bodyWeightKg, gender) {
-  if (liftKg <= 0 || bodyWeightKg <= 0) {
-    throw new Error('Invalid Value');
-  }
-  
-  const coeff =
-    gender === 'male'
-      ? [
-          -216.0475144,
-          16.2606339,
-          -0.002388645,
-          -0.00113732,
-          7.01863e-6,
-          -1.291e-8
-        ]
-      : [
-          594.31747775582,
-          -27.23842536447,
-          0.82112226871,
-          -0.00930733913,
-          4.731582e-5,
-          -9.054e-8
-        ];
+function oneRM() {
+  try {
+    const weightKg = parseFloat(document.getElementById('oneRMWeight').value) || 0;
+    const reps = parseFloat(document.getElementById('oneRMReps').value) || 0;
+    const formula = document.getElementById('oneRMFormulaType').value;
     
-  const denominator =
-    coeff[0] +
-    coeff[1] * bodyWeightKg +
-    coeff[2] * Math.pow(bodyWeightKg, 2) +
-    coeff[3] * Math.pow(bodyWeightKg, 3) +
-    coeff[4] * Math.pow(bodyWeightKg, 4) +
-    coeff[5] * Math.pow(bodyWeightKg, 5);
-  
-  return (liftKg * 500) / denominator;
+    if (weightKg <= 0 || reps <= 0 || reps > 20 || !Number.isInteger(reps) || formula === null) {
+      throw new Error('Invalid Value');
+    }
+    
+    if (reps == 1)  {
+      writeOutput(weightKg.toFixed(2));
+      return;
+    }
+    
+    let result;
+    if (formula === 'epley') {
+      result = weightKg * (1 + reps / 30);
+    } else if (formula === 'brzycki') {
+      result = weightKg * (36 / (37 - reps));
+    } else {
+      result = weightKg * Math.pow(reps, 0.10);
+    }
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
+function relativeStrength() {
+  try {
+    const liftKg = parseFloat(document.getElementById('relativeStrengthLift').value) || 0;
+    const bodyWeightKg = parseFloat(document.getElementById('relativeStrengthBodyWeight').value) || 0;
+    
+    if (liftKg <= 0 || bodyWeightKg <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = liftKg / bodyWeightKg;
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
+function intensityPercent() {
+  try {
+    const liftKg = parseFloat(document.getElementById('intensityPercentLift').value) || 0;
+    const oneRmKg = parseFloat(document.getElementById('intensityPercentOneRM').value) || 0;
+    
+    if (liftKg <= 0 || oneRmKg <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = (liftKg / oneRmKg) * 100;
+    
+    writeOutput(`${result.toFixed(2)}%`);
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
+function wilksScore() {
+  try {
+    const liftKg = parseFloat(document.getElementById('wilksScoreLift').value) || 0;
+    const bodyWeightKg = parseFloat(document.getElementById('wilksScoreBodyWeight').value) || 0;
+    const gender = document.getElementById('wilksScoreGender').value;
+    
+    if (liftKg <= 0 || bodyWeightKg <= 0 || gender === null) {
+      throw new Error('Invalid Value');
+    }
+    
+    const coeff =
+      gender === 'male'
+        ? [
+            -216.0475144,
+            16.2606339,
+            -0.002388645,
+            -0.00113732,
+            7.01863e-6,
+            -1.291e-8
+          ]
+        : [
+            594.31747775582,
+            -27.23842536447,
+            0.82112226871,
+            -0.00930733913,
+            4.731582e-5,
+            -9.054e-8
+          ];
+      
+    const denominator =
+      coeff[0] +
+      coeff[1] * bodyWeightKg +
+      coeff[2] * Math.pow(bodyWeightKg, 2) +
+      coeff[3] * Math.pow(bodyWeightKg, 3) +
+      coeff[4] * Math.pow(bodyWeightKg, 4) +
+      coeff[5] * Math.pow(bodyWeightKg, 5);
+    
+    const result = (liftKg * 500) / denominator;
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
+  }
 }
 
 // NUTRITION
@@ -448,6 +494,84 @@ class FFMIFormula extends HTMLElement {
   }
 }
 
+class oneRMFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>1RM Calculator</h2>
+        <p>Enter reps from 1 - 20</p>
+        <input id="oneRMWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="oneRMReps" type="number" placeholder="Reps (amount)" required>
+        <select id="oneRMFormulaType" name="Formula" required>
+          <option value="epley">Epley</option>
+          <option value="brzycki">Brzycki</option>
+          <option value="lombardi">Lombardi</option>
+        </select>
+        <button id="oneRMCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#oneRMCalc').onclick = () => {
+      oneRM();
+    };
+  }
+}
+
+class relativeStrengthFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Relative Strength Calculator</h2>
+        <input id="relativeStrengthLift" type="number" placeholder="Lift (kg)" required>
+        <input id="relativeStrengthBodyWeight" type="number" placeholder="Body Weight (kg)" required>
+        <button id="relativeStrengthCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#relativeStrengthCalc').onclick = () => {
+      relativeStrength();
+    };
+  }
+}
+
+class intensityPercentFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Intensity Percent Calculator</h2>
+        <input id="intensityPercentLift" type="number" placeholder="Lift (kg)" required>
+        <input id="intensityPercentOneRM" type="number" placeholder="OneRM (kg)" required>
+        <button id="intensityPercentCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#intensityPercentCalc').onclick = () => {
+      intensityPercent();
+    };
+  }
+}
+
+class wilksScoreFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Wilks Score Calculator</h2>
+        <input id="wilksScoreLift" type="number" placeholder="Lift (kg)" required>
+        <input id="wilksScoreBodyWeight" type="number" placeholder="Body Weight (kg)" required>
+        <select id="wilksScoreGender" name="Gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button id="wilksScoreCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#wilksScoreCalc').onclick = () => {
+      wilksScore();
+    };
+  }
+}
+
 customElements.define('bmi-formula', BMIFormula);
 customElements.define('bmr-formula', BMRFormula);
 customElements.define('tdee-formula', TDEEFormula);
@@ -456,3 +580,7 @@ customElements.define('waisttoheight-formula', waistToHeightFormula)
 customElements.define('heartratezones-formula', heartRateZonesFormula);
 customElements.define('leanbodymass-formula', leanBodyMassFormula)
 customElements.define('ffmi-formula', FFMIFormula);
+customElements.define('onerm-formula', oneRMFormula)
+customElements.define('relativestrength-formula', relativeStrengthFormula);
+customElements.define('intensitypercent-formula', intensityPercentFormula);
+customElements.define('wilksscore-formula', wilksScoreFormula);
