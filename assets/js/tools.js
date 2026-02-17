@@ -167,6 +167,58 @@ function FFMI() {
   }
 }
 
+function idealBodyWeight() {
+  try {
+     const heightCm = parseFloat(document.getElementById('idealBodyWeightHeight').value) || 0;
+     const gender = document.getElementById('idealBodyWeightGender').value;
+     
+     if (heightCm <= 0) {
+       throw new Error('Invalid Value');
+     }
+     
+     const heightInches = heightCm / 2.54;
+     
+     if (heightInches < 60) {
+       throw new Error('Height must be at least 152cm');
+     }
+     
+     let result;
+     if (gender === 'male') {
+      result = 50 + 2.3 * (heightInches - 60);
+     } else {
+      result = 45.5 + 2.3 * (heightInches - 60);
+     }
+     
+     writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
+function VO2Max() {
+  try {
+    const age = parseFloat(document.getElementById('VO2MaxAge').value) || 0;
+    const restingHR = parseFloat(document.getElementById('VO2MaxRestingHR').value) || 0;
+    
+    if (age <= 0 || age > 120 || restingHR <= 0 || restingHR > 220) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = 15 * ((220 - age) / restingHR);
+    
+    let category =
+      result < 30 ? 'Poor'
+      : result < 40 ? 'Fair'
+      : result < 50 ? 'Good'
+      : result < 60 ? 'Excellent'
+      : 'Superior';
+    
+    writeOutput(`${result.toFixed(1)}ml/kg/min (${category})`)
+  } catch (e) {
+    writeOutput(e.message);
+  }
+}
+
 // STRENGTH
 function oneRM() {
   try {
@@ -278,74 +330,137 @@ function wilksScore() {
 }
 
 // NUTRITION
-function macros(calories, proteinRatio, carbRatio, fatRatio) {
-  if (calories <= 0) {
-    throw new Error('Invalid Value');
+function macros() {
+  try {
+    const calories = parseFloat(document.getElementById('macrosCalories').value) || 0;
+    const proteinRatio = parseFloat(document.getElementById('macrosProtein').value) || -1;
+    const carbRatio = parseFloat(document.getElementById('macrosCarb').value) || -1;
+    const fatRatio = parseFloat(document.getElementById('macrosFat').value) || -1;
+    
+    if (calories <= 0 || proteinRatio < 0 || carbRatio < 0 || fatRatio < 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const totalRatio = proteinRatio + carbRatio + fatRatio;
+    
+    if (Math.abs(totalRatio - 1) > 0.01) {
+      throw new Error('Ratios must sum to 1');
+    }
+    
+    const result = {
+      proteinGrams: (calories * proteinRatio) / 4,
+      carbGrams: (calories * carbRatio) / 4,
+      fatGrams: (calories * fatRatio) / 9
+    };
+    
+    writeOutput(`Protein: ${result.proteinGrams.toFixed(2)}g, Carbs: ${result.carbGrams.toFixed(2)}g, Fat: ${result.fatGrams.toFixed(2)}g`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  const totalRatio = proteinRatio + carbRatio + fatRatio;
-  
-  if (Math.abs(totalRatio - 1) > 0.01) {
-    throw new Error('Ratios must sum to 1');
-  }
-  
-  return {
-    proteinGrams: (calories * proteinRatio) / 4,
-    carbGrams: (calories * carbRatio) / 4,
-    fatGrams: (calories * fatRatio) / 9
-  };
 }
 
-function proteinIntake(weightKg, multiplier = 1.6) {
-  if (weightKg <= 0 || multiplier <= 0) {
-    throw new Error('Invalid Value');
+function proteinIntake() {
+  try {
+    const weightKg = parseFloat(document.getElementById('proteinIntakeWeight').value) || 0;
+    const multiplier = parseFloat(document.getElementById('proteinIntakeMultiplier').value) || 0;
+    
+    if (weightKg <= 0 || multiplier < 0.8 || multiplier > 3) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = weightKg * multiplier;
+    
+    writeOutput(`${result.toFixed(2)}g`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return weightKg * multiplier;
 }
 
-function waterIntake(weightKg) {
-  if (weightKg <= 0) {
-    throw new Error('Invalid Value');
+function waterIntake() {
+  try {
+    const weightKg = parseFloat(document.getElementById('waterIntakeWeight').value) || 0;
+    
+    if (weightKg <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = (weightKg * 35) / 1000;
+    
+    writeOutput(`${result.toFixed(2)}L`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return weightKg * 35;
 }
 
-function calorieSurplus(tdeeValue, intakeCalories) {
-  if (tdeeValue <= 0 || intakeCalories <= 0) {
-    throw new Error('Invalid Value');
+function calorieSurplus() {
+  try {
+    const tdeeValue = parseFloat(document.getElementById('calorieSurplusTDEE').value) || 0;
+    const intakeCalories = parseFloat(document.getElementById('calorieSurplusCalories').value) || 0;
+    
+    if (tdeeValue <= 0 || intakeCalories <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = intakeCalories - tdeeValue;
+    
+    writeOutput(`${result.toFixed(2)}kcal`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return intakeCalories - tdeeValue;
 }
 
-function calorieDeficit(tdeeValue, intakeCalories) {
-  if (tdeeValue <= 0 || intakeCalories <= 0) {
-    throw new Error('Invalid Value');
+function calorieDeficit() {
+  try {
+    const tdeeValue = parseFloat(document.getElementById('calorieDeficitTDEE').value) || 0;
+    const intakeCalories = parseFloat(document.getElementById('calorieDeficitCalories').value) || 0;
+    
+    if (tdeeValue <= 0 || intakeCalories <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = tdeeValue - intakeCalories;
+    
+    writeOutput(`${result.toFixed(2)}kcal`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return tdeeValue - intakeCalories;
 }
 
-function fiberIntake(calories) {
-  if (calories <= 0) {
-    throw new Error('Invalid Value');
+function fiberIntake() {
+  try {
+    const calories = parseFloat(document.getElementById('fiberIntakeCalories').value) || 0;
+    
+    if (calories <= 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = (calories / 1000) * 14
+    
+    writeOutput(`${result.toFixed(2)}g`);
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  return (calories / 1000) * 14;
 }
 
 function glycemicLoad(gi, carbGrams) {
-  if (gi < 0 || gi > 100) {
-    throw new Error('GI must be between 0 and 100');
+  try {
+    const gi = parseFloat(document.getElementById('glycemicLoadGI').value) || -1;
+    const carbGrams = parseFloat(document.getElementById('glycemicLoadCarb').value) || -1;
+    
+    if (gi < 0 || gi > 100) {
+      throw new Error('GI must be between 0 and 100');
+    }
+    
+    if (carbGrams < 0) {
+      throw new Error('Invalid Value');
+    }
+    
+    const result = (gi * carbGrams) / 100;
+    
+    writeOutput(result.toFixed(2));
+  } catch (e) {
+    writeOutput(e.message);
   }
-  
-  if (carbGrams < 0) {
-    throw new Error('Invalid Value');
-  }
-  
-  return (gi * carbGrams) / 100;
 }
 
 class BMIFormula extends HTMLElement {
@@ -392,7 +507,8 @@ class TDEEFormula extends HTMLElement {
     this.innerHTML = `
       <div class="tools-element">
         <h2>TDEE Calculator</h2>
-        <p>You can check your BMR by choosing the "BMR" tool above. Activity: No Exercise 1.2 - 1.9 Extra Active</p>
+        <p>You can check your BMR by choosing the "BMR" tool above</p>
+        <p>Activity: No Exercise 1.2 - 1.9 Extra Active</p>
         <input id="TDEEBMR" type="number" placeholder="BMR Score" required>
         <input id="TDEEActivity" type="number" placeholder="Activity Multiplier" required>
         <button id="TDEECalc">Calculate</button>
@@ -572,15 +688,184 @@ class wilksScoreFormula extends HTMLElement {
   }
 }
 
+class macrosFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Macros Calculator</h2>
+        <p>Ratio must be 0.0 - 1.0</p>
+        <input id="macrosCalories" type="number" placeholder="Calories (kcal)" required>
+        <input id="macrosProtein" type="number" placeholder="Protein Ratio" required>
+        <input id="macrosCarb" type="number" placeholder="Carb Ratio" required>
+        <input id="macrosFat" type="number" placeholder="Fat Ratio" required>
+        <button id="macrosCalc">Calculate</button
+      </div>
+    `;
+    
+    this.querySelector('#macrosCalc').onclick = () => {
+      macros();
+    };
+  }
+}
+
+class proteinIntakeFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Protein Intake Calculator</h2>
+        <p>Activity: 0.8 - 3.0</p>
+        <p>Muscle Gain: 1.6 - 2.2</p>
+        <input id="proteinIntakeWeight" type="number" placeholder="Weight (kg)" required>
+        <input id="proteinIntakeMultiplier" type="number" placeholder="Multiplier" required>
+        <button id="proteinIntakeCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#proteinIntakeCalc').onclick = () => {
+      proteinIntake();
+    };
+  }
+}
+
+class waterIntakeFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Water Intake Calculator</h2>
+        <p>Result may not suitable for people in hot climate and high water needs</p>
+        <input id="waterIntakeWeight" type="number" placeholder="Weight (kg)" required>
+        <button id="waterIntakeCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#waterIntakeCalc').onclick = () => {
+      waterIntake();
+    };
+  }
+}
+
+class calorieSurplusFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Calorie Surplus Calculator</h2>
+        <input id="calorieSurplusTDEE" type="number" placeholder="TDEE" required>
+        <input id="calorieSurplusCalories" type="number" placeholder="Calories (kcal)" required>
+        <button id="calorieSurplusCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#calorieSurplusCalc').onclick = () => {
+      calorieSurplus();
+    };
+  }
+}
+
+class calorieDeficitFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Calorie Deficit Calculator</h2>
+        <input id="calorieDeficitTDEE" type="number" placeholder="TDEE" required>
+        <input id="calorieDeficitCalories" type="number" placeholder="Calories (kcal)" required>
+        <button id="calorieDeficitCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#calorieDeficitCalc').onclick = () => {
+      calorieDeficit();
+    };
+  }
+}
+
+class fiberIntakeFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Fiber Intake Calculator</h2>
+        <input id="fiberIntakeCalories" type="number" placeholder="Calories (kcal)" required>
+        <button id="fiberIntakeCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#fiberIntakeCalc').onclick = () => {
+      fiberIntake();
+    };
+  }
+}
+
+class glycemicLoadFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Glycemic Load Calculator</h2>
+        <input id="glycemicLoadGI" type="number" placeholder="Glycemic Index (GI)" required>
+        <input id="glycemicLoadCarb" type="number" placeholder="Carb (g)" required>
+        <button id="glycemicLoadCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#glycemicLoadCalc').onclick = () => {
+      glycemicLoad();
+    };
+  }
+}
+
+class idealBodyWeightFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>Ideal Body Weight Calculator</h2>
+        <input id="idealBodyWeightHeight" type="number" placeholder="Height (cm)" required>
+        <select id="idealBodyWeightGender" name="Gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button id="idealBodyWeightCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#idealBodyWeightCalc').onclick = () => {
+      idealBodyWeight();
+    };
+  }
+}
+
+class VO2MaxFormula extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="tools-element">
+        <h2>VO2 Max Calculator</h2>
+        <input id="VO2MaxAge" type="number" placeholder="Age (years)" required>
+        <input id="VO2MaxRestingHR" type="number" placeholder="Resting HR (bpm)" required>
+        <button id="VO2MaxCalc">Calculate</button>
+      </div>
+    `;
+    
+    this.querySelector('#VO2MaxCalc').onclick = () => {
+      VO2Max();
+    }
+  }
+}
+
 customElements.define('bmi-formula', BMIFormula);
 customElements.define('bmr-formula', BMRFormula);
 customElements.define('tdee-formula', TDEEFormula);
 customElements.define('bodyfat-formula', bodyFatFormula);
-customElements.define('waisttoheight-formula', waistToHeightFormula)
+customElements.define('waisttoheight-formula', waistToHeightFormula);
 customElements.define('heartratezones-formula', heartRateZonesFormula);
-customElements.define('leanbodymass-formula', leanBodyMassFormula)
+customElements.define('leanbodymass-formula', leanBodyMassFormula);
 customElements.define('ffmi-formula', FFMIFormula);
-customElements.define('onerm-formula', oneRMFormula)
+customElements.define('onerm-formula', oneRMFormula);
 customElements.define('relativestrength-formula', relativeStrengthFormula);
 customElements.define('intensitypercent-formula', intensityPercentFormula);
 customElements.define('wilksscore-formula', wilksScoreFormula);
+customElements.define('macros-formula', macrosFormula);
+customElements.define('proteinintake-formula', proteinIntakeFormula);
+customElements.define('waterintake-formula', waterIntakeFormula);
+customElements.define('caloriesurplus-formula', calorieSurplusFormula);
+customElements.define('caloriedeficit-formula', calorieDeficitFormula);
+customElements.define('fiberintake-formula', fiberIntakeFormula);
+customElements.define('glycemicload-formula', glycemicLoadFormula);
+customElements.define('idealbodyweight-formula', idealBodyWeightFormula);
+customElements.define('vo2max-formula', VO2MaxFormula);
