@@ -82,7 +82,7 @@ function pingFetch() {
   }
 }
 
-async function usersFetch() {
+async function statsFetch() {
   try {
     const response = await fetch(`${API_URL}/stats`, {
       method: 'GET',
@@ -98,33 +98,14 @@ async function usersFetch() {
     }
     
     usersElement.textContent = data.stats.totalAccounts;
-  } catch (e) {
-    usersElement.textContent = 'ERROR: COULDNT CONNECT';
-  }
-}
-
-async function membersFetch() {
-  try {
-    const response = await fetch(`${API_URL}/stats`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error('ERROR: COULDNT CONNECT');
-    }
-    
     membersElement.textContent = data.stats.totalMembers;
   } catch (e) {
+    usersElement.textContent = 'ERROR: COULDNT CONNECT';
     membersElement.textContent = 'ERROR: COULDNT CONNECT';
   }
 }
 
-async function cachedFetch() {
+async function cacheFetch() {
   try {
     const response = await fetch(`${API_URL}/stats`, {
       method: 'GET',
@@ -140,63 +121,59 @@ async function cachedFetch() {
     }
     
     cachedElement.textContent = data.cache.cached;
-  } catch (e) {
-    cachedElement.textContent = 'ERROR: COULDNT CONNECT';
-  }
-}
-
-async function cacheAgeFetch() {
-  try {
-    const response = await fetch(`${API_URL}/stats`, {
-      method: 'GET',
-      headers: 'application/json'
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error('ERROR: COULDNT CONNECT');
-    }
-    
     cacheAgeElement.textContent = data.cache.cacheAge;
   } catch (e) {
+    cachedElement.textContent = 'ERROR: COULDNT CONNECT';
     cacheAgeElement.textContent = 'ERROR: COULDNT CONNECT';
   }
 }
 
-async function nameFetch() {
+async function advancedFetch() {
   try {
-    const response = await fetch(`${API_URL}`, {
+    const response = await fetch(`${API_URL}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     });
     
-    //todo
+    const data = response.json();
+    
+    if (!response.ok) {
+      throw new Error('ERROR: COULDNT CONNECT');
+    }
+    
+    nameElement.textContent = data.name;
+    versionElement.textContent = data.version;
+    
+    uptimeElement.textContent = data.system.uptime;
+    nodeElement.textContent = data.system.node;
+    osElement.textContent = data.system.platform;
+    cpuElement.textContent = data.system.cpu;
+    
+    totalMemoryElement.textContent = data.memory.total;
+    usedMemoryElement.textContent = data.memory.used;
   } catch (e) {
     nameElement.textContent = 'ERROR: COULDNT CONNECT';
-  }
-}
-
-async function versionFetch() {
-  try {
-    //todo
-  } catch (e) {
     versionElement.textContent = 'ERROR: COULDNT CONNECT';
+    
+    uptimeElement.textContent = 'ERROR: COULDNT CONNECT';
+    nodeElement.textContent = 'ERROR: COULDNT CONNECT';
+    osElement.textContent = 'ERROR: COULDNT CONNECT';
+    cpuElement.textContent = 'ERROR: COULDNT CONNECT';
+    
+    totalMemoryElement.textContent = 'ERROR: COULDNT CONNECT';
+    usedMemoryElement.textContent = 'ERROR: COULDNT CONNECT';
   }
 }
-
-//todo
 
 async function init() {
   try {
     addressFetch();
     await statusFetch();
-    await usersFetch();
-    await membersFetch();
-    await cachedFetch();
-    await cacheAgeFetch();
+    await statsFetch();
+    await cacheFetch();
+    await advancedFetch();
   } catch (e) {
     console.error(e.message);
   }
