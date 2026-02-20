@@ -57,23 +57,23 @@ I was wondering why there is no such thing as easy and quick gym manager for eve
 # Install
 This is guide on installing **Gymscribe** frontend files and run it locally!
 
-1. Install VS Code and Git. (you can use any code editor)
+1. Install **VS Code** and **Git**. (you can use any code editor)
 2. Clone **Gymscribe** using Git in your terminal:
 ```
 git clone https://github.com/alarixfr/gymscribe.git
 ```
 3. Open the cloned **Gymscribe** folder in your code editor.
 4. Configure `./assets/js/handler.js`.
-(ADJUST THE **DASHBOARD_URL**, **LOGIN_URL** variable to correct html path or url)
-5. Open index.js in your browser or use **Live Server**.
+5. Adjust the **DASHBOARD_URL** and **LOGIN_URL** variable to correct html path or url
+6. Open index.js in your browser or use **Live Server**.
 
 ## IMPORTANT NOTE
 1. **Gymscribe** original server can be accessed anywhere without special *CORS*.
 2. **Gymscribe** original server might be offline or have potential security issues to watch.
 3. If you have your own API or cloned **Gymscribe** API, you can connect it by configuring the `./assets/js/handler.js` file, right in the **API_URL** variable.
 
-<h1>Full Installation Guide<h1>
-<p>The complete guide to installing Gymscribe can be read <a href="https://gymscribe.vercel.app/docs.html/">here!</a></p>
+## Full Guide
+The complete guide to installing Gymscribe can be read <a href="https://gymscribe.vercel.app/docs.html">https://gymscribe.vercel.app/docs.html</a>
 
 <h1>BACKEND</h1>
 <p>
