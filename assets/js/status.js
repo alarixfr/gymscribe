@@ -32,22 +32,36 @@ function addressFetch() {
   }
 }
 
-function ipFetch() {
+async function locationFetch() {
   try {
-    //todo
-    const data = 'test';
-    ipElement.textContent = data;
+    const response = await fetch(`${API_URL}/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error('ERROR: COULDNT CONNECT');
+    }
+    
+    const region = fetch(`https://ipapi.co/${data.ip}/json/`)
+      .then(res => {
+        if (!res.ok) throw new Error('ERROR: COULDNT DETECT');
+        res.json();
+      })
+      .then(regionData => {
+        regionElement = `${data.region}, ${data.country_name}`;
+      })
+      .catch(e => {
+        throw new Error('ERROR: COULDNT DETECT');
+      });
+    
+    ipElement.textContent = data.ip;
   } catch (e) {
     ipElement.textContent = 'ERROR: COULDNT CONNECT';
-  }
-}
-
-function regionFetch() {
-  try {
-    //todo
-    const data = 'test';
-    regionElement.textContent = data;
-  } catch (e) {
     regionElement.textContent = 'ERROR: COULDNT CONNECT';
   }
 }
@@ -69,15 +83,9 @@ async function statusFetch() {
     }
     
     statusElement.textContent = `${response.status} - ${data.status}`;
+    pingElement.textContent = data.ping;
   } catch (e) {
     statusElement.textContent = 'ERROR: COULDNT CONNECT';
-  }
-}
-
-function pingFetch() {
-  try {
-    //todo
-  } catch (e) {
     pingElement.textContent = 'ERROR: COULDNT CONNECT';
   }
 }
@@ -170,6 +178,7 @@ async function advancedFetch() {
 async function init() {
   try {
     addressFetch();
+    await locationFetch();
     await statusFetch();
     await statsFetch();
     await cacheFetch();

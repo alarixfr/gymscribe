@@ -25,6 +25,7 @@ List of **Gymscribe** features:
 - Attendance System
 - Attendance Data Chart
 - /GET RESTAPI for the Gym data
+- Advanced gym tools
 - And Many Other Stuff!
 
 # Tech Stack
@@ -53,7 +54,25 @@ I was wondering why there is no such thing as easy and quick gym manager for eve
 
 <p>Gymscribe is free and open source. Try it -> <a href="https://gymscribe.vercel.app">https://gymscribe.vercel.app/</a></p>
 
-<h1>Installation Guide<h1>
+# Install
+This is guide on installing **Gymscribe** frontend files and run it locally!
+
+1. Install VS Code and Git. (you can use any code editor)
+2. Clone **Gymscribe** using Git in your terminal:
+```
+git clone https://github.com/alarixfr/gymscribe.git
+```
+3. Open the cloned **Gymscribe** folder in your code editor.
+4. Configure `./assets/js/handler.js`.
+(ADJUST THE **DASHBOARD_URL**, **LOGIN_URL** variable to correct html path or url)
+5. Open index.js in your browser or use **Live Server**.
+
+## IMPORTANT NOTE
+1. **Gymscribe** original server can be accessed anywhere without special *CORS*.
+2. **Gymscribe** original server might be offline or have potential security issues to watch.
+3. If you have your own API or cloned **Gymscribe** API, you can connect it by configuring the `./assets/js/handler.js` file, right in the **API_URL** variable.
+
+<h1>Full Installation Guide<h1>
 <p>The complete guide to installing Gymscribe can be read <a href="https://gymscribe.vercel.app/docs.html/">here!</a></p>
 
 <h1>BACKEND</h1>
@@ -67,8 +86,6 @@ The backend are open source and can be found in the github repo below:
 <a href="https://flavortown.hackclub.com/projects/32">https://flavortown.hackclub.com/projects/32</a>
 <img style="width:100%;margin-top:1rem;" src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GYMSCRIBEFLAVORTOWN.png" alt="Gymscribe Flavortown">
 <hr>
-<img style="width:30%;" src="https://raw.githubusercontent.com/hackclub/flavortown/refs/heads/main/app/assets/images/orpheus_sprites/12.png" alt="Flavortown">
-<p style="font-size:2rem">Welcome! :&#41</p>
 <h2>If you are reviewing this project:</h2>
 <p>there are some stuff you might want to know,<p/>
 <ol>
@@ -77,6 +94,7 @@ The backend are open source and can be found in the github repo below:
 </ol>
 <h2>For the fraud department:</h2>
 <p>Thanks for viewing my project, if you guys found something suspicious in my project, just wanted to say that I always check how the ui looks with changes written in the css styling because I want the ui looks as good as I want. Another thing for you guys to know that I DID NOT do <i>time inflation</i> on purposes, my first project was flagged with no valid reasons, hope you guys know I commits too often because of this, haha.</p>
+<p>Slow coding happends here because im perfectionist and because I am still learning since this is my first fullstack app.</p>
 <hr>
 <p style="float:left">
   <img width="49%" src="https://assets.hackclub.com/flag-standalone.svg" alt="Hack Club">
