@@ -224,7 +224,7 @@ html.sr .load-hidden {
 }
 
 .feature-container:hover {
-  transform: translateY(-0.3rem);
+  border: 2px solid white;
 }
 
 .feature-container div h3, .plans-container h3 {

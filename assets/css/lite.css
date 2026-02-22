@@ -95,7 +95,7 @@ html.sr .load-hidden {
   display: inline-block;
 }
 
-.navbar-content a:hovee {
+.navbar-content a:hover {
   border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow: none;
   background: none;
@@ -127,22 +127,124 @@ html.sr .load-hidden {
   cursor: pointer;
 }
 
-footer {
-  text-align: center;
-  width: 100%;
-  color: black;
-  margin-top: auto;
-  padding: 1rem;
-  background: white;
-  margin-top: 10vh;
-}
-
 .main {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 1rem;
   width: 100%;
   min-height: 100vh;
+}
+
+.box {
+  width: 100%;
+  max-width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 0.6rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  gap: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.info-container {
+  align-items: flex-start;
+  margin-top: 2rem;
+  width: 85%;
+}
+
+.statistics-container {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+}
+
+.chart-container {
+  width: 85%;
+  min-height: 400px;
+}
+
+.manager-container {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  gap: 0.6rem;
+}
+
+.member-form-container h2, .member-list-container h2 {
+  align-self: flex-start;
+}
+
+.member-form-container {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.member-list-container {
+  flex: 2;
+  justify-content: flex-start;
+}
+
+.add-member-form, .control-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+input, select, button {
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.8rem 0.6rem;
+}
+
+hr {
+  width: 100%;
+  margin: 1.2rem 0rem;
+}
+
+.submit-buttons, .control-buttons {
+  transition: all 0.2s ease;
+}
+
+.submit-buttons {
+  background: rgba(82,240,155,0.7);
+}
+
+.submit-buttons:hover {
+  background: rgba(11,165,92,0.7);
+}
+
+.control-buttons {
+  background: rgba(116,199,255,0.7);
+}
+
+.control-buttons:hover {
+  background: rgba(25,144,255,0.7);
+}
+
+.red-buttons {
+  background: rgba(255,92,92,0.7);
+}
+
+.red-buttons:hover {
+  background: rgba(240,23,23,0.7);
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
@@ -212,9 +314,5 @@ footer {
   
   .burger-container {
     margin-right: 0.5rem;
-  }
-  
-  footer {
-    margin-top: 5rem;
   }
 }
