@@ -1,5 +1,6 @@
 <h1>Gymscribe</h1>
 <p>An open source gym membership management app for gym owners and everyone with PostgreSQL database.</p>
+<a href="https://gymscribe.vercel.app">Try it</a>
 
 <img src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GymscribeBanner.png" width="100%" alt="Gymscribe Banner">
 <img src="https://hackatime-badge.hackclub.com/U09EB9V2NBB/gymscribe" alt="Hakatime Stats">
@@ -63,16 +64,15 @@ This is guide on installing **Gymscribe** frontend files and run it locally!
 git clone https://github.com/alarixfr/gymscribe.git
 ```
 3. Open the cloned **Gymscribe** folder in your code editor.
-4. Configure `./assets/js/handler.js`.
-5. Adjust the **DASHBOARD_URL** and **LOGIN_URL** variable to correct html path or url
+4. Configure `./assets/js/handler.js` and change the **DASHBOARD_URL** and **LOGIN_URL** variable to correct html path or url
 6. Open index.js in your browser or use **Live Server**.
 
-## IMPORTANT NOTE
+# IMPORTANT NOTE
 1. **Gymscribe** original server can be accessed anywhere without special *CORS*.
 2. **Gymscribe** original server might be offline or have potential security issues to watch.
 3. If you have your own API or cloned **Gymscribe** API, you can connect it by configuring the `./assets/js/handler.js` file, right in the **API_URL** variable.
 
-## Full Guide
+# Full Guide
 The complete guide to installing Gymscribe can be read <a href="https://gymscribe.vercel.app/docs.html">https://gymscribe.vercel.app/docs.html</a>
 
 <h1>BACKEND</h1>
@@ -83,6 +83,7 @@ The backend are open source and can be found in the github repo below:
 
 <h1>FLAVORTOWN</h1>
 <p>This project was shipped in flavortown with total of 100 hours including the backend.</p>
+<hr>
 <a href="https://flavortown.hackclub.com/projects/32">https://flavortown.hackclub.com/projects/32</a>
 <img style="width:100%;margin-top:1rem;" src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GYMSCRIBEFLAVORTOWN.png" alt="Gymscribe Flavortown">
 <hr>
