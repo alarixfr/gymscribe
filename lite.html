@@ -18,8 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   
   <script src="/assets/js/navbarResponsive.js" defer></script>
-  <script type="module" src="/assets/js/tools.js"></script>
-  <script type="module" src="/assets/js/toolsSelect.js"></script>
+  <script type="module" src="/assets/js/lite.js"></script>
 </head>
 <body>
   <div class="navbar">
@@ -70,15 +69,15 @@
     <div class="manager-container">
       <div class="member-form-container box">
         <h2>Member Manager</h2>
-        <form class="add-member-form">
-          <input id="name" type="text" placeholder="Member name" maxlength="32" required>
-          <input id="age" type="text" placeholder="Member Age" maxlength="32" required>
-          <input id="note" type="text" placeholder="Note" maxlength="64">
-          <label for="plan">Membership duration:</label>
-          <select id="plan" name="plan" required>
-            <option value="7day">7 Days</option>
-            <option value="30day">30 Days</option>
-            <option value="365day">365 Days</option>
+        <form id="add-member-form" class="add-member-form">
+          <input id="name" type="text" placeholder="Member name" maxlength="16" required>
+          <input id="age" type="number" placeholder="Member Age" maxlength="3" required>
+          <input id="note" type="text" placeholder="Note" maxlength="32">
+          <label for="status">Membership status:</label>
+          <select id="status" name="status" required>
+            <option value="active">Active</option>
+            <option value="expiressoon">Expires Soon</option>
+            <option value="expired">Expired</option>
           </select>
           <button class="submit-buttons" type="submit">Add Member</button>
         </form>
@@ -93,6 +92,50 @@
       </div>
       <div class="member-list-container box">
         <h2>Member List</h2>
+        <div id="member-container" class="member-container">
+          <div class="members">
+            <h2>Gymscribe Member</h2>
+            <p>abcdefghijk-01019999</p>
+            <p>32 - Active</p>
+            <p>abcdefgjsieoapkslfneheocurbenajcovntbdgajshdoepsjdjehebcbvjreioaks</p>
+            <div class="members-buttons">
+              <button class="red-buttons">Delete</button>
+              <button class="control-buttons">Update</button>
+            </div>
+          </div>
+          
+          <div class="members">
+            <h2>Gymscribe Member 2</h2>
+            <p>aiehaodjwil-67676767</p>
+            <p>67 - Expired</p>
+            <p>No notes.</p>
+            <div class="members-buttons">
+              <button class="red-buttons">Delete</button>
+              <button class="control-buttons">Update</button>
+            </div>
+          </div>
+          
+          <div class="members">
+            <h2>Gymscribe Member 3</h2>
+            <p>kdowjaksjpl-01492792</p>
+            <p>100 - Expires Soon</p>
+            <p>Cool</p>
+            <div class="members-buttons">
+              <button class="red-buttons">Delete</button>
+              <button class="control-buttons">Update</button>
+            </div>
+          </div>
+          
+          <div class="members">
+            <h2>Gymscribe Member 4</h2>
+            <p>iehdiwnsiwjb-18291974</p>
+            <p>25 - Active</p>
+            <div class="members-buttons">
+              <button class="red-buttons">Delete</button>
+              <button class="control-buttons">Update</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

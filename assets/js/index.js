@@ -6,7 +6,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === secretCode[i]) {
     i++;
     if (i === secretCode.length) {
-      alert("idk how did you manage to find this thing but its cool to know someone actually read this but if you come from the github code then its cheating but who cares, lol.");
+      alert("oh hi there! congrats for finding this! don't forgot to star Gymscribe repo!");
       i = 0;
     }
   } else {
