@@ -138,6 +138,21 @@
         </div>
       </div>
     </div>
+    <div id="update-modal" class="update-modal">
+      <form id="update-modal-form">
+        <h2>Update Member</h2>
+        <input id="update-modal-name"  type="text" placeholder="New Name" maxlength="16" required>
+        <input id="update-modal-age" type="number" placeholder="New Age" maxlength="3" required>
+        <input id="update-modal-note" type="text" placeholder="New Note" maxlength="32" required>
+        <select id="update-modal-status" name="New Status" required>
+          <option value="nochange">Keep Previous</option>
+          <option value="active">Active</option>
+          <option value="expiressoon">Expires Soon</option>
+          <option value="expired">Expired</option>
+        </select>
+        <button class="submit-buttons" type="submit">Update</button>
+      </form>
+    </div>
   </div>
   
   <footer>

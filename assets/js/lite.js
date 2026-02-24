@@ -1,10 +1,24 @@
 const memberContainer = document.getElementById('member-container');
 const memberForm = document.getElementById('add-member-form');
+const updateModal = document.getElementById('update-modal');
+const updateModalForm = document.getElementById('update-modal-form');
+const updateModalName = document.getElementById('update-modal-name');
+const updateModalAge = document.getElementById('update-modal-age');
+const updateModalNote = document.getElementById('update-modal-note');
+const updateModalStatus = document.getElementById('update-modal-status');
 
 let members = [];
+let updateMemberTarget = null;
 
 function timestamp() {
   return Date.now();
+}
+
+function findMember(id) {
+  const targetId = members.findIndex(m => m.id === id);
+  if (targetId !== -1) return targetId;
+  
+  return;
 }
 
 function createId() {
@@ -36,7 +50,10 @@ function createMember(memberName, memberAge, memberNote, memberStatus) {
 
 function deleteMember(id) {
   try {
+    const targetMemberIndex = findMember(id);
+    members.splice(targetMemberIndex, 1);
     
+    render();
   } catch (e) {
     console.error(e.message);
   }
@@ -44,7 +61,19 @@ function deleteMember(id) {
 
 function updateMember(id) {
   try {
+    updateModal.style.display = 'flex';
     
+    const memberIndex = findMember(id);
+    updateMemberTarget = members[memberIndex];
+    /*
+    updateModalName.value = memberTarget.name;
+    updateModalAge.value = memberTarget.age;
+    updateModalNote.value = memberTarget.note;
+    */
+    
+    updateModalName.setAttribute('value', updateMemberTarget.name);
+    updateModalAge.setAttribute('value', updateMemberTarget.age);
+    updateModalNote.setAttribute('value', updateMemberTarget.note);
   } catch (e) {
     console.error(e.message);
   }
@@ -55,8 +84,6 @@ function addMember(name, age, note, status) {
     const member = createMember(name, age, note, status);
     
     members.push(member);
-    
-    console.log(members);
     render();
   } catch (e) {
     console.error(e.message);
@@ -94,8 +121,13 @@ function generateElement(member) {
     
     memberElement.append(nameElement, idElement, ageStatusElement, noteElement, buttonContainerElement);
     
-    deleteButtonElement.addEventListener('click', deleteMember(member.id));
-    updateButtonElement.addEventListener('click', updateMember(member.id));
+    deleteButtonElement.addEventListener('click', () => {
+      deleteMember(member.id);
+    });
+    
+    updateButtonElement.addEventListener('click', () => {
+      updateMember(member.id);
+    });
     
     return memberElement;
   } catch (e) {
@@ -104,11 +136,22 @@ function generateElement(member) {
 }
 
 function render() {
-  
+  try {
+    memberContainer.innerHTML = '';
+    
+    for (const member of members) {
+      const memberElement = generateElement(member);
+      memberContainer.append(memberElement);
+    }
+  } catch(e) {
+    console.error(e.message);
+  }
 }
 
 function init() {
-  memberContainer.innerHTML = ``;
+  updateModal.style.display = 'none';
+  
+  render();
 }
 
 memberForm.addEventListener('submit', (e) => {
@@ -130,6 +173,23 @@ memberForm.addEventListener('submit', (e) => {
   } finally {
     memberForm.reset();
   }
+});
+
+updateModalForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const memberTarget = updateMemberTarget;
+  memberTarget.name = updateModalName.value;
+  memberTarget.age = updateModalAge.value;
+  memberTarget.note = updateModalNote.value;
+  if (updateModalStatus.value !== 'nochange') {
+    memberTarget.status = updateModalStatus.value;
+  }
+  
+  updateModalForm.reset();
+  updateModal.style.display = 'none';
+  
+  render();
 });
 
 init();
