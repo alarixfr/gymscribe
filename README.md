@@ -83,8 +83,8 @@ The backend are open source and can be found in the github repo below:
 
 <h1>FLAVORTOWN</h1>
 <p>This project was shipped in flavortown with total of 100 hours including the backend.</p>
-<hr>
 <a href="https://flavortown.hackclub.com/projects/32">https://flavortown.hackclub.com/projects/32</a>
+<hr>
 <img style="width:100%;margin-top:1rem;" src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GYMSCRIBEFLAVORTOWN.png" alt="Gymscribe Flavortown">
 <hr>
 <h2>If you are reviewing this project:</h2>

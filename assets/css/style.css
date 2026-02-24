@@ -223,7 +223,7 @@ html.sr .load-hidden {
   transition: all 0.2s ease;
 }
 
-.feature-container:hover {
+.feature-container:hover, .plans-container:hover {
   border: 2px solid white;
 }
 

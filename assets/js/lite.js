@@ -15,8 +15,14 @@ const exportJSONButton = document.getElementById('exportJSON');
 const exportCSVButton = document.getElementById('exportCSV');
 const clearDataButton = document.getElementById('clearData');
 
+const totalCount = document.getElementById('total-count');
+const activeCount = document.getElementById('active-count');
+const expiresSoonCount = document.getElementById('expires-soon-count');
+const expiredCount = document.getElementById('expired-count');
+
 let members = [];
 let updateMemberTarget = null;
+let memberChart = null;
 
 function isStorageExist() {
   if (typeof Storage !== 'undefined') return true;
@@ -175,6 +181,81 @@ function generateElement(member) {
   }
 }
 
+function renderChart() {
+  try {
+    const activeMembers = members.filter((m) => m.status === 'active').length;
+    const expiresSoonMembers = members.filter((m) => m.status === 'expiressoon').length;
+    const expiredMembers = members.filter((m) => m.status === 'expired').length;
+    
+    const chartContainer = document.querySelector('.chart-container');
+    
+    if (memberChart) {
+      memberChart.destroy();
+    }
+    
+    let canvas = chartContainer.querySelector('canvas');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      chartContainer.innerHTML = '';
+      chartContainer.append(canvas);
+    }
+    
+    const ctx = canvas.getContext('2d');
+    
+    memberChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Active', 'Expires Soon', 'Expired'],
+        datasets: [
+          {
+            data: [
+              activeMembers,
+              expiresSoonMembers,
+              expiredMembers,
+            ],
+            backgroundColor: [
+              'rgba(60, 180, 120, 0.8)',
+              'rgba(255, 200, 10, 0.8)',
+              'rgba(255, 90, 90, 0.8)',
+            ],
+            borderColor: [
+              'rgba(60, 180, 120, 1)',
+              'rgba(255, 200, 10, 1)',
+              'rgba(255, 90, 90, 1)',
+            ],
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#fff',
+              font: {
+                size: 14
+              }
+            }
+          },
+          title: {
+            display: true,
+            text: 'Members Data',
+            color: '#fff',
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    });
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
 function render() {
   try {
     memberContainer.innerHTML = '';
@@ -183,6 +264,18 @@ function render() {
       const memberElement = generateElement(member);
       memberContainer.append(memberElement);
     }
+    
+    const totalMembers = members.length;
+    const activeMembers = members.filter((m) => m.status === 'active').length;
+    const expiresSoonMembers = members.filter((m) => m.status === 'expiressoon').length;
+    const expiredMembers = members.filter((m) => m.status === 'expired').length;
+    
+    totalCount.textContent = totalMembers;
+    activeCount.textContent = activeMembers;
+    expiresSoonCount.textContent = expiresSoonMembers;
+    expiredCount.textContent = expiredMembers;
+    
+    renderChart();
   } catch(e) {
     console.error(e.message);
   }

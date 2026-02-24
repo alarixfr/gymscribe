@@ -170,7 +170,11 @@ html.sr .load-hidden {
 
 .chart-container {
   width: 85%;
-  min-height: 400px;
+  height: 400px;
+}
+
+.chart-container canvas {
+  width: 100%;
 }
 
 .manager-container {
