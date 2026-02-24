@@ -178,6 +178,7 @@ html.sr .load-hidden {
   flex-direction: row;
   width: 85%;
   gap: 0.6rem;
+  min-height: 0;
 }
 
 .member-form-container h2, .member-list-container h2 {
@@ -187,11 +188,15 @@ html.sr .load-hidden {
 .member-form-container {
   flex: 1;
   justify-content: flex-start;
+  flex-shrink: 0;
+  height: fit-content;
 }
 
 .member-list-container {
   flex: 2;
   justify-content: flex-start;
+  min-width: 0;
+  overflow-y: auto;
 }
 
 .member-container {

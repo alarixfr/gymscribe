@@ -19,6 +19,7 @@
   
   <script src="/assets/js/navbarResponsive.js" defer></script>
   <script type="module" src="/assets/js/lite.js"></script>
+  <script type="module" src="/assets/js/handler.js"></script>
 </head>
 <body>
   <div class="navbar">
@@ -84,10 +85,10 @@
         <hr>
         <h2>List Control</h2>
         <div class="control-container">
-          <button class="control-buttons">Load JSON</button>
-          <button class="control-buttons">Export to JSON</button>
-          <button class="control-buttons">Export to CSV</button>
-          <button class="control-buttons red-buttons">Clear Data</button>
+          <button id="loadJSON" class="control-buttons">Load JSON</button>
+          <button id="exportJSON" class="control-buttons">Export to JSON</button>
+          <button id="exportCSV" class="control-buttons">Export to CSV</button>
+          <button id="clearData" class="control-buttons red-buttons">Clear Data</button>
         </div>
       </div>
       <div class="member-list-container box">

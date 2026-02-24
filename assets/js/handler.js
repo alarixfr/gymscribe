@@ -6,6 +6,7 @@ const EMAIL_KEY = 'gymscribe-email';
 const ATTENDANCE_KEY = 'gymscribe-attendance';
 const ATTENDANCE_LAST_KEY = 'gymscribe-attendance-last';
 const JOURNALS_KEY = 'gymscribe-journals';
+const LITE_KEY = 'gymscribe-lite';
 
 let gymCache = null;
 
@@ -647,6 +648,7 @@ export {
   ATTENDANCE_KEY,
   ATTENDANCE_LAST_KEY,
   JOURNALS_KEY,
+  LITE_KEY,
   openDashboard,
   isStorageExist,
   isAuthenticated,
