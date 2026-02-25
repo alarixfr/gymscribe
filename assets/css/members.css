@@ -402,9 +402,15 @@ textarea::placeholder {
   width: 100%;
 }
 
+.export-button-container {
+  flex: display;
+  flex-direction: row;
+  margin-left: auto;
+  gap: 0.4rem;
+}
+
 .export-button {
   flex: none;
-  margin-left: auto;
   padding: 0.6rem;
 }
 
@@ -643,10 +649,15 @@ textarea::placeholder {
     justify-content: center;
   }
   
-  .export-button {
+  .export-button-container {
     margin-left: none;
     margin-right: none;
     flex-grow: 1;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .export-button {
     width: 100%;
   }
 }

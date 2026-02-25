@@ -11,6 +11,7 @@ const noteInput = document.getElementById('memberNoteInput');
 const plansInput = document.getElementById('memberPlansInput');
 const submitBtn = document.getElementById('submit');
 const exportBtn = document.getElementById('exportBtn');
+const exportJSONBtn = document.getElementById('exportJSONBtn');
 const filterInput = document.getElementById('filterInput');
 const filterStatusInput = document.getElementById('filterStatusInput');
 const filterAttendanceInput = document.getElementById('filterAttendanceInput');
@@ -21,52 +22,77 @@ let statusFilter = '';
 let attendanceFilter = '';
 
 async function convertToCSV(list) {
-  const headers = [
-    "id",
-    "name",
-    "email",
-    "phone",
-    "birthday",
-    "note",
-    "plans",
-    "status",
-    "duration",
-    "isAttended",
-    "timestamp"
-  ];
-  
-  const rows = [
-    headers,
-    ...list.map(m => [
-      m.id ?? "",
-      m.name ?? "",
-      m.details?.email ?? "",
-      m.details?.phone ?? "",
-      m.details?.birthday ?? "",
-      m.details?.note ?? "",
-      m.plan ?? "",
-      m.status ?? "",
-      m.duration ?? "",
-      m.isAttended ?? "",
-      m.timestamp ?? ""
-    ])
-  ];
-  
-  const csv = rows.map(row => row
-    .map(value => `"${String(value).replace(/"/g, '""')}"`)
-    .join(",")
-  )
-  .join("\n");
-  
-  const blob = new Blob([csv], { type: "text/csv" });
-  const url = URL.createObjectURL(blob);
-  
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = "members.csv";
-  a.click();
-  
-  URL.revokeObjectURL(url);
+  try {
+    const headers = [
+      "id",
+      "name",
+      "email",
+      "phone",
+      "birthday",
+      "note",
+      "plans",
+      "status",
+      "duration",
+      "isAttended",
+      "timestamp"
+    ];
+    
+    const rows = [
+      headers,
+      ...list.map(m => [
+        m.id ?? "",
+        m.name ?? "",
+        m.details?.email ?? "",
+        m.details?.phone ?? "",
+        m.details?.birthday ?? "",
+        m.details?.note ?? "",
+        m.plan ?? "",
+        m.status ?? "",
+        m.duration ?? "",
+        m.isAttended ?? "",
+        m.timestamp ?? ""
+      ])
+    ];
+    
+    const csv = rows.map(row => row
+      .map(value => `"${String(value).replace(/"/g, '""')}"`)
+      .join(",")
+    )
+    .join("\n");
+    
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "members.csv";
+    a.click();
+    
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
+async function convertToJSON(list) {
+  try {
+    const dataString = JSON.stringify(list, null, 2);
+    
+    const blob = new Blob([dataString], {
+      type: 'application/json',
+    });
+    
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    
+    link.href = url;
+    link.download = `members-${Date.now()}.json`;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error(e.message);
+  }
 }
 
 async function newMember() {
@@ -339,6 +365,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       }, 2000);
     }
   });
+});
+
+exportJSONBtn.addEventListener('click', async (event) => {
+  exportJSONBtn.disabled = true;
+  try {
+    if (!members || members.length === 0) {
+      exportJSONBtn.textContent = 'Members list is blank';
+      throw new Error('Members list is blank');
+    }
+    
+    exportJSONBtn.textContent = 'Downloading...';
+    await convertToJSON(members);
+  } catch (error) {
+    console.error(error.message);
+  } finally {
+    setTimeout(() => {
+      exportJSONBtn.textContent = 'Export To .JSON';
+      exportJSONBtn.disabled = false;
+    }, 2000);
+  }
 });
 
 export { fetchMembers };

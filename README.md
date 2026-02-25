@@ -1,7 +1,7 @@
-<h1>Gymscribe</h1>
-<p>An open source gym membership management app for gym owners and everyone with PostgreSQL database.</p>
-<a href="https://gymscribe.vercel.app">Try it</a>
-
+# Gymscribe
+An open source gym membership management app for gym owners and everyone with PostgreSQL database.
+<a href="https://gymscribe.vercel.app">Try Gymscribe!</a>
+<hr>
 <img src="https://raw.githubusercontent.com/alarixfr/gymscribe/refs/heads/main/assets/img/GymscribeBanner.png" width="100%" alt="Gymscribe Banner">
 <img src="https://hackatime-badge.hackclub.com/U09EB9V2NBB/gymscribe" alt="Hakatime Stats">
 

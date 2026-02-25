@@ -89,6 +89,17 @@
             <a class="raw-data-button" href="/dashboard/members.html">Manage</a>
           </div>
         </div>
+        <div class="data-container">
+          <div class="raw-data-container">
+            <p class="raw-data">Members Status Ditribution:</p>
+            <p id="activePercent" class="raw-data">Active: Loading</p>
+            <p id="expiresSoonPercent" class="raw-data">Expires Soon: Loading</p>
+            <p id="expiredPercent" class="raw-data">Expired: Loading</p>
+          </div>
+          <div class="chart-container">
+            <canvas id="membersChart" class="chart"></canvas>
+          </div>
+        </div>
       </div>
       
       <div class="lower-section">
