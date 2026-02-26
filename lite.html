@@ -1,164 +1,210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gymscribe Lite</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gymscribe Lite</title>
 
-  <meta name="description" content="An open source gym membership management app.">
-  <meta name="keywords" content="gym, gym management, gym members">
-  <meta name="author" content="Alaric Abyasa">
-  <meta name="robots" content="noindex, nofollow">
+    <meta
+      name="description"
+      content="An open source gym membership management app."
+    />
+    <meta name="keywords" content="gym, gym management, gym members" />
+    <meta name="author" content="Alaric Abyasa" />
+    <meta name="robots" content="noindex, nofollow" />
 
-  <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png" />
 
-  <link rel="stylesheet" href="/assets/css/lite.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-  
-  <script src="/assets/js/navbarResponsive.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
-  <script type="module" src="/assets/js/lite.js"></script>
-  <script type="module" src="/assets/js/handler.js"></script>
-</head>
-<body>
-  <div class="navbar">
-    <div class="logo-container">
-      <a href="/" class="logo"><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"></a>
-      <span>Gymscribe Lite</span>
-    </div>
+    <link rel="stylesheet" href="/assets/css/lite.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
 
-    <div class="burger-container">
-      <div class="burger" onclick="toggleMenu()">☰</div>
-    </div>
-    
-    <div class="navbar-content">
-      <a href="/">Join Gymscribe</a>
-    </div>
-  </div>
-  
-  <div class="main">
-    <div class="info-container box">
-      <p>This is lite version of Gymscribe, no account required.</p>
-      <p>We suggest only using lite version for light use and testing!</p>
-      <p>Always backup members data before leaving!</p>
-    </div>
-    
-    <div class="statistics-container">
-      <div class="box">
-        <h2>Total Members</h2>
-        <p id="total-count">000</p>
+    <script src="/assets/js/navbarResponsive.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
+    <script type="module" src="/assets/js/lite.js"></script>
+    <script type="module" src="/assets/js/handler.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo-container">
+        <a href="/" class="logo"
+          ><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"
+        /></a>
+        <span>Gymscribe Lite</span>
       </div>
-      <div class="box">
-        <h2>Active</h2>
-        <p id="active-count">000</p>
+
+      <div class="burger-container">
+        <div class="burger" onclick="toggleMenu()">☰</div>
       </div>
-      <div class="box">
-        <h2>Expires Soon</h2>
-        <p id="expires-soon-count">000</p>
-      </div>
-      <div class="box">
-        <h2>Expired</h2>
-        <p id="expired-count">000</p>
+
+      <div class="navbar-content">
+        <a href="/">Join Gymscribe</a>
       </div>
     </div>
-    
-    <div class="chart-container box">
-      
-    </div>
-    
-    <div class="manager-container">
-      <div class="member-form-container box">
-        <h2>Member Manager</h2>
-        <form id="add-member-form" class="add-member-form">
-          <input id="name" type="text" placeholder="Member name" maxlength="16" required>
-          <input id="age" type="number" placeholder="Member Age" min="1" max="150" required>
-          <input id="note" type="text" placeholder="Note" maxlength="32">
-          <label for="status">Membership status:</label>
-          <select id="status" name="status" required>
+
+    <div class="main">
+      <div class="info-container box">
+        <p>This is lite version of Gymscribe, no account required.</p>
+        <p>We suggest only using lite version for light use and testing!</p>
+        <p>Always backup members data before leaving!</p>
+      </div>
+
+      <div class="statistics-container">
+        <div class="box">
+          <h2>Total Members</h2>
+          <p id="total-count">000</p>
+        </div>
+        <div class="box">
+          <h2>Active</h2>
+          <p id="active-count">000</p>
+        </div>
+        <div class="box">
+          <h2>Expires Soon</h2>
+          <p id="expires-soon-count">000</p>
+        </div>
+        <div class="box">
+          <h2>Expired</h2>
+          <p id="expired-count">000</p>
+        </div>
+      </div>
+
+      <div class="chart-container box"></div>
+
+      <div class="manager-container">
+        <div class="member-form-container box">
+          <h2>Member Manager</h2>
+          <form id="add-member-form" class="add-member-form">
+            <input
+              id="name"
+              type="text"
+              placeholder="Member name"
+              maxlength="16"
+              required
+            />
+            <input
+              id="age"
+              type="number"
+              placeholder="Member Age"
+              min="1"
+              max="150"
+              required
+            />
+            <input id="note" type="text" placeholder="Note" maxlength="32" />
+            <label for="status">Membership status:</label>
+            <select id="status" name="status" required>
+              <option value="active">Active</option>
+              <option value="expiressoon">Expires Soon</option>
+              <option value="expired">Expired</option>
+            </select>
+            <button class="submit-buttons" type="submit">Add Member</button>
+          </form>
+          <hr />
+          <h2>List Control</h2>
+          <div class="control-container">
+            <button id="loadJSON" class="control-buttons">Load JSON</button>
+            <button id="exportJSON" class="control-buttons">
+              Export to JSON
+            </button>
+            <button id="exportCSV" class="control-buttons">
+              Export to CSV
+            </button>
+            <button id="clearData" class="control-buttons red-buttons">
+              Clear Data
+            </button>
+          </div>
+        </div>
+        <div class="member-list-container box">
+          <h2>Member List</h2>
+          <div id="member-container" class="member-container">
+            <div class="members">
+              <h2>Gymscribe Member</h2>
+              <p>abcdefghijk-01019999</p>
+              <p>32 - Active</p>
+              <p>
+                abcdefgjsieoapkslfneheocurbenajcovntbdgajshdoepsjdjehebcbvjreioaks
+              </p>
+              <div class="members-buttons">
+                <button class="red-buttons">Delete</button>
+                <button class="control-buttons">Update</button>
+              </div>
+            </div>
+
+            <div class="members">
+              <h2>Gymscribe Member 2</h2>
+              <p>aiehaodjwil-67676767</p>
+              <p>67 - Expired</p>
+              <p>No notes.</p>
+              <div class="members-buttons">
+                <button class="red-buttons">Delete</button>
+                <button class="control-buttons">Update</button>
+              </div>
+            </div>
+
+            <div class="members">
+              <h2>Gymscribe Member 3</h2>
+              <p>kdowjaksjpl-01492792</p>
+              <p>100 - Expires Soon</p>
+              <p>Cool</p>
+              <div class="members-buttons">
+                <button class="red-buttons">Delete</button>
+                <button class="control-buttons">Update</button>
+              </div>
+            </div>
+
+            <div class="members">
+              <h2>Gymscribe Member 4</h2>
+              <p>iehdiwnsiwjb-18291974</p>
+              <p>25 - Active</p>
+              <div class="members-buttons">
+                <button class="red-buttons">Delete</button>
+                <button class="control-buttons">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="update-modal" class="update-modal">
+        <form id="update-modal-form">
+          <h2>Update Member</h2>
+          <input
+            id="update-modal-name"
+            type="text"
+            placeholder="New Name"
+            maxlength="16"
+            required
+          />
+          <input
+            id="update-modal-age"
+            type="number"
+            placeholder="New Age"
+            min="1"
+            max="150"
+            required
+          />
+          <input
+            id="update-modal-note"
+            type="text"
+            placeholder="New Note"
+            maxlength="32"
+            required
+          />
+          <select id="update-modal-status" name="New Status" required>
+            <option value="nochange">Keep Previous</option>
             <option value="active">Active</option>
             <option value="expiressoon">Expires Soon</option>
             <option value="expired">Expired</option>
           </select>
-          <button class="submit-buttons" type="submit">Add Member</button>
+          <button class="submit-buttons" type="submit">Update</button>
         </form>
-        <hr>
-        <h2>List Control</h2>
-        <div class="control-container">
-          <button id="loadJSON" class="control-buttons">Load JSON</button>
-          <button id="exportJSON" class="control-buttons">Export to JSON</button>
-          <button id="exportCSV" class="control-buttons">Export to CSV</button>
-          <button id="clearData" class="control-buttons red-buttons">Clear Data</button>
-        </div>
-      </div>
-      <div class="member-list-container box">
-        <h2>Member List</h2>
-        <div id="member-container" class="member-container">
-          <div class="members">
-            <h2>Gymscribe Member</h2>
-            <p>abcdefghijk-01019999</p>
-            <p>32 - Active</p>
-            <p>abcdefgjsieoapkslfneheocurbenajcovntbdgajshdoepsjdjehebcbvjreioaks</p>
-            <div class="members-buttons">
-              <button class="red-buttons">Delete</button>
-              <button class="control-buttons">Update</button>
-            </div>
-          </div>
-          
-          <div class="members">
-            <h2>Gymscribe Member 2</h2>
-            <p>aiehaodjwil-67676767</p>
-            <p>67 - Expired</p>
-            <p>No notes.</p>
-            <div class="members-buttons">
-              <button class="red-buttons">Delete</button>
-              <button class="control-buttons">Update</button>
-            </div>
-          </div>
-          
-          <div class="members">
-            <h2>Gymscribe Member 3</h2>
-            <p>kdowjaksjpl-01492792</p>
-            <p>100 - Expires Soon</p>
-            <p>Cool</p>
-            <div class="members-buttons">
-              <button class="red-buttons">Delete</button>
-              <button class="control-buttons">Update</button>
-            </div>
-          </div>
-          
-          <div class="members">
-            <h2>Gymscribe Member 4</h2>
-            <p>iehdiwnsiwjb-18291974</p>
-            <p>25 - Active</p>
-            <div class="members-buttons">
-              <button class="red-buttons">Delete</button>
-              <button class="control-buttons">Update</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-    <div id="update-modal" class="update-modal">
-      <form id="update-modal-form">
-        <h2>Update Member</h2>
-        <input id="update-modal-name"  type="text" placeholder="New Name" maxlength="16" required>
-        <input id="update-modal-age" type="number" placeholder="New Age" min="1" max="150" required>
-        <input id="update-modal-note" type="text" placeholder="New Note" maxlength="32" required>
-        <select id="update-modal-status" name="New Status" required>
-          <option value="nochange">Keep Previous</option>
-          <option value="active">Active</option>
-          <option value="expiressoon">Expires Soon</option>
-          <option value="expired">Expired</option>
-        </select>
-        <button class="submit-buttons" type="submit">Update</button>
-      </form>
-    </div>
-  </div>
-  
-  <footer>
-    <p>Gymscribe - Open source gym manager.</p>
-  </footer>
-</body>
+
+    <footer>
+      <p>Gymscribe - Open source gym manager.</p>
+    </footer>
+  </body>
 </html>

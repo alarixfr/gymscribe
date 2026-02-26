@@ -11,7 +11,8 @@ html {
   scroll-behavior: smooth;
 }
 
-a:focus, a:active {
+a:focus,
+a:active {
   outline: none;
   box-sizing: none;
 }
@@ -21,7 +22,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Outfit', Sans-Serif;
+  font-family: "Outfit", Sans-Serif;
   background-color: #151515;
   color: white;
 }
@@ -107,7 +108,9 @@ button {
   text-align: center;
 }
 
-.menu a, .logout, .remove-journal {
+.menu a,
+.logout,
+.remove-journal {
   color: black;
   text-decoration: none;
   font-weight: 500;
@@ -119,20 +122,24 @@ button {
   box-shadow: 2px 2px #000;
   display: inline-block;
 }
-  
-.menu a:hover, .logout:hover, .remove-journal:hover {
+
+.menu a:hover,
+.logout:hover,
+.remove-journal:hover {
   border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow: none;
   background: none;
   color: black;
 }
 
-.logout, .remove-journal {
-  background: rgba(237,75,75, 0.9);
+.logout,
+.remove-journal {
+  background: rgba(237, 75, 75, 0.9);
 }
 
-.logout:hover, .remove-journal:hover {
-  border: 2px solid rgba(237,75,75, 0.9);
+.logout:hover,
+.remove-journal:hover {
+  border: 2px solid rgba(237, 75, 75, 0.9);
 }
 
 .main {
@@ -144,7 +151,7 @@ button {
   flex-direction: column;
   background: rgba(255, 255, 255, 0.1);
   padding: 1.1rem 0.8rem;
-  border: 2px solid rgba(255,255,255,0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   transition: all 0.2s ease;
 }
@@ -174,7 +181,7 @@ button {
   align-items: left;
   justify-content: center;
   text-align: left;
-  padding: 0.8rem 1.2rem;;
+  padding: 0.8rem 1.2rem;
   color: white;
   border-radius: 8px;
   width: auto;
@@ -207,10 +214,10 @@ code {
   font-size: 1.25rem;
   display: block;
   color: black;
-  font: 'Outfit';
+  font: "Outfit";
   border-radius: 0px;
   text-decoration: none;
-  background: rgba(233,198,44,1);
+  background: rgba(233, 198, 44, 1);
   box-shadow: 2px 2px #000;
   text-align: center;
   display: inline-block;
@@ -219,13 +226,13 @@ code {
 }
 
 .yellow-button:hover {
-  background: rgba(233,198,44,0.6);
-  border: 2px solid #F4D750;
+  background: rgba(233, 198, 44, 0.6);
+  border: 2px solid #f4d750;
 }
 
 .yellow-button:active {
-  background: rgba(233,198,44,0.25);
-  border: 2px solid #F4D750;
+  background: rgba(233, 198, 44, 0.25);
+  border: 2px solid #f4d750;
 }
 
 #token {
@@ -236,20 +243,20 @@ code {
   .logo img {
     height: 2.2rem;
   }
-  
+
   .logo-container {
     padding-left: 0rem;
     gap: 0rem;
   }
-  
+
   .menu {
     padding-right: 0rem;
   }
-  
+
   .logo-container span {
     font-size: 1.5rem;
   }
-  
+
   .menu {
     display: flex;
     opacity: 0;
@@ -270,7 +277,7 @@ code {
     transform: translateY(2rem);
     transition: all 0.2s ease;
   }
-  
+
   .menu a {
     background: rgba(255, 255, 255, 0.7);
     border: 2px solid #000;
@@ -278,51 +285,51 @@ code {
     display: block;
     width: 100%;
   }
-  
+
   .menu a:hover {
     border: 2px solid rgba(255, 255, 255, 0.7);
     box-shadow: none;
     background: none;
     color: black;
   }
-  
+
   .account {
     width: 100%;
   }
-  
+
   .account h2 {
     text-align: center;
     font-size: 0.9rem;
     width: 100%;
   }
-  
+
   .logout {
     width: 100%;
   }
-  
+
   .logout:hover {
     display: inline-block;
     box-shadow: 2px 2px rgba(0, 0, 0, 0);
   }
-  
+
   .menu.show {
     opacity: 1;
     transform: translateY(0px);
     pointer-events: auto;
   }
-  
+
   .burger {
     display: block;
   }
-  
+
   .burger-container {
     margin-right: 0.5rem;
   }
-  
+
   .account {
     flex-direction: column;
   }
-  
+
   code {
     font-size: 0.8rem;
   }

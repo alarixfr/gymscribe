@@ -1,12 +1,25 @@
-const secretCode = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+const secretCode = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "b",
+  "a",
+];
 
 let i = 0;
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === secretCode[i]) {
     i++;
     if (i === secretCode.length) {
-      alert("oh hi there! congrats for finding this! don't forgot to star Gymscribe repo!");
+      alert(
+        "oh hi there! congrats for finding this! don't forgot to star Gymscribe in github!",
+      );
       i = 0;
     }
   } else {
@@ -14,4 +27,4 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-ScrollReveal().reveal('.load-hidden');
+ScrollReveal().reveal(".load-hidden");

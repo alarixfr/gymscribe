@@ -1,22 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>API - Gymscribe</title>
-    
-    <meta name="description" content="An open source gym membership management app.">
-    <meta name="keywords" content="gym, gym management, gym members">
-    <meta name="author" content="Alaric Abyasa">
-    <meta name="robots" content="noindex, nofollow">
 
-    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
-    
-    <link rel="stylesheet" href="/assets/css/api.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
+    <meta
+      name="description"
+      content="An open source gym membership management app."
+    />
+    <meta name="keywords" content="gym, gym management, gym members" />
+    <meta name="author" content="Alaric Abyasa" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png" />
+
+    <link rel="stylesheet" href="/assets/css/api.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0" defer></script>
     <script src="/assets/js/scrollReveal.js" defer></script>
@@ -24,18 +30,20 @@
     <script type="module" src="/assets/js/handler.js"></script>
     <script type="module" src="/assets/js/getGymInfo.js"></script>
     <script type="module" src="/assets/js/api.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="navbar">
       <div class="logo-container">
-        <a href="/" class="logo"><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"></a>
+        <a href="/" class="logo"
+          ><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"
+        /></a>
         <span>Dashboard</span>
       </div>
-      
+
       <div class="burger-container">
         <div class="burger" onclick="toggleMenu()">☰</div>
       </div>
-      
+
       <div class="menu">
         <a href="/dashboard/analytics.html">Analytics</a>
         <a href="/dashboard/members.html">Members</a>
@@ -47,7 +55,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="main">
       <div class="dash-gym-info">
         <h1>API</h1>
@@ -57,7 +65,7 @@
           <p id="gymInfoDate" class="date-gym-info">Monday, 01/01/2025</p>
         </div>
       </div>
-      
+
       <div class="api-container">
         <h1 class="method">GET</h1>
         <div class="api">
@@ -164,7 +172,8 @@
   }
 }
           </code>
+        </div>
       </div>
     </div>
-</body>
+  </body>
 </html>

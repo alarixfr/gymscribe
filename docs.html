@@ -1,205 +1,280 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Docs - Gymscribe</title>
-    
-    <meta name="description" content="An open source gym membership management app.">
-    <meta name="keywords" content="gym, gym management, gym members">
-    <meta name="author" content="Alaric Abyasa">
-    <meta name="robots" content="noindex, nofollow">
-    
-    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
-    
-    <link rel="stylesheet" href="/assets/css/docs.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="navbar">
-    <div class="navbar-main">
-      <a href="/" id="openNavbar" class="open-navbar">☰</a>
-      <h1>Docs</h1>
-    </div>
-    
-    <div class="navbar-container">
-      <div class="navbar-content">
-        <h3>Guide</h3>
-        <button>Introduction</button>
-        <button>Getting Started</button>
-        <button>Analytics</button>
-        <button>Members</button>
-        <button>Gym</button>
-        <button>API</button>
-        <button>Notes</button>
+
+    <meta
+      name="description"
+      content="An open source gym membership management app."
+    />
+    <meta name="keywords" content="gym, gym management, gym members" />
+    <meta name="author" content="Alaric Abyasa" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png" />
+
+    <link rel="stylesheet" href="/assets/css/docs.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-main">
+        <a href="/" id="openNavbar" class="open-navbar">☰</a>
+        <h1>Docs</h1>
       </div>
-          
-      <div class="navbar-content">
-        <h3>Install</h3>
-        <button>Introduction</button>
-        <button>Installation</button>
-        <button>Initialization</button>
-        <button>Testing</button>
-        <button>Deploy</button>
-        <button>Important</button>
+
+      <div class="navbar-container">
+        <div class="navbar-content">
+          <h3>Guide</h3>
+          <button>Introduction</button>
+          <button>Getting Started</button>
+          <button>Analytics</button>
+          <button>Members</button>
+          <button>Gym</button>
+          <button>API</button>
+          <button>Notes</button>
+        </div>
+
+        <div class="navbar-content">
+          <h3>Install</h3>
+          <button>Introduction</button>
+          <button>Installation</button>
+          <button>Initialization</button>
+          <button>Testing</button>
+          <button>Deploy</button>
+          <button>Important</button>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <div class="main">
-    <!--
+
+    <div class="main">
+      <!--
     <div class="banner">
       <div class="image-container">
         <img src="/assets/img/GYMSCRIBEFLAVORTOWN.png" alt="Gymscribe Flavortown">
       </div>
     </div>
     -->
-    
-    <div class="section">
-      <h1 class="heading">Introduction</h1>
-      <p><span class="strong">Gymscribe</span> is an open source advanced gym membership management app for gym owners to track and manage memberships easily. carefully created with vanilla css and PostgreSQL using various libraries.</p>
-      <p><span class="strong">Gymscribe</span> is different because you can run it locally by downloading the source code and host it on your own server.</p>
-      <p><span class="strong">Gymscribe</span> is <span class="italic">free</span> for everyone.</p>
-      <p class="strong">Welcome to Gymscribe!</p>
-      <div class="image-container">
-        <img src="/assets/img/GymscribeBanner.png" alt="Gymscribe Banner">
+
+      <div class="section">
+        <h1 class="heading">Introduction</h1>
+        <p>
+          <span class="strong">Gymscribe</span> is an open source advanced gym
+          membership management app for gym owners to track and manage
+          memberships easily. carefully created with vanilla css and PostgreSQL
+          using various libraries.
+        </p>
+        <p>
+          <span class="strong">Gymscribe</span> is different because you can run
+          it locally by downloading the source code and host it on your own
+          server.
+        </p>
+        <p>
+          <span class="strong">Gymscribe</span> is
+          <span class="italic">free</span> for everyone.
+        </p>
+        <p class="strong">Welcome to Gymscribe!</p>
+        <div class="image-container">
+          <img src="/assets/img/GymscribeBanner.png" alt="Gymscribe Banner" />
+        </div>
       </div>
-    </div>
-    
-    <div class="section">
-      <h2 class="subheading">Features</h2>
-      <p><span class="strong">Gymscribe</span> have various of features enough to manage a small and scalable gyms.</p>
-      <p>List of <span class="strong">Gymscribe</span> features:</p>
-      <ol>
-        <li>JWT Authentication</li>
-        <li>PostgreSQL Database</li>
-        <li>Altcha Captcha</li>
-        <li>Manage Members (CRUD)</li>
-        <li>Members Data Analytics</li>
-        <li>Export Members To .CSV</li>
-        <li>Journals + Save To DB</li>
-        <li>Attendance System</li>
-        <li>Attendance Data Chart</li>
-        <li>/GET RESTAPI For The Gym Data</li>
-        <li>Advanced gym tools</li>
-        <li>And Many Other Stuff!</li>
-      </ol>
-    </div>
-    
-    <div class="section">
-      <h2 class="subheading">Tech Stack</h2>
-      <p><span class="strong">Gymscribe</span> is made using standard and modern technology.</p>
-      <p>List of tech stack used:</p>
-      <ol>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Javascript</li>
-        <li>NodeJS</li>
-        <li>Express</li>
-        <li>Prisma</li>
-        <li>Neon</li>
-        <li>PostgreSQL</li>
-        <li>Altcha</li>
-        <li>Chart.JS</li>
-        <li>Vercel</li>
-        <li>Railway</li>
-        <li>etc.</li>
-      </ol>
-    </div>
-    
-    <div class="section">
-      <h2 class="subheading">Ideas</h2>
-      <p>The ideas and vision of <span class="strong">Gymscribe</span> :&#41;</p>
-      <p>I was wondering why there is no such thing as easy and quick gym manager for every gym owners? well, introducing... <span class="strong">Gymscribe</span>! a free and open source gym membership manager because we belive managing memberships doesn't requires a subscriptions. ♥️</p>
-    </div>
-    
-    <div class="section">
-      <h2 class="heading">Install</h2>
-      <p>This section will explains step by step on how to install <span class="strong">Gymscribe</span> on your own device/server/vps or deploy it somewhere online.</p>
-      <p>This section will also explains how to configure and setting things up to make yout own <span class="strong">Gymscribe</span> run.</p>
-    </div>
-    
-    <div class="section">
-      <h2 class="subheading">Install Frontend</h2>
-      <p>This is guide for installing the <span class="strong">Gymscribe</span> frontend and run it locally.</p>
-      <p>1. Install VS Code and Git.</p>
-      <p class="warning">(You can use any code editor).</p>
-      <p>2. Clone <span class="strong">Gymscribe</span> files using Git in your terminal.</p>
-      <p class="code-block">git clone https://github.com/alarixfr/gymscribe.git</p>
-      <p>3. Open the folders in your code editor.</p>
-      <p class="warning">Using terminal:</p>
-      <p class="code-block">cd gymscribe</p>
-      <p>4. Configure the <span class="italic">./assets/js/handler.js</span>.</p>
-      <p class="warning">Adjust the <span class="italic">DASHBOARD_URL, LOGIN_URL</span> variable to correct html path or url.</p>
-      <p>5. Open index.js in your browser or use <span class="strong">Live Server</span>.</p>
-      <p><span class="error">Important:</span> If you have your own API or cloned <span class="strong">Gymscribe</span> API, you can connect it by configuring the <span class="italic">./assets/js/handler.js</span> file, right in the <span class="strong">API_URL</span> variable.</p>
-      
-      <br>
-      
-      <h2 class="subheading">Install Backend</h2>
-      <p>You can modify how things go inside your own <span class="strong">Gymscribe</span> by running the server locally.</p>
-      <p>1. Install Node.js latest version.</p>
-      <p>2. Clone <span class="strong">Gymscribe</span> backend files using Git in your terminal.</p>
-      <p class="code-block">git clone https://github.com/alarixfr/gymscribeBackend.git</p>
-      <p>3. Open the folder in your code editor or terminal:</p>
-      <p class="code-block">cd gymscribeBackend</p>
-      <p>4. Install dependencies in your terminal:</p>
-      <p class="code-block">npm install</p>
-      <p>5. Create a Neon database:</p>
-      <p>Go to <a href="https://neon.tech/">https://neon.tech/</a>.</p>
-      <p>Then create a new account or login to an existing account.</p>
-      <p>Create a new project and <span class="warning">pick any/closest region</span>.</p>
-      <p>Copy the connection string.</p>
-      <span class="error">Keep your connection string private!</span>
-      <p>6. Create .ENV:</p>
-      <p>Create a new .env file inside the project folder.</p>
-      <p class="warning">Terminal:</p>
-      <p class="code-block">touch .env</p>
-      <p>Copy, paste in the .env file and modify it:</p>
-      <p class="code-block">
-# Database
-DATABASE_URL="paste_your_neon_url_here"
 
-# JWT Secret (change this to random string)
-JWT_SECRET="random-string-change-this-abcdef"
+      <div class="section">
+        <h2 class="subheading">Features</h2>
+        <p>
+          <span class="strong">Gymscribe</span> have various of features enough
+          to manage a small and scalable gyms.
+        </p>
+        <p>List of <span class="strong">Gymscribe</span> features:</p>
+        <ol>
+          <li>JWT Authentication</li>
+          <li>PostgreSQL Database</li>
+          <li>Altcha Captcha</li>
+          <li>Manage Members (CRUD)</li>
+          <li>Members Data Analytics</li>
+          <li>Export Members To .CSV</li>
+          <li>Journals + Save To DB</li>
+          <li>Attendance System</li>
+          <li>Attendance Data Chart</li>
+          <li>/GET RESTAPI For The Gym Data</li>
+          <li>Advanced gym tools</li>
+          <li>And Many Other Stuff!</li>
+        </ol>
+      </div>
 
-# Altcha Secret (for CAPTCHA)
-ALTCHA_SECRET="random-string-change-this-abcdef"
+      <div class="section">
+        <h2 class="subheading">Tech Stack</h2>
+        <p>
+          <span class="strong">Gymscribe</span> is made using standard and
+          modern technology.
+        </p>
+        <p>List of tech stack used:</p>
+        <ol>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>Javascript</li>
+          <li>NodeJS</li>
+          <li>Express</li>
+          <li>Prisma</li>
+          <li>Neon</li>
+          <li>PostgreSQL</li>
+          <li>Altcha</li>
+          <li>Chart.JS</li>
+          <li>Vercel</li>
+          <li>Railway</li>
+          <li>etc.</li>
+        </ol>
+      </div>
 
-# Port (optional, defaults to 8080)
-PORT=8080
-      </p>
-      <p>7. Initialize Database:</p>
-      <p class="code-block">npx prisma generate</p>
-      <p>then,</p>
-      <p class="code-block">npx prisma migrate dev --name init</p>
-      <p>8. Run the server:</p>
-      <p class="code-block">npm start</p>
-      <p class="strong">🎉 DONE!!</p>
-      <p>You now have the server runs locally, you can modify the code yourself or deploy it using VPS!</p>
-      <p class="error">Make sure you already configure the <span class="italic">./assets/js/handler.js</span> variables in the <span class="strong">Gymscribe Frontend</span> folders if you are using it locally too!</p>
-    </div>
-    
-    <div class="section">
-      <h2 class="heading">API</h2>
-      <p>Integrate your gym data into another application with <span class="strong">Gymscribe</span> API.</p>
-      <p>1. Login into your <span class="strong">Gymscribe</span> account.</p>
-      <p>2. Go to <span class="warning">API</span> page in the dashboard navbar.</p>
-      <p>3. Find the <span class="warning">Copy Token</span> button and click it to copy your token.</p>
-      <p>4. Find the <span class="warning">URL</span> and copy the link.</p>
-      <p>5. Test it by opening the <span class="warning">URL</span> in your browser.</p>
+      <div class="section">
+        <h2 class="subheading">Ideas</h2>
+        <p>
+          The ideas and vision of <span class="strong">Gymscribe</span> :&#41;
+        </p>
+        <p>
+          I was wondering why there is no such thing as easy and quick gym
+          manager for every gym owners? well, introducing...
+          <span class="strong">Gymscribe</span>! a free and open source gym
+          membership manager because we belive managing memberships doesn't
+          requires a subscriptions. ♥️
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="heading">Install</h2>
+        <p>
+          This section will explains step by step on how to install
+          <span class="strong">Gymscribe</span> on your own device/server/vps or
+          deploy it somewhere online.
+        </p>
+        <p>
+          This section will also explains how to configure and setting things up
+          to make yout own <span class="strong">Gymscribe</span> run.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="subheading">Install Frontend</h2>
+        <p>
+          This is guide for installing the
+          <span class="strong">Gymscribe</span> frontend and run it locally.
+        </p>
+        <p>1. Install VS Code and Git.</p>
+        <p class="warning">(You can use any code editor).</p>
+        <p>
+          2. Clone <span class="strong">Gymscribe</span> files using Git in your
+          terminal.
+        </p>
+        <p class="code-block">
+          git clone https://github.com/alarixfr/gymscribe.git
+        </p>
+        <p>3. Open the folders in your code editor.</p>
+        <p class="warning">Using terminal:</p>
+        <p class="code-block">cd gymscribe</p>
+        <p>
+          4. Configure the <span class="italic">./assets/js/handler.js</span>.
+        </p>
+        <p class="warning">
+          Adjust the
+          <span class="italic">DASHBOARD_URL, LOGIN_URL</span> variable to
+          correct html path or url.
+        </p>
+        <p>
+          5. Open index.js in your browser or use
+          <span class="strong">Live Server</span>.
+        </p>
+        <p>
+          <span class="error">Important:</span> If you have your own API or
+          cloned <span class="strong">Gymscribe</span> API, you can connect it
+          by configuring the
+          <span class="italic">./assets/js/handler.js</span> file, right in the
+          <span class="strong">API_URL</span> variable.
+        </p>
+
+        <br />
+
+        <h2 class="subheading">Install Backend</h2>
+        <p>
+          You can modify how things go inside your own
+          <span class="strong">Gymscribe</span> by running the server locally.
+        </p>
+        <p>1. Install Node.js latest version.</p>
+        <p>
+          2. Clone <span class="strong">Gymscribe</span> backend files using Git
+          in your terminal.
+        </p>
+        <p class="code-block">
+          git clone https://github.com/alarixfr/gymscribeBackend.git
+        </p>
+        <p>3. Open the folder in your code editor or terminal:</p>
+        <p class="code-block">cd gymscribeBackend</p>
+        <p>4. Install dependencies in your terminal:</p>
+        <p class="code-block">npm install</p>
+        <p>5. Create a Neon database:</p>
+        <p>Go to <a href="https://neon.tech/">https://neon.tech/</a>.</p>
+        <p>Then create a new account or login to an existing account.</p>
+        <p>
+          Create a new project and
+          <span class="warning">pick any/closest region</span>.
+        </p>
+        <p>Copy the connection string.</p>
+        <span class="error">Keep your connection string private!</span>
+        <p>6. Create .ENV:</p>
+        <p>Create a new .env file inside the project folder.</p>
+        <p class="warning">Terminal:</p>
+        <p class="code-block">touch .env</p>
+        <p>Copy, paste in the .env file and modify it:</p>
+        <p class="code-block">
+          # Database DATABASE_URL="paste_your_neon_url_here" # JWT Secret
+          (change this to random string)
+          JWT_SECRET="random-string-change-this-abcdef" # Altcha Secret (for
+          CAPTCHA) ALTCHA_SECRET="random-string-change-this-abcdef" # Port
+          (optional, defaults to 8080) PORT=8080
+        </p>
+        <p>7. Initialize Database:</p>
+        <p class="code-block">npx prisma generate</p>
+        <p>then,</p>
+        <p class="code-block">npx prisma migrate dev --name init</p>
+        <p>8. Run the server:</p>
+        <p class="code-block">npm start</p>
+        <p class="strong">🎉 DONE!!</p>
+        <p>
+          You now have the server runs locally, you can modify the code yourself
+          or deploy it using VPS!
+        </p>
+        <p class="error">
+          Make sure you already configure the
+          <span class="italic">./assets/js/handler.js</span> variables in the
+          <span class="strong">Gymscribe Frontend</span> folders if you are
+          using it locally too!
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="heading">API</h2>
+        <p>Integrate your gym data into another application with <span class="strong">Gymscribe</span> API.</p>
+        <p>1. Login into your <span class="strong">Gymscribe</span> account.</p>
+        <p>2. Go to <span class="warning">API</span> page in the dashboard navbar.</p>
+        <p>3. Find the <span class="warning">Copy Token</span> button and click it to copy your token.</p>
+        <p>4. Find the <span class="warning">URL</span> and copy the link.</p>
+        <p>5. Test it by opening the <span class="warning">URL</span> in your browser.</p>
       
-      <br>
+        <br>
       
-      <h2 class="subheading">V1</h2>
-      <p>1. Fetch the gym info:</p>
-      <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
-      <p>Replace <span class="warning">url</span> with the copied api url.</p>
-      <p>Replace <span class="warning">(your token)</span> with your copied account token.</p>
-      <p>Response:</p>
-      <p class="code-block">
+        <h2 class="subheading">V1</h2>
+        <p>1. Fetch the gym info:</p>
+        <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
+        <p>Replace <span class="warning">url</span> with the copied api url.</p>
+        <p>Replace <span class="warning">(your token)</span> with your copied account token.</p>
+        <p>Response:</p>
+        <p class="code-block">
 {
   success: true,
   "id": "String",
@@ -209,14 +284,14 @@ PORT=8080
   "address": "String",
   "timezone": "Integer"
 }
-      </p>
+        </p>
       
-      <br>
+        <br>
       
-      <p>2. Fetch the gym members data:</p>
-      <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
-      <p>Response:</p>
-      <p class="code-block">
+        <p>2. Fetch the gym members data:</p>
+        <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
+        <p>Response:</p>
+        <p class="code-block">
 {
   success: true,
   "membersCount":
@@ -246,14 +321,14 @@ PORT=8080
     }
   ]
 }
-      </p>
+        </p>
       
-      <br>
+        <br>
       
-      <p>3. Fetch the gym saved last 7 days attendance data</p>
-      <p class="code-block"><span class="warning">url</span>/api/v1/attendance?token=<span class="warning">(your token)</span></p>
-      <p>Response:</p>
-      <p class="code-block">
+        <p>3. Fetch the gym saved last 7 days attendance data</p>
+        <p class="code-block"><span class="warning">url</span>/api/v1/attendance?token=<span class="warning">(your token)</span></p>
+        <p>Response:</p>
+        <p class="code-block">
 {
   success: true,
   attendance: {
@@ -294,39 +369,76 @@ PORT=8080
     }
   }
 }
-      </p>
+        </p>
       
-      <br>
+        <br>
       
-      <p class="error">Don't share your token! keep it secret for your account safety.</p>
-      <p class="error">You can also put your token in <span class="warning">Authorization</span> inside <span class="italic">headers</span> (recommended for security)</p>
+        <p class="error">Don't share your token! keep it secret for your account safety.</p>
+        <p class="error">You can also put your token in <span class="warning">Authorization</span> inside <span class="italic">headers</span> (recommended for security)</p>
+      </div>
+
+      <div class="section">
+        <h2 class="heading">Security And Privacy</h2>
+        <p>
+          Your data is stored in 3rd party database. We can't guarantee the
+          safety of your account and gym data. We suggest installing
+          <span class="strong">Gymscribe</span> locally to ensure yout data
+          safety.
+        </p>
+        <p>
+          Even though we have <span class="italic">Altcha</span> captcha in our
+          login system, <span class="strong">Gymscribe</span> is still vunerable
+          from various cyber attacks.
+        </p>
+        <p>
+          By installing <span class="strong">Gymscribe</span> locally, you are
+          running your own service and you have full control to privacy.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="heading">License</h2>
+        <p>
+          <span class="strong">Gymscribe</span> is licensed under
+          <span class="italic">Apache License 2.0</span>.
+        </p>
+        <p>
+          In short, you are free to use it for almost any purpose, including
+          personal and commercial products.
+        </p>
+        <p>
+          You may copy the code, modify it, extend it, and redistribute it. You
+          are also allowed to use it alongside proprietary or closed-source
+          code, this mean you are not required to open source your entire
+          application.
+        </p>
+        <p>
+          Keep in mind that there are a few required conditions if you
+          redistribute the original code or in modified version. You must keep
+          the original copyright notice and include the
+          <span class="italic">Apache License 2.0</span> text, and you must
+          clearly indicate any changes you have made.
+        </p>
+        <p>
+          You may not claim the original work as entirely your own, nor may you
+          use the project's name, logo, or branding in a way that implies
+          official endorsement or ownerships.
+        </p>
+        <p>
+          <span class="strong">Gymscribe</span> is provided "as is," without
+          warranties of any kind. The author makes no guarantee and is not
+          liable for bugs, data loss, or any damage caused by the uses.
+        </p>
+      </div>
+
+      <div class="page-button-container">
+        <a href="/" class="page-button strong">Try Gymscribe</a>
+      </div>
     </div>
-    
-    <div class="section">
-      <h2 class="heading">Security And Privacy</h2>
-      <p>Your data is stored in 3rd party database. We can't guarantee the safety of your account and gym data. We suggest installing <span class="strong">Gymscribe</span> locally to ensure yout data safety.</p>
-      <p>Even though we have <span class="italic">Altcha</span> captcha in our login system, <span class="strong">Gymscribe</span> is still vunerable from various cyber attacks.</p>
-      <p>By installing <span class="strong">Gymscribe</span> locally, you are running your own service and you have full control to privacy.</p>
-    </div>
-    
-    <div class="section">
-      <h2 class="heading">License</h2>
-      <p><span class="strong">Gymscribe</span> is licensed under <span class="italic">Apache License 2.0</span>.</p>
-      <p>In short, you are free to use it for almost any purpose, including personal and commercial products.</p>
-      <p>You may copy the code, modify it, extend it, and redistribute it. You are also allowed to use it alongside proprietary or closed-source code, this mean you are not required to open source your entire  application.</p>
-      <p>Keep in mind that there are a few required conditions if you redistribute the original code or in modified version. You must keep the original copyright notice and include the <span class="italic">Apache License 2.0</span> text, and you must clearly indicate any changes you have made.</p>
-      <p>You may not claim the original work as entirely your own, nor may you use the project's name, logo, or branding in a way that implies official endorsement or ownerships.</p>
-      <p><span class="strong">Gymscribe</span> is provided "as is," without warranties of any kind. The author makes no guarantee and is not liable for bugs, data loss, or any damage caused by the uses.</p>
-    </div>
-    
-    <div class="page-button-container">
-      <a href="/" class="page-button strong">Try Gymscribe</a>
-    </div>
-  </div>
-  
-  <footer>
-    <p>Your ultimate gym management app.</p>
-    <p>© 2025 Gymscribe. All rights reserved</p>
-  </footer>
-</body>
+
+    <footer>
+      <p>Your ultimate gym management app.</p>
+      <p>© 2025 Gymscribe. All rights reserved</p>
+    </footer>
+  </body>
 </html>

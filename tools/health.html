@@ -1,72 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health - Gym Tools</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health - Gym Tools</title>
 
-  <meta name="description" content="An open source gym membership management app.">
-  <meta name="keywords" content="gym, gym management, gym members">
-  <meta name="author" content="Alaric Abyasa">
-  <meta name="robots" content="noindex, nofollow">
+    <meta
+      name="description"
+      content="An open source gym membership management app."
+    />
+    <meta name="keywords" content="gym, gym management, gym members" />
+    <meta name="author" content="Alaric Abyasa" />
+    <meta name="robots" content="noindex, nofollow" />
 
-  <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/Gymscribe.png" />
 
-  <link rel="stylesheet" href="/assets/css/tools.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-  
-  <script src="/assets/js/navbarResponsive.js" defer></script>
-  <script type="module" src="/assets/js/tools.js"></script>
-  <script type="module" src="/assets/js/toolsSelect.js"></script>
-</head>
-<body>
-  <div class="navbar">
-    <div class="logo-container">
-      <a href="/" class="logo"><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"></a>
-      <span>Gym Tools</span>
-    </div>
+    <link rel="stylesheet" href="/assets/css/tools.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
 
-    <div class="burger-container">
-      <div class="burger" onclick="toggleMenu()">☰</div>
-    </div>
-    
-    <div class="navbar-content">
-      <a href="/tools/health.html">Health</a>
-      <a href="/tools/strength.html">Strength</a>
-      <a href="/tools/nutrition.html">Nutrition</a>
-      <a href="/">Join Gymscribe</a>
-    </div>
-  </div>
-  
-  <div class="main">
-    <div class="hero">
-      <h1>Health Tools</h1>
-      <p>By Gymscribe</p>
-    </div>
-    <div class="content-container">
-      <div class="select-tools-container">
-        <button id="BMI" class="select-tools-button">BMI</button>
-        <button id="BMR" class="select-tools-button">BMR</button>
-        <button id="TDEE" class="select-tools-button">TDEE</button>
-        <button id="bodyFat" class="select-tools-button">Body Fat</button>
-        <button id="waistToHeight" class="select-tools-button">Waist To Height</button>
-        <button id="heartRateZones" class="select-tools-button">Heart Rate Zones</button>
-        <button id="leanBodyMass" class="select-tools-button">Lean Body Mass</button>
-        <button id="FFMI" class="select-tools-button">FFMI</button>
-        <button id="idealBodyWeight" class="select-tools-button">Ideal Body Weight</button>
-        <button id="VO2Max" class="select-tools-button">VO2 Max</button>
+    <script src="/assets/js/navbarResponsive.js" defer></script>
+    <script type="module" src="/assets/js/tools.js"></script>
+    <script type="module" src="/assets/js/toolsSelect.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo-container">
+        <a href="/" class="logo"
+          ><img src="/assets/img/Gymscribe.png" alt="Gymscribe Logo"
+        /></a>
+        <span>Gym Tools</span>
       </div>
-      <div class="display-container">
-        <div class="tool-input-container">
-          <bmi-formula></bmi-formula>
+
+      <div class="burger-container">
+        <div class="burger" onclick="toggleMenu()">☰</div>
+      </div>
+
+      <div class="navbar-content">
+        <a href="/tools/health.html">Health</a>
+        <a href="/tools/strength.html">Strength</a>
+        <a href="/tools/nutrition.html">Nutrition</a>
+        <a href="/">Join Gymscribe</a>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="hero">
+        <h1>Health Tools</h1>
+        <p>By Gymscribe</p>
+      </div>
+      <div class="content-container">
+        <div class="select-tools-container">
+          <button id="BMI" class="select-tools-button">BMI</button>
+          <button id="BMR" class="select-tools-button">BMR</button>
+          <button id="TDEE" class="select-tools-button">TDEE</button>
+          <button id="bodyFat" class="select-tools-button">Body Fat</button>
+          <button id="waistToHeight" class="select-tools-button">
+            Waist To Height
+          </button>
+          <button id="heartRateZones" class="select-tools-button">
+            Heart Rate Zones
+          </button>
+          <button id="leanBodyMass" class="select-tools-button">
+            Lean Body Mass
+          </button>
+          <button id="FFMI" class="select-tools-button">FFMI</button>
+          <button id="idealBodyWeight" class="select-tools-button">
+            Ideal Body Weight
+          </button>
+          <button id="VO2Max" class="select-tools-button">VO2 Max</button>
         </div>
-        <div class="output-container">
-          <p id="output" class="output">Output: Choose a tool!</p>
+        <div class="display-container">
+          <div class="tool-input-container">
+            <bmi-formula></bmi-formula>
+          </div>
+          <div class="output-container">
+            <p id="output" class="output">Output: Choose a tool!</p>
+          </div>
         </div>
       </div>
-      </div>
     </div>
-</body>
+  </body>
 </html>

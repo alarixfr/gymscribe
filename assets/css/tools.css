@@ -15,7 +15,8 @@ a {
   color: white;
 }
 
-a:focus, a:active {
+a:focus,
+a:active {
   outline: none;
   box-sizing: none;
 }
@@ -25,7 +26,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Outfit', Sans-Serif;
+  font-family: "Outfit", Sans-Serif;
   background-color: #151515;
   color: white;
   padding-bottom: 5rem;
@@ -105,7 +106,7 @@ html.sr .load-hidden {
 .navbar-content a:last-child {
   border-radius: 0px;
   text-decoration: none;
-  background-color: #3CB371;
+  background-color: #3cb371;
   box-shadow: 2px 2px #000;
   padding: 0.4rem 0.6rem;
   text-align: center;
@@ -118,7 +119,7 @@ html.sr .load-hidden {
   background: none;
   box-shadow: none;
   color: black;
-  border: 2px solid #2E8B57;
+  border: 2px solid #2e8b57;
 }
 
 .burger {
@@ -179,7 +180,7 @@ footer {
   color: white;
   background: rgba(255, 255, 255, 0.1);
   padding: 0.4rem;
-  border: 2px solid rgba(255,255,255,0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   transition: all 0.2s ease;
 }
@@ -192,21 +193,24 @@ footer {
   font-size: 1.2rem;
 }
 
-.tools a, .select-tools-button {
+.tools a,
+.select-tools-button {
   margin-top: auto;
   color: black;
   width: 100%;
   text-align: center;
   font-size: 2rem;
-  background: rgba(67,135,250,0.8);
+  background: rgba(67, 135, 250, 0.8);
   border: 4px solid transparent;
   padding: 0.6rem;
   transition: all 0.2s ease;
   display: inline-block;
 }
 
-.tools a:hover, .select-tools-button:hover, .selected-tool {
-  border: 4px solid rgba(67,135,250,0.8) !important;
+.tools a:hover,
+.select-tools-button:hover,
+.selected-tool {
+  border: 4px solid rgba(67, 135, 250, 0.8) !important;
   background: none !important;
   color: white !important;
 }
@@ -254,7 +258,6 @@ footer {
   font-size: 1.4rem;
 }
 
-
 .tools-element {
   padding: 0.4rem;
   width: 100%;
@@ -275,7 +278,8 @@ footer {
   text-align: left;
 }
 
-.tools-element input, .tools-element select {
+.tools-element input,
+.tools-element select {
   width: 100%;
   font-size: 1.2rem;
   border: none;
@@ -300,16 +304,16 @@ footer {
   .logo img {
     height: 2.2rem;
   }
-  
+
   .logo-container {
     padding-left: 0rem;
     gap: 0rem;
   }
-  
+
   .logo-container span {
     font-size: 1.5rem;
   }
-  
+
   .navbar-content {
     display: flex;
     opacity: 0;
@@ -330,92 +334,93 @@ footer {
     transform: translateY(2rem);
     transition: all 0.2s ease;
   }
-  
+
   .navbar-content a {
     background: rgba(255, 255, 255, 0.7);
     border: 2px solid #000;
     box-shadow: 2px 2px #000;
     display: inline-block;
   }
-  
+
   .navbar-content a:hover {
     border: 2px solid rgba(255, 255, 255, 0.7);
     box-shadow: none;
     background: none;
     color: black;
   }
-  
+
   .navbar-content a:last-child:hover {
-    border: 2px solid #2E8B57;
+    border: 2px solid #2e8b57;
     display: inline-block;
     box-shadow: 2px 2px rgba(0, 0, 0, 0);
   }
-  
+
   .navbar-content.show {
     opacity: 1;
     transform: translateY(0px);
     pointer-events: auto;
   }
-  
+
   .burger {
     display: block;
   }
-  
+
   .burger-container {
     margin-right: 0.5rem;
   }
-  
+
   .hero h1 {
     font-size: 3rem;
   }
-  
+
   .hero p {
     font-size: 1rem;
   }
-  
-  .tools-container, .select-tools-container {
+
+  .tools-container,
+  .select-tools-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
   }
-  
+
   .tools-container {
     margin: 0.2rem 0.4rem;
   }
-  
+
   .tools {
     padding: 0.4rem;
   }
-  
+
   .tools h2 {
     font-size: 1.8rem;
   }
-  
+
   .tools p {
     font-size: 1rem;
     margin-bottom: 1.4rem;
   }
-  
+
   .tools a {
     font-size: 1rem;
     padding: 0.4rem;
   }
-  
+
   .select-tools-button {
     font-size: 1rem;
   }
-  
+
   .tool-input-container {
     width: 90%;
   }
-  
+
   .output-container {
     width: 90%;
   }
-  
+
   .tools-element p {
     font-size: 1rem;
   }
-  
+
   footer {
     margin-top: 20vh;
   }

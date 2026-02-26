@@ -1,12 +1,12 @@
-import { JOURNALS_KEY as STORAGE_KEY } from './handler.js';
+import { JOURNALS_KEY as STORAGE_KEY } from "./handler.js";
 
-const journalForm = document.getElementById('journalForm');
+const journalForm = document.getElementById("journalForm");
 
 let journals = [];
-let search = '';
+let search = "";
 
 function isStorageExist() {
-  if (typeof(Storage) === undefined) {
+  if (typeof Storage === undefined) {
     return false;
   }
   return true;
@@ -44,16 +44,16 @@ function journalObject(id, title, desc, timestamp) {
     id,
     title,
     desc,
-    timestamp
+    timestamp,
   };
 }
 
 function createJournal(title, desc) {
   const timestamp = generateTimestamp();
-  
+
   const journalId = `${timestamp}-${Math.random().toString(36).slice(2)}`;
   const journal = journalObject(journalId, title, desc, timestamp);
-  
+
   journals.push(journal);
   render();
   save();
@@ -61,64 +61,70 @@ function createJournal(title, desc) {
 
 function removeJournal(id) {
   const journalIndex = findJournalIndex(id);
-  
+
   if (journalIndex === -1) return;
-  
+
   journals.splice(journalIndex, 1);
   render();
   save();
 }
 
 function generateElement(journal) {
-  const journalContainer = document.createElement('div');
-  const journalTitle = document.createElement('h3');
-  const journalDescription = document.createElement('p');
-  const journalId = document.createElement('p');
-  const removeButton = document.createElement('button');
-  
+  const journalContainer = document.createElement("div");
+  const journalTitle = document.createElement("h3");
+  const journalDescription = document.createElement("p");
+  const journalId = document.createElement("p");
+  const removeButton = document.createElement("button");
+
   journalTitle.textContent = journal.title;
   journalDescription.textContent = journal.desc;
   journalId.textContent = journal.id;
-  removeButton.textContent = 'Remove';
-  removeButton.classList.add('remove-journal');
-  removeButton.setAttribute('type', 'button');
-  
-  journalContainer.append(journalTitle, journalDescription, journalId, removeButton);
-  journalContainer.classList.add('journal');
-  
-  removeButton.addEventListener('click', (e) => {
+  removeButton.textContent = "Remove";
+  removeButton.classList.add("remove-journal");
+  removeButton.setAttribute("type", "button");
+
+  journalContainer.append(
+    journalTitle,
+    journalDescription,
+    journalId,
+    removeButton,
+  );
+  journalContainer.classList.add("journal");
+
+  removeButton.addEventListener("click", (e) => {
     removeJournal(journal.id);
   });
-  
+
   return journalContainer;
 }
 
 function render() {
-  const journalsContainer = document.getElementById('journalContainer');
-  journalsContainer.innerHTML = '';
-  
+  const journalsContainer = document.getElementById("journalContainer");
+  journalsContainer.innerHTML = "";
+
   for (const journal of journals) {
     if (search && !journal.title.toLowerCase().includes(search)) {
       continue;
     }
-    
+
     const journalElement = generateElement(journal);
     journalsContainer.append(journalElement);
   }
 }
 
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener("DOMContentLoaded", (e) => {
   load();
   render();
-  
-  journalForm.addEventListener('submit', (event) => {
+
+  journalForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    
-    const journalTitleInput = document.getElementById('journalTitleInput').value;
-    const journalDescInput = document.getElementById('journalDescInput').value;
-  
+
+    const journalTitleInput =
+      document.getElementById("journalTitleInput").value;
+    const journalDescInput = document.getElementById("journalDescInput").value;
+
     if (!journalTitleInput && !journalDescInput) return;
-    
+
     createJournal(journalTitleInput, journalDescInput);
     journalForm.reset();
   });

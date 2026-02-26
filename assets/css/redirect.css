@@ -11,7 +11,8 @@ html {
   scroll-behavior: smooth;
 }
 
-a:focus, a:active {
+a:focus,
+a:active {
   outline: none;
   box-sizing: none;
 }
@@ -21,7 +22,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Outfit', Sans-Serif;
+  font-family: "Outfit", Sans-Serif;
   background-color: #151515;
   min-height: 100vh;
 }

@@ -1,12 +1,12 @@
-const API_URL = "https://gymscribe.up.railway.app";
-const DASHBOARD_URL = 'https://gymscribe.vercel.app/dashboard/analytics.html';
-const LOGIN_URL = 'https://gymscribe.vercel.app/login.html';
-const STORAGE_KEY = 'gymscribe-auth';
-const EMAIL_KEY = 'gymscribe-email';
-const ATTENDANCE_KEY = 'gymscribe-attendance';
-const ATTENDANCE_LAST_KEY = 'gymscribe-attendance-last';
-const JOURNALS_KEY = 'gymscribe-journals';
-const LITE_KEY = 'gymscribe-lite';
+const API_URL = "http://localhost:8080";
+const DASHBOARD_URL = "https://gymscribe.vercel.app/dashboard.html";
+const LOGIN_URL = "https://gymscribe.vercel.app/login.html";
+const STORAGE_KEY = "gymscribe-auth";
+const EMAIL_KEY = "gymscribe-email";
+const ATTENDANCE_KEY = "gymscribe-attendance";
+const ATTENDANCE_LAST_KEY = "gymscribe-attendance-last";
+const JOURNALS_KEY = "gymscribe-journals";
+const LITE_KEY = "gymscribe-lite";
 
 let gymCache = null;
 
@@ -19,7 +19,7 @@ function openLogin() {
 }
 
 function isStorageExist() {
-  if (typeof(Storage) === "undefined") {
+  if (typeof Storage === "undefined") {
     return false;
   }
   return true;
@@ -27,7 +27,7 @@ function isStorageExist() {
 
 function isAuthenticated() {
   if (!isStorageExist()) return false;
-  
+
   const token = localStorage.getItem(STORAGE_KEY);
   return !!token;
 }
@@ -39,23 +39,23 @@ function getToken() {
 async function verifyToken() {
   try {
     const token = getToken();
-    
+
     if (!token) return false;
-    
+
     const response = await fetch(`${API_URL}/gym`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
-    
+
     if (response.status === 401) {
       return false;
     }
-    
+
     if (response.ok) return true;
-    
+
     return false;
   } catch (error) {
     return false;
@@ -64,12 +64,12 @@ async function verifyToken() {
 
 function logout() {
   gymCache = null;
-  
+
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(EMAIL_KEY);
   localStorage.removeItem(ATTENDANCE_KEY);
   localStorage.removeItem(ATTENDANCE_LAST_KEY);
-  
+
   openLogin();
 }
 
@@ -85,10 +85,10 @@ async function init() {
   if (!requireAuth()) {
     return;
   }
-  
+
   try {
     const isValid = await verifyToken();
-    
+
     if (!isValid) {
       logout();
       return;
@@ -102,18 +102,18 @@ async function init() {
 async function getChallenge() {
   try {
     const response = await fetch(`${API_URL}/auth/challenge`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to fetch altcha challenge');
+      throw new Error(data.error || "Failed to fetch altcha challenge");
     }
-    
+
     return data.challenge;
   } catch (error) {
     return { error: error.message };
@@ -123,28 +123,28 @@ async function getChallenge() {
 async function register(email, password, altchaPayload) {
   try {
     const response = await fetch(`${API_URL}/auth/register`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
         password,
-        altchaPayload
-      })
+        altchaPayload,
+      }),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to fetch auth register');
+      throw new Error(data.error || "Failed to fetch auth register");
     }
-    
+
     if (isStorageExist()) {
       localStorage.setItem(STORAGE_KEY, data.token);
       localStorage.setItem(EMAIL_KEY, data.user.email);
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -154,28 +154,28 @@ async function register(email, password, altchaPayload) {
 async function login(email, password, altchaPayload) {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
         password,
-        altchaPayload
-      })
+        altchaPayload,
+      }),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to fetch auth login');
+      throw new Error(data.error || "Failed to fetch auth login");
     }
-    
+
     if (isStorageExist()) {
       localStorage.setItem(STORAGE_KEY, data.token);
       localStorage.setItem(EMAIL_KEY, data.user.email);
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -184,44 +184,44 @@ async function login(email, password, altchaPayload) {
 
 async function changePassword(currentPassword, newPassword) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     if (!currentPassword || !newPassword) {
-      return { error: 'Current password and new password are required' };
+      return { error: "Current password and new password are required" };
     }
-    
+
     if (newPassword.length < 6) {
-      return { error: 'Password min character is 6' };
+      return { error: "Password min character is 6" };
     }
-    
+
     if (newPassword.length > 100) {
-      return { error: 'Password max character limit reached of 100' };
+      return { error: "Password max character limit reached of 100" };
     }
-    
+
     if (newPassword === currentPassword) {
-      return { error: 'New password must be different' };
+      return { error: "New password must be different" };
     }
-    
+
     const response = await fetch(`${API_URL}/auth/change-password`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         currentPassword,
-        newPassword
-      })
+        newPassword,
+      }),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to change password');
+      throw new Error(data.error || "Failed to change password");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -230,26 +230,26 @@ async function changePassword(currentPassword, newPassword) {
 
 async function getGymInfo() {
   if (gymCache) return gymCache;
-  
+
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/gym`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to fetch gym details');
+      throw new Error(data.error || "Failed to fetch gym details");
     }
-    
+
     gymCache = data;
     return data;
   } catch (error) {
@@ -259,25 +259,25 @@ async function getGymInfo() {
 
 async function updateGymInfo(gymData) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated'};
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/gym`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(gymData)
+      body: JSON.stringify(gymData),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to update gym details');
+      throw new Error(data.error || "Failed to update gym details");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -286,30 +286,30 @@ async function updateGymInfo(gymData) {
 
 async function getMembers() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
     const gymInfo = await getGymInfo();
-    
+
     if (gymInfo.error) throw new Error(gymInfo.error);
-    
+
     const timezone = gymInfo.timezone;
-    
+
     const response = await fetch(`${API_URL}/members`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': "application/json",
-        "Authorization": `Bearer ${token}`,
-        "x-timezone": timezone
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "x-timezone": timezone,
+      },
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to fetch gym members');
+      throw new Error(data.error || "Failed to fetch gym members");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -318,25 +318,25 @@ async function getMembers() {
 
 async function createMember(memberData) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/members`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(memberData)
+      body: JSON.stringify(memberData),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to add gym member');
+      throw new Error(data.error || "Failed to add gym member");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -345,25 +345,25 @@ async function createMember(memberData) {
 
 async function updateMember(memberId, memberData) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/members/${memberId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(memberData)
+      body: JSON.stringify(memberData),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to update member');
+      throw new Error(data.error || "Failed to update member");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -372,24 +372,24 @@ async function updateMember(memberId, memberData) {
 
 async function deleteMember(memberId) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/members/${memberId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to delete member');
+      throw new Error(data.error || "Failed to delete member");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -398,25 +398,25 @@ async function deleteMember(memberId) {
 
 async function renewMember(memberId, plan) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/members/${memberId}/renew`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ plan })
+      body: JSON.stringify({ plan }),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to renew member plans');
+      throw new Error(data.error || "Failed to renew member plans");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -425,30 +425,30 @@ async function renewMember(memberId, plan) {
 
 async function toggleAttendance(memberId) {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
     const gymInfo = await getGymInfo();
-    
+
     if (gymInfo.error) throw new Error(gymInfo.error);
-    
+
     const timezone = gymInfo.timezone;
-    
+
     const response = await fetch(`${API_URL}/members/${memberId}/attendance`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        'x-timezone': timezone
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "x-timezone": timezone,
+      },
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to toggle member attendance');
+      throw new Error(data.error || "Failed to toggle member attendance");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -457,28 +457,28 @@ async function toggleAttendance(memberId) {
 
 async function journalsSave() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    if (!isStorageExist()) throw new Error('Storage unavailable');
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+    if (!isStorageExist()) throw new Error("Storage unavailable");
+
     const journalsData = JSON.parse(localStorage.getItem(JOURNALS_KEY) ?? "[]");
-    
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/journals`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ journals: journalsData })
+      body: JSON.stringify({ journals: journalsData }),
     });
-    
+
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to save journals');
+      throw new Error(data.error || "Failed to save journals");
     }
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -487,25 +487,25 @@ async function journalsSave() {
 
 async function journalsLoad() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    if (!isStorageExist()) throw new Error('Storage unavailable');
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+    if (!isStorageExist()) throw new Error("Storage unavailable");
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/journals`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
-    
+
     const data = await response.json();
-    
-    if (!response.ok) throw new Error(data.error || 'Failed to load journals');
-    
+
+    if (!response.ok) throw new Error(data.error || "Failed to load journals");
+
     localStorage.setItem(JOURNALS_KEY, JSON.stringify(data.journals || []));
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -516,7 +516,7 @@ function journalsClear() {
   try {
     if (!isStorageExist()) return false;
     localStorage.removeItem(JOURNALS_KEY);
-    
+
     return true;
   } catch (error) {
     return false;
@@ -525,24 +525,24 @@ function journalsClear() {
 
 async function journalsReset() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/journals`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
-    
+
     const data = await response.json();
-    
-    if (!response.ok) throw new Error(data.error || 'Failed to reset journals');
-    
+
+    if (!response.ok) throw new Error(data.error || "Failed to reset journals");
+
     journalsClear();
-    
+
     return data;
   } catch (error) {
     return false;
@@ -551,25 +551,28 @@ async function journalsReset() {
 
 async function attendanceSave() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
-    if (!isStorageExist()) throw new Error('Storage unavailable');
-    const attendanceData = JSON.parse(localStorage.getItem(ATTENDANCE_KEY) ?? "{}");
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
+    if (!isStorageExist()) throw new Error("Storage unavailable");
+    const attendanceData = JSON.parse(
+      localStorage.getItem(ATTENDANCE_KEY) ?? "{}",
+    );
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/attendance`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ attendance: attendanceData })
-    })
+      body: JSON.stringify({ attendance: attendanceData }),
+    });
     const data = await response.json();
-    
-    if (!response.ok) throw new Error(data.error || 'Failed to save attendance')
-    
+
+    if (!response.ok)
+      throw new Error(data.error || "Failed to save attendance");
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -578,25 +581,26 @@ async function attendanceSave() {
 
 async function attendanceLoad() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    if (!isStorageExist()) throw new Error('Storage unavailable');
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+    if (!isStorageExist()) throw new Error("Storage unavailable");
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/attendance`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const data = await response.json();
-    
-    if (!response.ok) throw new Error(data.error || 'Failed to load attendance');
-    
+
+    if (!response.ok)
+      throw new Error(data.error || "Failed to load attendance");
+
     localStorage.setItem(ATTENDANCE_KEY, JSON.stringify(data.attendance || {}));
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -608,7 +612,7 @@ function attendanceClear() {
     if (!isStorageExist()) return false;
     localStorage.removeItem(ATTENDANCE_KEY);
     localStorage.removeItem(ATTENDANCE_LAST_KEY);
-    
+
     return true;
   } catch (error) {
     return false;
@@ -617,24 +621,25 @@ function attendanceClear() {
 
 async function attendanceReset() {
   try {
-    if (!requireAuth()) return { error: 'Not authenticated' };
-    
+    if (!requireAuth()) return { error: "Not authenticated" };
+
     const token = getToken();
-    
+
     const response = await fetch(`${API_URL}/storage/attendance`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const data = await response.json();
-    
-    if (!response.ok) throw new Error(data.error || 'Failed to reset attendance')
-    
+
+    if (!response.ok)
+      throw new Error(data.error || "Failed to reset attendance");
+
     attendanceClear();
-    
+
     return data;
   } catch (error) {
     return { error: error.message };
@@ -675,5 +680,5 @@ export {
   attendanceSave,
   attendanceLoad,
   attendanceClear,
-  attendanceReset
+  attendanceReset,
 };

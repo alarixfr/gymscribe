@@ -7,19 +7,21 @@ function writeOutput(msg) {
 // HEALTH
 function BMI() {
   try {
-    const weightKg = parseFloat(document.getElementById('BMIWeight').value) || 0;
-    const heightCm = parseFloat(document.getElementById('BMIHeight').value) || 0;
-    
+    const weightKg =
+      parseFloat(document.getElementById("BMIWeight").value) || 0;
+    const heightCm =
+      parseFloat(document.getElementById("BMIHeight").value) || 0;
+
     if (!weightKg && !heightCm) {
-      throw new Error('Not Found');
+      throw new Error("Not Found");
     }
-    
+
     if (weightKg <= 0 || heightCm <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = weightKg / Math.pow(heightCm / 100, 2);
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -28,22 +30,24 @@ function BMI() {
 
 function BMR() {
   try {
-    const weightKg = parseFloat(document.getElementById('BMRWeight').value) || 0;
-    const heightCm = parseFloat(document.getElementById('BMRHeight').value) || 0;
-    const age = parseFloat(document.getElementById('BMRAge').value) || 0;
-    const gender = document.getElementById('BMRGender').value;
-    
+    const weightKg =
+      parseFloat(document.getElementById("BMRWeight").value) || 0;
+    const heightCm =
+      parseFloat(document.getElementById("BMRHeight").value) || 0;
+    const age = parseFloat(document.getElementById("BMRAge").value) || 0;
+    const gender = document.getElementById("BMRGender").value;
+
     if (weightKg <= 0 || heightCm <= 0 || age <= 0) {
       throw new Error("Invalid Value");
     }
-    
+
     let result;
     if (gender === "male") {
       result = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
     } else {
       result = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
     }
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -52,15 +56,20 @@ function BMR() {
 
 function TDEE() {
   try {
-    const bmrValue = parseFloat(document.getElementById('TDEEBMR').value) || 0;
-    const activityMultiplier = parseFloat(document.getElementById('TDEEActivity').value) || 0;
-    
-    if (bmrValue <= 0 || activityMultiplier <= 1.2 || activityMultiplier >= 2.0) {
-      throw new Error('Invalid Value');
+    const bmrValue = parseFloat(document.getElementById("TDEEBMR").value) || 0;
+    const activityMultiplier =
+      parseFloat(document.getElementById("TDEEActivity").value) || 0;
+
+    if (
+      bmrValue <= 0 ||
+      activityMultiplier <= 1.2 ||
+      activityMultiplier >= 2.0
+    ) {
+      throw new Error("Invalid Value");
     }
-  
+
     const result = bmrValue * activityMultiplier;
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -69,21 +78,21 @@ function TDEE() {
 
 function bodyFat() {
   try {
-    const bmi = parseFloat(document.getElementById('bodyFatBMI').value) || 0;
-    const age = parseFloat(document.getElementById('bodyFatAge').value) || 0;
-    const gender = document.getElementById('bodyFatGender').value;
-    
+    const bmi = parseFloat(document.getElementById("bodyFatBMI").value) || 0;
+    const age = parseFloat(document.getElementById("bodyFatAge").value) || 0;
+    const gender = document.getElementById("bodyFatGender").value;
+
     if (bmi <= 0 || age <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     let result;
     if (gender === "male") {
-      result = 1.20 * bmi + 0.23 * age - 16.2;
+      result = 1.2 * bmi + 0.23 * age - 16.2;
     } else {
-      result = 1.20 * bmi + 0.23 * age - 5.4;
+      result = 1.2 * bmi + 0.23 * age - 5.4;
     }
-    
+
     writeOutput(`${result.toFixed(2)}%`);
   } catch (e) {
     writeOutput(e.message);
@@ -92,15 +101,17 @@ function bodyFat() {
 
 function waistToHeight() {
   try {
-    const waistCm = parseFloat(document.getElementById('waistToHeightWaist').value) || 0;
-    const heightCm = parseFloat(document.getElementById('waistToHeightHeight').value) || 0;
-    
+    const waistCm =
+      parseFloat(document.getElementById("waistToHeightWaist").value) || 0;
+    const heightCm =
+      parseFloat(document.getElementById("waistToHeightHeight").value) || 0;
+
     if (waistCm <= 0 || heightCm <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = waistCm / heightCm;
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -109,21 +120,24 @@ function waistToHeight() {
 
 function heartRateZones() {
   try {
-    const age = parseFloat(document.getElementById('heartRateZonesAge').value) || 0;
-    
+    const age =
+      parseFloat(document.getElementById("heartRateZonesAge").value) || 0;
+
     if (age <= 0 || age > 120) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const max = 220 - age;
-    
+
     const result = {
       fatBurn: [(max * 0.6).toFixed(0), (max * 0.7).toFixed(0)],
       cardio: [(max * 0.7).toFixed(0), (max * 0.85).toFixed(0)],
-      peak: [(max * 0.85).toFixed(0), max]
+      peak: [(max * 0.85).toFixed(0), max],
     };
-    
-    writeOutput(`Max: ${max} bpm, Fat Burn: ${result.fatBurn.join('-')} bpm, Cardio: ${result.cardio.join('-')} bpm, Peak: ${result.peak.join('-')} bpm`);
+
+    writeOutput(
+      `Max: ${max} bpm, Fat Burn: ${result.fatBurn.join("-")} bpm, Cardio: ${result.cardio.join("-")} bpm, Peak: ${result.peak.join("-")} bpm`,
+    );
   } catch (e) {
     writeOutput(e.message);
   }
@@ -131,65 +145,76 @@ function heartRateZones() {
 
 function leanBodyMass() {
   try {
-    const weightKg = parseFloat(document.getElementById('leanBodyMassWeight').value) || 0;
-    const bodyFatPercent = parseFloat(document.getElementById('leanBodyMassBodyFat').value) || 0;
-    
+    const weightKg =
+      parseFloat(document.getElementById("leanBodyMassWeight").value) || 0;
+    const bodyFatPercent =
+      parseFloat(document.getElementById("leanBodyMassBodyFat").value) || 0;
+
     if (weightKg <= 0 || bodyFatPercent <= 0 || bodyFatPercent >= 100) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-  
+
     const result = (weightKg * (100 - bodyFatPercent)) / 100;
-    
+
     writeOutput(result.toFixed(2));
-  } catch(e) {
+  } catch (e) {
     writeOutput(e.message);
   }
 }
 
 function FFMI() {
   try {
-    const weightKg = parseFloat(document.getElementById('FFMIWeight').value) || 0;
-    const heightCm = parseFloat(document.getElementById('FFMIHeight').value) || 0;
-    const bodyFatPercent = parseFloat(document.getElementById('FFMIBodyFat').value) || 0;
-    
-    if (weightKg <= 0 || heightCm <= 0 || bodyFatPercent <= 0 || bodyFatPercent >= 100) {
-      throw new Error('Invalid Value');
+    const weightKg =
+      parseFloat(document.getElementById("FFMIWeight").value) || 0;
+    const heightCm =
+      parseFloat(document.getElementById("FFMIHeight").value) || 0;
+    const bodyFatPercent =
+      parseFloat(document.getElementById("FFMIBodyFat").value) || 0;
+
+    if (
+      weightKg <= 0 ||
+      heightCm <= 0 ||
+      bodyFatPercent <= 0 ||
+      bodyFatPercent >= 100
+    ) {
+      throw new Error("Invalid Value");
     }
-    
+
     const lbm = (weightKg * (100 - bodyFatPercent)) / 100;
     const heightM = heightCm / 100;
-    
+
     const result = lbm / (heightM * heightM);
-    
+
     writeOutput(result.toFixed(2));
-  } catch(e) {
+  } catch (e) {
     writeOutput(e.message);
   }
 }
 
 function idealBodyWeight() {
   try {
-     const heightCm = parseFloat(document.getElementById('idealBodyWeightHeight').value) || 0;
-     const gender = document.getElementById('idealBodyWeightGender').value;
-     
-     if (heightCm <= 0) {
-       throw new Error('Invalid Value');
-     }
-     
-     const heightInches = heightCm / 2.54;
-     
-     if (heightInches < 60) {
-       throw new Error('Height must be at least 152cm');
-     }
-     
-     let result;
-     if (gender === 'male') {
+    const heightCm =
+      parseFloat(document.getElementById("idealBodyWeightHeight").value) || 0;
+    const gender = document.getElementById("idealBodyWeightGender").value;
+
+    if (heightCm <= 0) {
+      throw new Error("Invalid Value");
+    }
+
+    const heightInches = heightCm / 2.54;
+
+    if (heightInches < 60) {
+      throw new Error("Height must be at least 152cm");
+    }
+
+    let result;
+    if (gender === "male") {
       result = 50 + 2.3 * (heightInches - 60);
-     } else {
+    } else {
       result = 45.5 + 2.3 * (heightInches - 60);
-     }
-     
-     writeOutput(result.toFixed(2));
+    }
+
+    writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
   }
@@ -197,23 +222,28 @@ function idealBodyWeight() {
 
 function VO2Max() {
   try {
-    const age = parseFloat(document.getElementById('VO2MaxAge').value) || 0;
-    const restingHR = parseFloat(document.getElementById('VO2MaxRestingHR').value) || 0;
-    
+    const age = parseFloat(document.getElementById("VO2MaxAge").value) || 0;
+    const restingHR =
+      parseFloat(document.getElementById("VO2MaxRestingHR").value) || 0;
+
     if (age <= 0 || age > 120 || restingHR <= 0 || restingHR > 220) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = 15 * ((220 - age) / restingHR);
-    
+
     let category =
-      result < 30 ? 'Poor'
-      : result < 40 ? 'Fair'
-      : result < 50 ? 'Good'
-      : result < 60 ? 'Excellent'
-      : 'Superior';
-    
-    writeOutput(`${result.toFixed(1)}ml/kg/min (${category})`)
+      result < 30
+        ? "Poor"
+        : result < 40
+          ? "Fair"
+          : result < 50
+            ? "Good"
+            : result < 60
+              ? "Excellent"
+              : "Superior";
+
+    writeOutput(`${result.toFixed(1)}ml/kg/min (${category})`);
   } catch (e) {
     writeOutput(e.message);
   }
@@ -222,28 +252,35 @@ function VO2Max() {
 // STRENGTH
 function oneRM() {
   try {
-    const weightKg = parseFloat(document.getElementById('oneRMWeight').value) || 0;
-    const reps = parseFloat(document.getElementById('oneRMReps').value) || 0;
-    const formula = document.getElementById('oneRMFormulaType').value;
-    
-    if (weightKg <= 0 || reps <= 0 || reps > 20 || !Number.isInteger(reps) || formula === null) {
-      throw new Error('Invalid Value');
+    const weightKg =
+      parseFloat(document.getElementById("oneRMWeight").value) || 0;
+    const reps = parseFloat(document.getElementById("oneRMReps").value) || 0;
+    const formula = document.getElementById("oneRMFormulaType").value;
+
+    if (
+      weightKg <= 0 ||
+      reps <= 0 ||
+      reps > 20 ||
+      !Number.isInteger(reps) ||
+      formula === null
+    ) {
+      throw new Error("Invalid Value");
     }
-    
-    if (reps == 1)  {
+
+    if (reps == 1) {
       writeOutput(weightKg.toFixed(2));
       return;
     }
-    
+
     let result;
-    if (formula === 'epley') {
+    if (formula === "epley") {
       result = weightKg * (1 + reps / 30);
-    } else if (formula === 'brzycki') {
+    } else if (formula === "brzycki") {
       result = weightKg * (36 / (37 - reps));
     } else {
-      result = weightKg * Math.pow(reps, 0.10);
+      result = weightKg * Math.pow(reps, 0.1);
     }
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -252,15 +289,18 @@ function oneRM() {
 
 function relativeStrength() {
   try {
-    const liftKg = parseFloat(document.getElementById('relativeStrengthLift').value) || 0;
-    const bodyWeightKg = parseFloat(document.getElementById('relativeStrengthBodyWeight').value) || 0;
-    
+    const liftKg =
+      parseFloat(document.getElementById("relativeStrengthLift").value) || 0;
+    const bodyWeightKg =
+      parseFloat(document.getElementById("relativeStrengthBodyWeight").value) ||
+      0;
+
     if (liftKg <= 0 || bodyWeightKg <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = liftKg / bodyWeightKg;
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -269,15 +309,17 @@ function relativeStrength() {
 
 function intensityPercent() {
   try {
-    const liftKg = parseFloat(document.getElementById('intensityPercentLift').value) || 0;
-    const oneRmKg = parseFloat(document.getElementById('intensityPercentOneRM').value) || 0;
-    
+    const liftKg =
+      parseFloat(document.getElementById("intensityPercentLift").value) || 0;
+    const oneRmKg =
+      parseFloat(document.getElementById("intensityPercentOneRM").value) || 0;
+
     if (liftKg <= 0 || oneRmKg <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = (liftKg / oneRmKg) * 100;
-    
+
     writeOutput(`${result.toFixed(2)}%`);
   } catch (e) {
     writeOutput(e.message);
@@ -286,33 +328,27 @@ function intensityPercent() {
 
 function wilksScore() {
   try {
-    const liftKg = parseFloat(document.getElementById('wilksScoreLift').value) || 0;
-    const bodyWeightKg = parseFloat(document.getElementById('wilksScoreBodyWeight').value) || 0;
-    const gender = document.getElementById('wilksScoreGender').value;
-    
+    const liftKg =
+      parseFloat(document.getElementById("wilksScoreLift").value) || 0;
+    const bodyWeightKg =
+      parseFloat(document.getElementById("wilksScoreBodyWeight").value) || 0;
+    const gender = document.getElementById("wilksScoreGender").value;
+
     if (liftKg <= 0 || bodyWeightKg <= 0 || gender === null) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const coeff =
-      gender === 'male'
+      gender === "male"
         ? [
-            -216.0475144,
-            16.2606339,
-            -0.002388645,
-            -0.00113732,
-            7.01863e-6,
-            -1.291e-8
+            -216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-6,
+            -1.291e-8,
           ]
         : [
-            594.31747775582,
-            -27.23842536447,
-            0.82112226871,
-            -0.00930733913,
-            4.731582e-5,
-            -9.054e-8
+            594.31747775582, -27.23842536447, 0.82112226871, -0.00930733913,
+            4.731582e-5, -9.054e-8,
           ];
-      
+
     const denominator =
       coeff[0] +
       coeff[1] * bodyWeightKg +
@@ -320,9 +356,9 @@ function wilksScore() {
       coeff[3] * Math.pow(bodyWeightKg, 3) +
       coeff[4] * Math.pow(bodyWeightKg, 4) +
       coeff[5] * Math.pow(bodyWeightKg, 5);
-    
+
     const result = (liftKg * 500) / denominator;
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -332,28 +368,34 @@ function wilksScore() {
 // NUTRITION
 function macros() {
   try {
-    const calories = parseFloat(document.getElementById('macrosCalories').value) || 0;
-    const proteinRatio = parseFloat(document.getElementById('macrosProtein').value) || -1;
-    const carbRatio = parseFloat(document.getElementById('macrosCarb').value) || -1;
-    const fatRatio = parseFloat(document.getElementById('macrosFat').value) || -1;
-    
+    const calories =
+      parseFloat(document.getElementById("macrosCalories").value) || 0;
+    const proteinRatio =
+      parseFloat(document.getElementById("macrosProtein").value) || -1;
+    const carbRatio =
+      parseFloat(document.getElementById("macrosCarb").value) || -1;
+    const fatRatio =
+      parseFloat(document.getElementById("macrosFat").value) || -1;
+
     if (calories <= 0 || proteinRatio < 0 || carbRatio < 0 || fatRatio < 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const totalRatio = proteinRatio + carbRatio + fatRatio;
-    
+
     if (Math.abs(totalRatio - 1) > 0.01) {
-      throw new Error('Ratios must sum to 1');
+      throw new Error("Ratios must sum to 1");
     }
-    
+
     const result = {
       proteinGrams: (calories * proteinRatio) / 4,
       carbGrams: (calories * carbRatio) / 4,
-      fatGrams: (calories * fatRatio) / 9
+      fatGrams: (calories * fatRatio) / 9,
     };
-    
-    writeOutput(`Protein: ${result.proteinGrams.toFixed(2)}g, Carbs: ${result.carbGrams.toFixed(2)}g, Fat: ${result.fatGrams.toFixed(2)}g`);
+
+    writeOutput(
+      `Protein: ${result.proteinGrams.toFixed(2)}g, Carbs: ${result.carbGrams.toFixed(2)}g, Fat: ${result.fatGrams.toFixed(2)}g`,
+    );
   } catch (e) {
     writeOutput(e.message);
   }
@@ -361,15 +403,17 @@ function macros() {
 
 function proteinIntake() {
   try {
-    const weightKg = parseFloat(document.getElementById('proteinIntakeWeight').value) || 0;
-    const multiplier = parseFloat(document.getElementById('proteinIntakeMultiplier').value) || 0;
-    
+    const weightKg =
+      parseFloat(document.getElementById("proteinIntakeWeight").value) || 0;
+    const multiplier =
+      parseFloat(document.getElementById("proteinIntakeMultiplier").value) || 0;
+
     if (weightKg <= 0 || multiplier < 0.8 || multiplier > 3) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = weightKg * multiplier;
-    
+
     writeOutput(`${result.toFixed(2)}g`);
   } catch (e) {
     writeOutput(e.message);
@@ -378,14 +422,15 @@ function proteinIntake() {
 
 function waterIntake() {
   try {
-    const weightKg = parseFloat(document.getElementById('waterIntakeWeight').value) || 0;
-    
+    const weightKg =
+      parseFloat(document.getElementById("waterIntakeWeight").value) || 0;
+
     if (weightKg <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = (weightKg * 35) / 1000;
-    
+
     writeOutput(`${result.toFixed(2)}L`);
   } catch (e) {
     writeOutput(e.message);
@@ -394,15 +439,17 @@ function waterIntake() {
 
 function calorieSurplus() {
   try {
-    const tdeeValue = parseFloat(document.getElementById('calorieSurplusTDEE').value) || 0;
-    const intakeCalories = parseFloat(document.getElementById('calorieSurplusCalories').value) || 0;
-    
+    const tdeeValue =
+      parseFloat(document.getElementById("calorieSurplusTDEE").value) || 0;
+    const intakeCalories =
+      parseFloat(document.getElementById("calorieSurplusCalories").value) || 0;
+
     if (tdeeValue <= 0 || intakeCalories <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = intakeCalories - tdeeValue;
-    
+
     writeOutput(`${result.toFixed(2)}kcal`);
   } catch (e) {
     writeOutput(e.message);
@@ -411,15 +458,17 @@ function calorieSurplus() {
 
 function calorieDeficit() {
   try {
-    const tdeeValue = parseFloat(document.getElementById('calorieDeficitTDEE').value) || 0;
-    const intakeCalories = parseFloat(document.getElementById('calorieDeficitCalories').value) || 0;
-    
+    const tdeeValue =
+      parseFloat(document.getElementById("calorieDeficitTDEE").value) || 0;
+    const intakeCalories =
+      parseFloat(document.getElementById("calorieDeficitCalories").value) || 0;
+
     if (tdeeValue <= 0 || intakeCalories <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = tdeeValue - intakeCalories;
-    
+
     writeOutput(`${result.toFixed(2)}kcal`);
   } catch (e) {
     writeOutput(e.message);
@@ -428,14 +477,15 @@ function calorieDeficit() {
 
 function fiberIntake() {
   try {
-    const calories = parseFloat(document.getElementById('fiberIntakeCalories').value) || 0;
-    
+    const calories =
+      parseFloat(document.getElementById("fiberIntakeCalories").value) || 0;
+
     if (calories <= 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
-    const result = (calories / 1000) * 14
-    
+
+    const result = (calories / 1000) * 14;
+
     writeOutput(`${result.toFixed(2)}g`);
   } catch (e) {
     writeOutput(e.message);
@@ -444,19 +494,21 @@ function fiberIntake() {
 
 function glycemicLoad(gi, carbGrams) {
   try {
-    const gi = parseFloat(document.getElementById('glycemicLoadGI').value) || -1;
-    const carbGrams = parseFloat(document.getElementById('glycemicLoadCarb').value) || -1;
-    
+    const gi =
+      parseFloat(document.getElementById("glycemicLoadGI").value) || -1;
+    const carbGrams =
+      parseFloat(document.getElementById("glycemicLoadCarb").value) || -1;
+
     if (gi < 0 || gi > 100) {
-      throw new Error('GI must be between 0 and 100');
+      throw new Error("GI must be between 0 and 100");
     }
-    
+
     if (carbGrams < 0) {
-      throw new Error('Invalid Value');
+      throw new Error("Invalid Value");
     }
-    
+
     const result = (gi * carbGrams) / 100;
-    
+
     writeOutput(result.toFixed(2));
   } catch (e) {
     writeOutput(e.message);
@@ -473,8 +525,8 @@ class BMIFormula extends HTMLElement {
         <button id="BMICalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#BMICalc').onclick = () => {
+
+    this.querySelector("#BMICalc").onclick = () => {
       BMI();
     };
   }
@@ -495,8 +547,8 @@ class BMRFormula extends HTMLElement {
         <button id="BMRCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#BMRCalc').onclick = () => {
+
+    this.querySelector("#BMRCalc").onclick = () => {
       BMR();
     };
   }
@@ -514,8 +566,8 @@ class TDEEFormula extends HTMLElement {
         <button id="TDEECalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#TDEECalc').onclick = () => {
+
+    this.querySelector("#TDEECalc").onclick = () => {
       TDEE();
     };
   }
@@ -535,8 +587,8 @@ class bodyFatFormula extends HTMLElement {
         <button id="bodyFatCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#bodyFatCalc').onclick = () => {
+
+    this.querySelector("#bodyFatCalc").onclick = () => {
       bodyFat();
     };
   }
@@ -552,8 +604,8 @@ class waistToHeightFormula extends HTMLElement {
         <button id="waistToHeightCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#waistToHeightCalc').onclick = () => {
+
+    this.querySelector("#waistToHeightCalc").onclick = () => {
       waistToHeight();
     };
   }
@@ -568,8 +620,8 @@ class heartRateZonesFormula extends HTMLElement {
         <button id="heartRateZonesCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#heartRateZonesCalc').onclick = () => {
+
+    this.querySelector("#heartRateZonesCalc").onclick = () => {
       heartRateZones();
     };
   }
@@ -585,8 +637,8 @@ class leanBodyMassFormula extends HTMLElement {
         <button id="leanBodyMassCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#leanBodyMassCalc').onclick = () => {
+
+    this.querySelector("#leanBodyMassCalc").onclick = () => {
       leanBodyMass();
     };
   }
@@ -603,8 +655,8 @@ class FFMIFormula extends HTMLElement {
         <button id="FFMICalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#FFMICalc').onclick = () => {
+
+    this.querySelector("#FFMICalc").onclick = () => {
       FFMI();
     };
   }
@@ -626,8 +678,8 @@ class oneRMFormula extends HTMLElement {
         <button id="oneRMCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#oneRMCalc').onclick = () => {
+
+    this.querySelector("#oneRMCalc").onclick = () => {
       oneRM();
     };
   }
@@ -643,8 +695,8 @@ class relativeStrengthFormula extends HTMLElement {
         <button id="relativeStrengthCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#relativeStrengthCalc').onclick = () => {
+
+    this.querySelector("#relativeStrengthCalc").onclick = () => {
       relativeStrength();
     };
   }
@@ -660,8 +712,8 @@ class intensityPercentFormula extends HTMLElement {
         <button id="intensityPercentCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#intensityPercentCalc').onclick = () => {
+
+    this.querySelector("#intensityPercentCalc").onclick = () => {
       intensityPercent();
     };
   }
@@ -681,8 +733,8 @@ class wilksScoreFormula extends HTMLElement {
         <button id="wilksScoreCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#wilksScoreCalc').onclick = () => {
+
+    this.querySelector("#wilksScoreCalc").onclick = () => {
       wilksScore();
     };
   }
@@ -701,8 +753,8 @@ class macrosFormula extends HTMLElement {
         <button id="macrosCalc">Calculate</button
       </div>
     `;
-    
-    this.querySelector('#macrosCalc').onclick = () => {
+
+    this.querySelector("#macrosCalc").onclick = () => {
       macros();
     };
   }
@@ -720,8 +772,8 @@ class proteinIntakeFormula extends HTMLElement {
         <button id="proteinIntakeCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#proteinIntakeCalc').onclick = () => {
+
+    this.querySelector("#proteinIntakeCalc").onclick = () => {
       proteinIntake();
     };
   }
@@ -737,8 +789,8 @@ class waterIntakeFormula extends HTMLElement {
         <button id="waterIntakeCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#waterIntakeCalc').onclick = () => {
+
+    this.querySelector("#waterIntakeCalc").onclick = () => {
       waterIntake();
     };
   }
@@ -754,8 +806,8 @@ class calorieSurplusFormula extends HTMLElement {
         <button id="calorieSurplusCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#calorieSurplusCalc').onclick = () => {
+
+    this.querySelector("#calorieSurplusCalc").onclick = () => {
       calorieSurplus();
     };
   }
@@ -771,8 +823,8 @@ class calorieDeficitFormula extends HTMLElement {
         <button id="calorieDeficitCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#calorieDeficitCalc').onclick = () => {
+
+    this.querySelector("#calorieDeficitCalc").onclick = () => {
       calorieDeficit();
     };
   }
@@ -787,8 +839,8 @@ class fiberIntakeFormula extends HTMLElement {
         <button id="fiberIntakeCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#fiberIntakeCalc').onclick = () => {
+
+    this.querySelector("#fiberIntakeCalc").onclick = () => {
       fiberIntake();
     };
   }
@@ -804,8 +856,8 @@ class glycemicLoadFormula extends HTMLElement {
         <button id="glycemicLoadCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#glycemicLoadCalc').onclick = () => {
+
+    this.querySelector("#glycemicLoadCalc").onclick = () => {
       glycemicLoad();
     };
   }
@@ -824,8 +876,8 @@ class idealBodyWeightFormula extends HTMLElement {
         <button id="idealBodyWeightCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#idealBodyWeightCalc').onclick = () => {
+
+    this.querySelector("#idealBodyWeightCalc").onclick = () => {
       idealBodyWeight();
     };
   }
@@ -841,31 +893,31 @@ class VO2MaxFormula extends HTMLElement {
         <button id="VO2MaxCalc">Calculate</button>
       </div>
     `;
-    
-    this.querySelector('#VO2MaxCalc').onclick = () => {
+
+    this.querySelector("#VO2MaxCalc").onclick = () => {
       VO2Max();
-    }
+    };
   }
 }
 
-customElements.define('bmi-formula', BMIFormula);
-customElements.define('bmr-formula', BMRFormula);
-customElements.define('tdee-formula', TDEEFormula);
-customElements.define('bodyfat-formula', bodyFatFormula);
-customElements.define('waisttoheight-formula', waistToHeightFormula);
-customElements.define('heartratezones-formula', heartRateZonesFormula);
-customElements.define('leanbodymass-formula', leanBodyMassFormula);
-customElements.define('ffmi-formula', FFMIFormula);
-customElements.define('onerm-formula', oneRMFormula);
-customElements.define('relativestrength-formula', relativeStrengthFormula);
-customElements.define('intensitypercent-formula', intensityPercentFormula);
-customElements.define('wilksscore-formula', wilksScoreFormula);
-customElements.define('macros-formula', macrosFormula);
-customElements.define('proteinintake-formula', proteinIntakeFormula);
-customElements.define('waterintake-formula', waterIntakeFormula);
-customElements.define('caloriesurplus-formula', calorieSurplusFormula);
-customElements.define('caloriedeficit-formula', calorieDeficitFormula);
-customElements.define('fiberintake-formula', fiberIntakeFormula);
-customElements.define('glycemicload-formula', glycemicLoadFormula);
-customElements.define('idealbodyweight-formula', idealBodyWeightFormula);
-customElements.define('vo2max-formula', VO2MaxFormula);
+customElements.define("bmi-formula", BMIFormula);
+customElements.define("bmr-formula", BMRFormula);
+customElements.define("tdee-formula", TDEEFormula);
+customElements.define("bodyfat-formula", bodyFatFormula);
+customElements.define("waisttoheight-formula", waistToHeightFormula);
+customElements.define("heartratezones-formula", heartRateZonesFormula);
+customElements.define("leanbodymass-formula", leanBodyMassFormula);
+customElements.define("ffmi-formula", FFMIFormula);
+customElements.define("onerm-formula", oneRMFormula);
+customElements.define("relativestrength-formula", relativeStrengthFormula);
+customElements.define("intensitypercent-formula", intensityPercentFormula);
+customElements.define("wilksscore-formula", wilksScoreFormula);
+customElements.define("macros-formula", macrosFormula);
+customElements.define("proteinintake-formula", proteinIntakeFormula);
+customElements.define("waterintake-formula", waterIntakeFormula);
+customElements.define("caloriesurplus-formula", calorieSurplusFormula);
+customElements.define("caloriedeficit-formula", calorieDeficitFormula);
+customElements.define("fiberintake-formula", fiberIntakeFormula);
+customElements.define("glycemicload-formula", glycemicLoadFormula);
+customElements.define("idealbodyweight-formula", idealBodyWeightFormula);
+customElements.define("vo2max-formula", VO2MaxFormula);

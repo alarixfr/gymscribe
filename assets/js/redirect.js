@@ -1,4 +1,4 @@
-import { openDashboard, requireAuth, init } from './handler.js';
+import { openDashboard, requireAuth, init } from "./handler.js";
 
 setTimeout(() => {
   if (requireAuth()) openDashboard();
