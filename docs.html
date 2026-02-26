@@ -183,6 +183,126 @@ PORT=8080
     </div>
     
     <div class="section">
+      <h2 class="heading">API</h2>
+      <p>Integrate your gym data into another application with <span class="strong">Gymscribe</span> API.</p>
+      <p>1. Login into your <span class="strong">Gymscribe</span> account.</p>
+      <p>2. Go to <span class="warning">API</span> page in the dashboard navbar.</p>
+      <p>3. Find the <span class="warning">Copy Token</span> button and click it to copy your token.</p>
+      <p>4. Find the <span class="warning">URL</span> and copy the link.</p>
+      <p>5. Test it by opening the <span class="warning">URL</span> in your browser.</p>
+      
+      <br>
+      
+      <h2 class="subheading">V1</h2>
+      <p>1. Fetch the gym info:</p>
+      <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
+      <p>Replace <span class="warning">url</span> with the copied api url.</p>
+      <p>Replace <span class="warning">(your token)</span> with your copied account token.</p>
+      <p>Response:</p>
+      <p class="code-block">
+{
+  success: true,
+  "id": "String",
+  "name": "String",
+  "description": "String",
+  "owner": "String",
+  "address": "String",
+  "timezone": "Integer"
+}
+      </p>
+      
+      <br>
+      
+      <p>2. Fetch the gym members data:</p>
+      <p class="code-block"><span class="warning">url</span>/api/v1/gym?token=<span class="warning">(your token)</span></p>
+      <p>Response:</p>
+      <p class="code-block">
+{
+  success: true,
+  "membersCount":
+  {
+    "all": "Integer",
+    "active": "Integer",
+    "expiresSoon": "Integer",
+    "expired": "Integer"
+  },
+  "membersList":
+  [
+    {
+      "id": "Integer",
+      "name": "String",
+      "plan": "String",
+      "status": "String",
+      "duration": "Integer",
+      "isAttended": "Boolean",
+      "timestamp": "String",
+      "details":
+      {
+        "email": "String",
+        "phone": "Integer",
+        "birthday": "Integer",
+        "note" "String"
+      }
+    }
+  ]
+}
+      </p>
+      
+      <br>
+      
+      <p>3. Fetch the gym saved last 7 days attendance data</p>
+      <p class="code-block"><span class="warning">url</span>/api/v1/attendance?token=<span class="warning">(your token)</span></p>
+      <p>Response:</p>
+      <p class="code-block">
+{
+  success: true,
+  attendance: {
+    "day1":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day2":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day3":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day4":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day5":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day6":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    },
+    "day7":
+    {
+      "attended": "Integer",
+      "absence": "Integer"
+    }
+  }
+}
+      </p>
+      
+      <br>
+      
+      <p class="error">Don't share your token! keep it secret for your account safety.</p>
+      <p class="error">You can also put your token in <span class="warning">Authorization</span> inside <span class="italic">headers</span> (recommended for security)</p>
+    </div>
+    
+    <div class="section">
       <h2 class="heading">Security And Privacy</h2>
       <p>Your data is stored in 3rd party database. We can't guarantee the safety of your account and gym data. We suggest installing <span class="strong">Gymscribe</span> locally to ensure yout data safety.</p>
       <p>Even though we have <span class="italic">Altcha</span> captcha in our login system, <span class="strong">Gymscribe</span> is still vunerable from various cyber attacks.</p>

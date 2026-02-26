@@ -146,11 +146,13 @@ footer {
 }
 
 .code-block {
+  display: block;
   font-size: 1.1rem;
   padding: 0.4rem;
   font-family: Monospace;
   background: rgba(78,78,78, 0.3);
   word-break: break-all;
+  white-space: pre-wrap;
 }
 
 @media (min-width: 768px) {
