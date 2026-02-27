@@ -4,11 +4,17 @@
   box-sizing: border-box;
   outline: none;
   text-decoration: none;
-  -webkit-tap-hightlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 a:focus,
@@ -165,7 +171,8 @@ html.sr .load-hidden {
   border: 1.8px solid;
 }
 
-.features {
+.features,
+.demo {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -190,13 +197,15 @@ html.sr .load-hidden {
 }
 
 .features h2,
-.pricing h2 {
+.pricing h2,
+.demo h2 {
   color: white;
   font-size: 2.1rem;
 }
 
 .features p,
 .pricing p,
+.demo p,
 .cta p {
   color: #aaa;
   font-size: 1.25rem;
@@ -338,6 +347,11 @@ html.sr .load-hidden {
   box-shadow: none;
 }
 
+.demo video {
+  width: 50%;
+  border-radius: 8px;
+}
+
 .footer {
   margin-top: 2rem;
   width: 100%;
@@ -443,7 +457,8 @@ html.sr .load-hidden {
   }
 
   .features h2,
-  .pricing h2 {
+  .pricing h2,
+  .demo h2 {
     font-size: 1.4rem;
   }
 
@@ -454,6 +469,10 @@ html.sr .load-hidden {
   .cta p {
     padding: 0.2rem;
     margin: 0.2rem;
+  }
+
+  .demo video {
+    width: 85%;
   }
 
   .footer {

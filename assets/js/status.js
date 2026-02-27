@@ -2,7 +2,6 @@ import { API_URL } from "./handler.js";
 
 const addressElement = document.getElementById("address");
 const ipElement = document.getElementById("ip");
-const regionElement = document.getElementById("region");
 
 const statusElement = document.getElementById("status");
 const pingElement = document.getElementById("ping");
@@ -32,12 +31,11 @@ function addressFetch() {
   }
 }
 
-async function locationFetch() {
+async function statusFetch() {
   try {
     const response = await fetch(`${API_URL}/`, {
       method: "GET",
       headers: {
-        "bypass-tunnel-reminder": "true",
         "Content-Type": "application/json",
       },
     });
@@ -45,48 +43,15 @@ async function locationFetch() {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error("ERROR: COULDNT CONNECT");
-    }
-
-    const region = fetch(`https://ipapi.co/${data.system.ip}/json/`)
-      .then((res) => {
-        if (!res.ok) throw new Error("ERROR: COULDNT DETECT");
-        res.json();
-      })
-      .then((regionData) => {
-        regionElement = `${regionData.region}, ${regionData.country_name}`;
-      })
-      .catch((e) => {
-        throw new Error("ERROR: COULDNT DETECT");
-      });
-
-    ipElement.textContent = data.system.ip;
-  } catch (e) {
-    ipElement.textContent = "ERROR: COULDNT CONNECT";
-    regionElement.textContent = "ERROR: COULDNT CONNECT";
-  }
-}
-
-async function statusFetch() {
-  try {
-    const response = await fetch(`${API_URL}/`, {
-      method: "GET",
-      headers: {
-        "bypass-tunnel-reminder": "true",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
       statusElement.textContent = `${response.status} - offline`;
       return;
     }
 
+    ipElement.textContent = data.system.ip;
     statusElement.textContent = `${response.status} - ${data.status}`;
     pingElement.textContent = data.system.ping;
   } catch (e) {
+    ipElement.textContent = "ERROR: COULDNT CONNECT";
     statusElement.textContent = "ERROR: COULDNT CONNECT";
     pingElement.textContent = "ERROR: COULDNT CONNECT";
   }
@@ -97,19 +62,18 @@ async function statsFetch() {
     const response = await fetch(`${API_URL}/stats`, {
       method: "GET",
       headers: {
-        "bypass-tunnel-reminder": "true",
         "Content-Type": "application/json",
       },
     });
 
     const data = await response.json();
 
-    if (!reponse.ok) {
+    if (!response.ok) {
       throw new Error("ERROR: COULDNT CONNECT");
     }
 
-    usersElement.textContent = data.stats.totalAccounts;
-    membersElement.textContent = data.stats.totalMembers;
+    usersElement.textContent = data.totalAccounts;
+    membersElement.textContent = data.totalMembers;
   } catch (e) {
     usersElement.textContent = "ERROR: COULDNT CONNECT";
     membersElement.textContent = "ERROR: COULDNT CONNECT";
@@ -121,14 +85,13 @@ async function cacheFetch() {
     const response = await fetch(`${API_URL}/stats`, {
       method: "GET",
       headers: {
-        "bypass-tunnel-reminder": "true",
         "Content-Type": "application/json",
       },
     });
 
     const data = await response.json();
 
-    if (!reponse.ok) {
+    if (!response.ok) {
       throw new Error("ERROR: COULDNT CONNECT");
     }
 
@@ -145,12 +108,11 @@ async function advancedFetch() {
     const response = await fetch(`${API_URL}/`, {
       method: "GET",
       headers: {
-        "bypass-tunnel-reminder": "true",
         "Content-Type": "application/json",
       },
     });
 
-    const data = response.json();
+    const data = await response.json();
 
     if (!response.ok) {
       throw new Error("ERROR: COULDNT CONNECT");
@@ -164,8 +126,8 @@ async function advancedFetch() {
     osElement.textContent = data.system.platform;
     cpuElement.textContent = data.system.cpu;
 
-    totalMemoryElement.textContent = data.memory.total;
-    usedMemoryElement.textContent = data.memory.used;
+    totalMemoryElement.textContent = data.system.memory.total;
+    usedMemoryElement.textContent = data.system.memory.used;
   } catch (e) {
     nameElement.textContent = "ERROR: COULDNT CONNECT";
     versionElement.textContent = "ERROR: COULDNT CONNECT";
@@ -183,7 +145,6 @@ async function advancedFetch() {
 async function init() {
   try {
     addressFetch();
-    await locationFetch();
     await statusFetch();
     await statsFetch();
     await cacheFetch();

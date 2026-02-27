@@ -4,11 +4,17 @@
   box-sizing: border-box;
   outline: none;
   text-decoration: none;
-  -webkit-tap-hightlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 a:focus,
@@ -24,6 +30,10 @@ body {
   font-family: "Outfit", Sans-Serif;
   background-color: #151515;
   min-height: 100vh;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 html.sr .load-hidden {
@@ -106,15 +116,15 @@ button {
 .select-button {
   font-size: 1.1rem;
   padding: 0.4rem;
-  background: rgba(255, 255, 255, 1);
+  background: rgb(255, 255, 255);
 }
 
 .select-button:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(55, 150, 96, 0.637);
 }
 
 .select-button:active {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(34, 97, 61, 0.349);
 }
 
 #form-submit {
@@ -134,8 +144,8 @@ button {
 }
 
 .active-btn {
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0px 2px #fff;
+  background: rgba(85, 226, 146, 0.7);
+  box-shadow: 0px 2px rgba(103, 255, 169, 0.4);
 }
 
 .captcha-info {
@@ -157,4 +167,27 @@ button {
   pointer-events: none;
   user-select: none;
   filter: brightness(0) invert(1);
+}
+
+.status {
+  margin-top: 0.4rem;
+  text-align: left;
+  color: yellow;
+  font-size: 0.6rem;
+}
+
+.status a {
+  color: yellow;
+}
+.status a:hover {
+  color: #cfcf7a;
+}
+
+.demo-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  margin-top: 0.4rem;
+  text-align: left;
+  color: #cfcf7a;
+  font-size: 0.6rem;
 }

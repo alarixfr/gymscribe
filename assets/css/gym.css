@@ -4,7 +4,7 @@
   box-sizing: border-box;
   outline: none;
   text-decoration: none;
-  -webkit-tap-hightlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {

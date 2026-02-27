@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:8080";
-const DASHBOARD_URL = "https://gymscribe.vercel.app/dashboard.html";
+const DASHBOARD_URL = "https://gymscribe.vercel.app/dashboard/analytics.html";
 const LOGIN_URL = "https://gymscribe.vercel.app/login.html";
 const STORAGE_KEY = "gymscribe-auth";
 const EMAIL_KEY = "gymscribe-email";
