@@ -178,7 +178,7 @@ altchaWidget.addEventListener("verified", (event) => {
 if (isAuthenticated()) openDashboard();
 
 if (altchaWidget) {
-  altchaWidget.setAttribute("challengeurl", `${API_URL}/auth/altcha-challenge`);
+  altchaWidget.setAttribute("challengeurl", `${API_URL}/auth/challenge`);
 }
 
 toggleMethod("login");
