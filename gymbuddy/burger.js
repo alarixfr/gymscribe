@@ -17,5 +17,3 @@ burger.addEventListener('click', () => {
     opened = false;
   }, 200);
 });
-
-navbar.style.display = 'none';
