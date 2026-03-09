@@ -127,10 +127,34 @@ html.sr .load-hidden {
   border: 2px solid #2e8b57;
 }
 
+.burger-container {
+  display: none;
+  position: fixed;
+  top: 0.4rem;
+  left: 0.6rem;
+  font-size: 5rem;
+  z-index: 1000;
+}
+
 .burger {
   display: none;
+  color: white;
   font-size: 1.8rem;
   cursor: pointer;
+}
+
+.burger.open {
+  animation: burgerAction 0.2s infinite;
+}
+
+@keyframes burgerAction {
+  from {
+    transform: rotate(0deg);
+  }
+  
+  to {
+    transform: rotate(180deg);
+  }
 }
 
 main {
@@ -161,11 +185,11 @@ main {
 
 #chatInput {
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: white;
   background: none;
   border: none;
-  padding: 0rem 0.4rem;
+  padding: 0rem 0.4em;
 }
 
 #chatSubmit {
@@ -174,6 +198,7 @@ main {
   color: white;
   background: rgba(255, 255, 255, 0.1);
   border: none;
+  border-radius: 6px;
 }
 
 .chat-window-container {
@@ -226,5 +251,32 @@ main {
   
   .logo-container span {
     font-size: 1.5rem;
+  }
+  
+  .navbar {
+    display: none;
+    width: 100%;
+    position: fixed;
+  }
+  
+  .burger-container, .burger {
+    display: block;
+  }
+  
+  .chat-input-container {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+  
+  #chatInput {
+    font-size: 1rem;
+  }
+  
+  .chat-window-placeholder img {
+    width: 8rem;
+  }
+  
+  .chat-window-placeholder h1 {
+    font-size: 1.4rem;
   }
 }
