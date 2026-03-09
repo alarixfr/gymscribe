@@ -28,7 +28,12 @@ chatForm.addEventListener('submit', async (e) => {
     if (!msg) return chatForm.reset();
     generateBubble('user', msg);
     
-    const aiResponse = { message: "sure" }; //chatAI(msg);
+    const aiResponse = await chatAI(msg);
+    if (aiResponse.error) {
+      generateBubble('ai', `Error: ${aiResponse.error}`);
+      return chatForm.reset();
+    }
+    
     generateBubble('ai', aiResponse.message);
     
     chatForm.reset();

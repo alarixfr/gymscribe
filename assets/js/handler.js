@@ -81,6 +81,13 @@ function requireAuth() {
   return true;
 }
 
+function requireAuthNoOpen() {
+  if (!isAuthenticated()) {
+    return false;
+  }
+  return true;
+}
+
 async function init() {
   if (!requireAuth()) {
     return;
@@ -649,7 +656,7 @@ async function attendanceReset() {
 
 async function chatAI(msg) {
   try {
-    if (!requireAuth()) return { error: "Not authenticated" };
+    if (!requireAuthNoOpen()) return { error: "Not authenticated. Please register/login to Gymscribe dashboard first!" };
     
     const token = getToken();
     

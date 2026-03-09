@@ -1,19 +1,17 @@
 const burger = document.querySelector('.burger');
 const navbar = document.querySelector('.navbar');
 
-let opened = false;
+let animating = false;
 
 burger.addEventListener('click', () => {
-  if (opened === true) return;
-  opened = true;
+  if (animating) return;
+  animating = true;
+  
   burger.classList.add('open');
-  if (navbar.style.display === 'none') {
-    navbar.style.display = 'flex';
-  } else {
-    navbar.style.display = 'none';
-  }
+  navbar.classList.toggle('show');
+  
   setTimeout(() => {
     burger.classList.remove('open');
-    opened = false;
+    animating = false;
   }, 200);
 });
