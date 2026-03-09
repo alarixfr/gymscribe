@@ -30,6 +30,7 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: row;
+  user-select: none;
 }
 
 html.sr .load-hidden {
@@ -182,6 +183,7 @@ main {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
+  user-select: auto;
 }
 
 .chat-window-placeholder {
@@ -195,6 +197,7 @@ main {
   justify-content: center;
   text-align: center;
   word-break: keep-all;
+  user-select: none;
 }
 
 .chat-window-placeholder img {

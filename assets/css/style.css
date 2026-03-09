@@ -27,6 +27,7 @@ body {
   font-family: "Outfit", Sans-Serif;
   background-color: #151515;
   height: 100vh;
+  user-select: none;
 }
 
 html.sr .load-hidden {
@@ -103,7 +104,7 @@ html.sr .load-hidden {
 .menu a:last-child {
   border-radius: 0px;
   text-decoration: none;
-  background-color: #3cb371;
+  background: #3cb371;
   box-shadow: 2px 2px #000;
   padding: 0.4rem 0.6rem;
   text-align: center;
@@ -117,6 +118,25 @@ html.sr .load-hidden {
   box-shadow: none;
   color: black;
   border: 2px solid #2e8b57;
+}
+
+#githubMenu {
+  background: rgb(5,120,200);
+  border-radius: 0px;
+  text-decoration: none;
+  box-shadow: 2px 2px #000;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+#githubMenu:hover {
+  background: none;
+  box-shadow: none;
+  color: black;
+  border: 2px solid rgb(90,147,255);
 }
 
 .burger {
@@ -154,8 +174,7 @@ html.sr .load-hidden {
   margin-top: 1rem;
 }
 
-.hero-buttons a,
-#btn {
+.hero-buttons a {
   text-decoration: none;
   color: white;
   font-size: 1.4rem;
@@ -168,8 +187,7 @@ html.sr .load-hidden {
   transition: all 0.2s ease;
 }
 
-.hero a:hover,
-#btn:hover {
+.hero a:hover {
   background: none;
   box-shadow: none;
   border: 1.8px solid;
@@ -311,6 +329,15 @@ html.sr .load-hidden {
   border: 2px solid #2e8b57;
 }
 
+.app-button {
+  display: block;
+  width: 50%;
+}
+
+.app-button-mobile {
+  display: none;
+}
+
 .cta {
   width: 100%;
   display: flex;
@@ -354,6 +381,7 @@ html.sr .load-hidden {
 .demo video {
   width: 50%;
   border-radius: 8px;
+  background: white;
 }
 
 .footer {
@@ -465,6 +493,17 @@ html.sr .load-hidden {
   .demo h2 {
     font-size: 1.4rem;
   }
+  
+  .app-button {
+    display: none;
+  }
+  
+  .app-button-mobile {
+    display: block;
+    width: 80%;
+    margin-top: 0.6rem;
+    order: 2;
+  }
 
   .cta h1 {
     font-size: 1.9rem;
@@ -507,7 +546,7 @@ html.sr .load-hidden {
   .feature-container:nth-child(odd) {
     flex-direction: row-reverse;
   }
-
+  
   .feature-container div {
     flex: 2;
   }
