@@ -21,20 +21,20 @@ function generateBubble(role, message) {
 chatForm.addEventListener('submit', async (e) => {
   try {
     e.preventDefault();
-    chatPlaceholder.style.display = 'none';
+    chatForm.reset();
     
     const msg = chatInput.value.trim();
     
-    if (!msg) return chatForm.reset();
+    if (!msg) return;
+    chatPlaceholder.style.display = 'none';
+    messageHistory.push({ role: 'user', content: msg });
     generateBubble('user', msg);
     
-    const aiResponse = await chatAI(msg);
-    if (aiResponse.error) {
-      generateBubble('ai', `Error: ${aiResponse.error}`);
-      return chatForm.reset();
-    }
+    const aiResponse = await chatAI(msg, messageHistory);
+    if (aiResponse.error) return generateBubble('ai', `Error: ${aiResponse.error}`);
     
-    generateBubble('ai', aiResponse.message);
+    messageHistory.push({ role: 'assistant', content: aiResponse.response });
+    generateBubble('ai', aiResponse.response);
     
     chatForm.reset();
   } catch (e) {

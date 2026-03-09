@@ -654,7 +654,7 @@ async function attendanceReset() {
   }
 }
 
-async function chatAI(msg) {
+async function chatAI(message, messageHistory = []) {
   try {
     if (!requireAuthNoOpen()) return { error: "Not authenticated. Please register/login to Gymscribe dashboard first!" };
     
@@ -666,7 +666,10 @@ async function chatAI(msg) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: msg }),
+      body: JSON.stringify({
+        message,
+        history: messageHistory,
+      }),
     });
     
     const data = await response.json();
