@@ -150,7 +150,11 @@ html.sr .load-hidden {
   max-width: 45ch;
 }
 
-.hero a,
+.hero-buttons {
+  margin-top: 1rem;
+}
+
+.hero-buttons a,
 #btn {
   text-decoration: none;
   color: white;

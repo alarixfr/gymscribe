@@ -1,0 +1,227 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+  box-sizing: none;
+}
+
+body {
+  font-family: "Outfit", Sans-Serif;
+  background-color: #151515;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+html.sr .load-hidden {
+  visibility: hidden;
+}
+
+.navbar {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  background: rgba(95,95,95,0.65);
+  box-shadow: 0 4px 30px rgba(0, 0, 0 ,0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  top: 0;
+  z-index: 1000;
+  flex: 1;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 4rem;
+  margin-top: 0.2rem;
+  pointer-events: none;
+  user-select: none;
+  filter: invert(100%);
+}
+
+.logo-container span {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.logo-container {
+  gap: 0.15rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  height: 100%;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.menu a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4rem;
+  margin: 0rem 1rem;
+  border-radius: 0px;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #000;
+  box-shadow: 2px 2px #000;
+  display: inline-block;
+}
+
+.menu a:hover {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: none;
+  background: none;
+  color: white;
+}
+
+.menu a:last-child {
+  border-radius: 0px;
+  text-decoration: none;
+  background: #3cb371;
+  box-shadow: 2px 2px #000;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #000;
+  transition: all 0.2s ease;
+}
+
+.menu a:last-child:hover {
+  background: none;
+  box-shadow: none;
+  color: white;
+  border: 2px solid #2e8b57;
+}
+
+.burger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+main {
+  flex: 4.5;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat-input-container {
+  width: 80%;
+  height: 5rem;
+  background: rgba(70,70,70,0.65);
+  padding: 0.1rem;
+  margin-bottom: 4rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.chat-input-container form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+#chatInput {
+  width: 100%;
+  font-size: 1.1rem;
+  color: white;
+  background: none;
+  border: none;
+  padding: 0rem 0.4rem;
+}
+
+#chatSubmit {
+  width: 5rem;
+  font-size: 1.1rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+.chat-window-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chat-window-placeholder {
+  width: 20%;
+  color: rgba(255, 255, 255, 0.8);
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.chat-window-placeholder img {
+  width: 14rem;
+  filter: invert(50%);
+}
+
+.chat-window-placeholder h1 {
+  font-size: 2.1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    height: 2.2rem;
+  }
+  
+  .logo-container {
+    padding-left: 0;
+    gap: 0;
+  }
+  
+  .menu {
+    padding-left: 0;
+  }
+  
+  .logo-container span {
+    font-size: 1.5rem;
+  }
+}

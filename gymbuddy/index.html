@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A new web page">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="../assets/img/Gymscribe.png">
+    <title>GymBuddy</title>
+    
+    <link rel="stylesheet" href="./style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/assets/js/scrollReveal.js" defer></script>
+    <script src="/assets/js/navbarResponsive.js" defer></script>
+    <script src="/assets/js/index.js" defer></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo-container">
+      <a href="/" class="logo">
+        <img src="../assets/img/Gymscribe.png" alt="Gymscribe Logo">
+      </a>
+      <span>GymBuddy</span>
+    </div>
+    
+    <!--
+    <div class="burger-container">
+      <div class="burger" onclick="toggleMenu()">☰</div>
+    </div>
+    -->
+    
+    <nav class="menu">
+      <a href="/">Ask GymBuddy</a>
+      <a href="/gymbuddy/exercises.html">Exercises</a>
+      <a href="/gymbuddy/journals.html">Journals</a>
+      <a href="/gymbuddy/goals.html">Goals</a>
+      <a href="../">Try Gymscribe</a>
+    </nav>
+  </div>
+  
+  <main>
+    <div class="chat-window-container">
+      <div class="chat-window-placeholder">
+        <img src="../assets/img/Gymscribe.png">
+        <h1>Ask GymBuddy AI</h1>
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <form>
+        <input id="chatInput" type="text" placeholder="How do I get visible sixpack?" maxlength="64" required>
+        <button id="chatSubmit" type="submit">Ask</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
