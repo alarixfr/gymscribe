@@ -20,7 +20,8 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="../assets/js/scrollReveal.js" defer></script>
     <script src="./burger.js" defer></script>
-    <script src="./index.js" defer></script>
+    <script src="./index.js" type="module"></script>
+    <script src="../assets/js/handler.js" type="module"></script>
 </head>
 <body>
   <div class="navbar">
@@ -52,8 +53,8 @@
       </div>
     </div>
     <div class="chat-input-container">
-      <form>
-        <input id="chatInput" type="text" placeholder="How do I get visible sixpack?" maxlength="64" required>
+      <form id="chatForm">
+        <input id="chatInput" type="text" placeholder="How do I get visible sixpack?" maxlength="64" autocomplete="off" required>
         <button id="chatSubmit" type="submit">Ask</button>
       </form>
     </div>

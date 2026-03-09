@@ -568,6 +568,7 @@ async function attendanceSave() {
       },
       body: JSON.stringify({ attendance: attendanceData }),
     });
+    
     const data = await response.json();
 
     if (!response.ok)
@@ -646,6 +647,32 @@ async function attendanceReset() {
   }
 }
 
+async function chatAI(msg) {
+  try {
+    if (!requireAuth()) return { error: "Not authenticated" };
+    
+    const token = getToken();
+    
+    const response = await fetch(`${API_URL}/ai`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ message: msg }),
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok)
+      throw new Error(data.error || "Failed to get AI response");
+    
+    return data;
+  } catch(error) {
+    return { error: error.message };
+  }
+}
+
 export {
   API_URL,
   DASHBOARD_URL,
@@ -681,4 +708,5 @@ export {
   attendanceLoad,
   attendanceClear,
   attendanceReset,
+  chatAI,
 };
