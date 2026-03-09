@@ -15,17 +15,18 @@ function generateBubble(role, message) {
   bubbleElement.append(bubbleMessageElement);
   
   chatContainer.append(bubbleElement);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
   return bubbleElement;
 }
 
 chatForm.addEventListener('submit', async (e) => {
   try {
     e.preventDefault();
-    chatForm.reset();
     
     const msg = chatInput.value.trim();
-    
     if (!msg) return;
+    
+    chatForm.reset();
     chatPlaceholder.style.display = 'none';
     messageHistory.push({ role: 'user', content: msg });
     generateBubble('user', msg);
