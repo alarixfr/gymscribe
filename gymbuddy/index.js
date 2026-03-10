@@ -11,7 +11,10 @@ function generateBubble(role, message) {
   const bubbleElement = document.createElement('div');
   bubbleElement.classList.add('bubble', `bubble-${role}`);
   const bubbleMessageElement = document.createElement('p');
-  bubbleMessageElement.textContent = message;
+  
+  const parsed = marked.parse(message);
+  const sanitized = DOMPurify.sanitize(parsed);
+  bubbleMessageElement.innerHTML = sanitized;
   bubbleElement.append(bubbleMessageElement);
   
   chatContainer.append(bubbleElement);
@@ -36,8 +39,6 @@ chatForm.addEventListener('submit', async (e) => {
     
     messageHistory.push({ role: 'assistant', content: aiResponse.response });
     generateBubble('ai', aiResponse.response);
-    
-    chatForm.reset();
   } catch (e) {
     console.error(e.message);
   }
