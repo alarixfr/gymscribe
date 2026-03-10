@@ -500,8 +500,8 @@ html.sr .load-hidden {
   
   .app-button-mobile {
     display: block;
-    width: 80%;
-    margin-top: 0.6rem;
+    width: 75%;
+    margin-top: 1.4rem;
     order: 2;
   }
 
