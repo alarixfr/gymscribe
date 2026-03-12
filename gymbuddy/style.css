@@ -264,18 +264,18 @@ main {
   display: flex !important;
 }
 
-.journals-manager, .journals-list {
+.journals-manager, .journals-list, .exercises-manager, .exercises-list {
   width: 100%;
 }
 
-.journals-manager {
+.journals-manager, .exercises-manager {
   margin-bottom: 2rem;
   padding-top: 1rem;
   padding-bottom: 2rem;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.journals-manager, .journals-manager form {
+.journals-manager, .journals-manager form, .exercises-manager, .exercises-manager form {
   font-size: 1.1rem;
   width: 100%;
   color: white;
@@ -285,22 +285,22 @@ main {
   justify-content: center;
 }
 
-.journals-manager form, .journals-advanced {
+.journals-manager form, .journals-advanced, .exercises-manager form {
   width: 80%;
 }
 
-.journals-manager form input, .journals-manager form button {
+.journals-manager form input, .journals-manager form button, .exercises-manager form input, .exercises-manager form button, .exercises-manager form select {
   width: 100%;
   padding: 0.6rem 0.8rem;
   border: none;
 }
 
-.journals-manager form label {
+.journals-manager form label, .exercises-manager form label {
   text-align: left;
   align-self: flex-start;
 }
 
-.journals-list {
+.journals-list, .exercises-list {
   margin-top: auto;
   height: 100%;
   max-height: 100%;
@@ -320,7 +320,7 @@ main {
   width: 100%;
 }
 
-#journalsSubmit, .journals-advanced button {
+#journalsSubmit, .journals-advanced button, #exercisesSubmit {
   width: 100%;
   padding: 0.6rem 0.8rem;
   border: none;
@@ -330,18 +330,18 @@ main {
   transition: all 0.2s ease;
 }
 
-#journalsSubmit:hover, .journals-advanced button:hover {
+#journalsSubmit:hover, .journals-advanced button:hover, #exercisesSubmit:hover {
   background: rgba(20, 180, 100, 0.5);
 }
 
-.journal {
+.journal, .exercise, .exerciseFound {
   color: white;
   margin: 0.6rem;
   padding: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
-.journal h3 {
+.journal h3, .exercise h3 {
   font-size: 1.4rem;
 }
 

@@ -18,7 +18,7 @@
     />
     
     <script src="./burger.js" defer></script>
-    <script src="./gymbuddyJournals.js" type="module"></script>
+    <script src="./gymbuddyExercises.js" type="module"></script>
     <script src="../assets/js/handler.js" type="module"></script>
 </head>
 <body>
@@ -43,42 +43,29 @@
   </div>
   
   <main>
-    <div class="journals-manager">
-      <form id="journalsForm">
-        <h1>Add Journals</h1>
-        <label for="journalsTitle">Title:</label>
-        <input id="journalsTitle" type="text" placeholder="Chest day..." maxlength="18" required>
-        <label for="journalsContent">Content:</label>
-        <input id="journalsContent" type="text" placeholder="10 sets of bench press today..." maxlength="32" required>
-        <label for="journalsWeight">Weight:</label>
-        <input id="journalsWeight" type="number" placeholder="Weight (kg)" min="0" max="999" required>
-        <label for="journalsMood">Mood:</label>
-        <input id="journalsMood" type="text" placeholder="Energized..." maxlength="18" required>
-        <button id="journalsSubmit" type="submit">Add Journal</button>
+    <div class="exercises-manager">
+      <form id="exercisesForm">
+        <h1>Search Exercises</h1>
+        <label for="exercisesType">Search For:</label>
+        <select id="exercisesType" name="exercisesType" required>
+          <option value="name">Exercises By Name</option>
+          <option value="bodyPart">Exercises By Body Part</option>
+          <option value="muscle">Exercises By Muscle</option>
+          <option value="equipment">Exercises By Equipment</option>
+        </select>
+        <label for="exercisesSearch">Search:</label>
+        <input id="exercisesSearch" type="text" placeholder="Search exercises..." maxlength="24" autocomplete="off" required>
+        <button id="exercisesSubmit" type="submit">Search Exercises</button>
       </form>
-      <div class="journals-advanced">
-        <button>Export To .CSV</button>
-        <button>Import With .CSV</button>
-      </div>
     </div>
-    <div id="journals-list" class="journals-list">
-      <div class="journal">
-        <h3>Chest Day</h3>
-        <p>10 sets of bench press today</p>
-        <p>ABCDEFG - 67kg energized</p>
-        <button>Delete Journal</button>
+    <div id="exercises-list" class="exercises-list">
+      <div class="exerciseFound">
+        <p>Status: Success</p>
+        <p>Found: 100</p>
+        <p>Listed: 10</p>
       </div>
-      <div class="journal">
-        <h3>Chest Day</h3>
-        <p>10 sets of bench press today</p>
-        <p>ABCDEFG - 67kg energized</p>
-        <button>Delete Journal</button>
-      </div>
-      <div class="journal">
-        <h3>Chest Day</h3>
-        <p>10 sets of bench press today</p>
-        <p>ABCDEFG - 67kg energized</p>
-        <button>Delete Journal</button>
+      <div class="exercise">
+        <h3>12345ab - Exercise 1</h3>
       </div>
     </div>
   </main>

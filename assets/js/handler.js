@@ -1,6 +1,7 @@
 const API_URL = "https://gymscribe.up.railway.app";
 const DASHBOARD_URL = "https://gymscribe.vercel.app/dashboard/analytics.html";
 const LOGIN_URL = "https://gymscribe.vercel.app/login.html";
+const GB_EXERCISES_URL = "https://www.exercisedb.dev";
 const STORAGE_KEY = "gymscribe-auth";
 const EMAIL_KEY = "gymscribe-email";
 const ATTENDANCE_KEY = "gymscribe-attendance";
@@ -687,6 +688,7 @@ async function chatAI(message, messageHistory = []) {
 export {
   API_URL,
   DASHBOARD_URL,
+  GB_EXERCISES_URL,
   EMAIL_KEY,
   ATTENDANCE_KEY,
   ATTENDANCE_LAST_KEY,
