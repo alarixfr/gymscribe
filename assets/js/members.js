@@ -68,13 +68,16 @@ async function convertToCSV(list) {
       )
       .join("\n");
 
-    const blob = new Blob([csv], { type: "text/csv" });
+    const blob = new Blob([csv], {
+      type: "text/csv",
+    });
+    
     const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "members.csv";
-    a.click();
+    const link = document.createElement("a");
+    
+    link.href = url;
+    link.download = `members-${Date.now()}.csv`;
+    link.click();
 
     URL.revokeObjectURL(url);
   } catch (e) {

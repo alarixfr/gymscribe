@@ -1,6 +1,8 @@
 import { GB_JOURNALS_KEY } from '../assets/js/handler.js';
 
 const journalsForm = document.getElementById('journalsForm');
+const exportCSVButton = document.getElementById('exportCSV');
+const exportJSONButton = document.getElementById('exportJSON');
 
 let journals = [];
 
@@ -108,6 +110,73 @@ function render() {
   }
 }
 
+function exportCSV(list) {
+  try {
+    const headers = [
+      "id",
+      "title",
+      "content",
+      "weight",
+      "mood",
+      "timestamp",
+    ];
+    
+    const rows = [
+      headers,
+      ...list.map((m) => [
+        m.id ?? "",
+        m.title ?? "",
+        m.content ?? "",
+        m.weight ?? "",
+        m.mood ?? "",
+        m.timestamp ?? "",
+      ])
+    ];
+    
+    const csv = rows
+      .map((row) =>
+        row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(",")
+      )
+      .join("\n");
+    
+    const blob = new Blob([csv], {
+      type: "text/csv",
+    });
+    
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    
+    link.href = url;
+    link.download = `journals-${Date.now()}.csv`;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
+function exportJSON(list) {
+  try {
+    const dataString = JSON.stringify(list, null, 2);
+    
+    const blob = new Blob([dataString], {
+      type: "application/json",
+    });
+    
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    
+    link.href = url;
+    link.download = `journals-${Date.now()}.json`;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
 journalsForm.addEventListener('submit', (e) => {
   e.preventDefault();
     
@@ -120,6 +189,24 @@ journalsForm.addEventListener('submit', (e) => {
     
   createJournal(journalTitleInput, journalContentInput, journalWeightInput, journalMoodInput);
   journalsForm.reset();
+});
+
+exportCSVButton.addEventListener('click', (e) => {
+  if (journals.length <= 0) {
+    alert('Journals Empty!');
+    return;
+  }
+  
+  exportCSV(journals);
+});
+
+exportJSONButton.addEventListener('click', (e) => {
+  if (journals.length <= 0) {
+    alert('Journals Empty!');
+    return;
+  }
+  
+  exportJSON(journals);
 });
 
 load();

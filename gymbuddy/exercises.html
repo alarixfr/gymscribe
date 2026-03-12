@@ -7,7 +7,7 @@
     <meta name="description" content="A new web page">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="../assets/img/Gymscribe.png">
-    <title>GymBuddy - Journals</title>
+    <title>GymBuddy - Exercises</title>
     
     <link rel="stylesheet" href="./style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,18 +47,18 @@
       <form id="journalsForm">
         <h1>Add Journals</h1>
         <label for="journalsTitle">Title:</label>
-        <input id="journalsTitle" type="text" placeholder="Chest day..." maxlength="18" autocomplete="off" required>
+        <input id="journalsTitle" type="text" placeholder="Chest day..." maxlength="18" required>
         <label for="journalsContent">Content:</label>
-        <input id="journalsContent" type="text" placeholder="10 sets of bench press today..." maxlength="32" autocomplete="off" required>
+        <input id="journalsContent" type="text" placeholder="10 sets of bench press today..." maxlength="32" required>
         <label for="journalsWeight">Weight:</label>
-        <input id="journalsWeight" type="number" placeholder="Weight (kg)" min="0" max="999" autocomplete="off" required>
+        <input id="journalsWeight" type="number" placeholder="Weight (kg)" min="0" max="999" required>
         <label for="journalsMood">Mood:</label>
-        <input id="journalsMood" type="text" placeholder="Energized..." maxlength="18" autocomplete="off" required>
+        <input id="journalsMood" type="text" placeholder="Energized..." maxlength="18" required>
         <button id="journalsSubmit" type="submit">Add Journal</button>
       </form>
       <div class="journals-advanced">
-        <button id="exportCSV">Export To .CSV</button>
-        <button id="exportJSON">Export To .JSON</button>
+        <button>Export To .CSV</button>
+        <button>Import With .CSV</button>
       </div>
     </div>
     <div id="journals-list" class="journals-list">
