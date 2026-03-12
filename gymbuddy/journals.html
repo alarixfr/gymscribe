@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A new web page">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="../assets/img/Gymscribe.png">
+    <title>GymBuddy - Journals</title>
+    
+    <link rel="stylesheet" href="./style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <script src="./burger.js" defer></script>
+    <script src="./gymbuddyJournals.js" type="module"></script>
+    <script src="../assets/js/handler.js" type="module"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo-container">
+      <a href="/" class="logo">
+        <img src="../assets/img/Gymscribe.png" alt="Gymscribe Logo">
+      </a>
+      <span>GymBuddy</span>
+    </div>
+    
+    <nav class="menu">
+      <a href="/gymbuddy/index.html">Ask GymBuddy</a>
+      <a href="/gymbuddy/exercises.html">Exercises</a>
+      <a href="/gymbuddy/journals.html">Journals</a>
+      <a href="../">Try Gymscribe</a>
+    </nav>
+  </div>
+  
+  <div class="burger-container">
+    <div class="burger">☰</div>
+  </div>
+  
+  <main>
+    <div class="journals-manager">
+      <form id="journalsForm">
+        <h1>Add Journals</h1>
+        <label for="journalsTitle">Title:</label>
+        <input id="journalsTitle" type="text" placeholder="Chest day..." maxlength="18" required>
+        <label for="journalsContent">Content:</label>
+        <input id="journalsContent" type="text" placeholder="10 sets of bench press today..." maxlength="32" required>
+        <label for="journalsWeight">Weight:</label>
+        <input id="journalsWeight" type="number" placeholder="Weight (kg)" min="0" max="999" required>
+        <label for="journalsMood">Mood:</label>
+        <input id="journalsMood" type="text" placeholder="Energized..." maxlength="18" required>
+        <button id="journalsSubmit" type="submit">Add Journal</button>
+      </form>
+      <div class="journals-advanced">
+        <button>Export To .CSV</button>
+        <button>Import With .CSV</button>
+      </div>
+    </div>
+    <div id="journals-list" class="journals-list">
+      <div class="journal">
+        <h3>Chest Day</h3>
+        <p>10 sets of bench press today</p>
+        <p>ABCDEFG - 67kg energized</p>
+        <button>Delete Journal</button>
+      </div>
+      <div class="journal">
+        <h3>Chest Day</h3>
+        <p>10 sets of bench press today</p>
+        <p>ABCDEFG - 67kg energized</p>
+        <button>Delete Journal</button>
+      </div>
+      <div class="journal">
+        <h3>Chest Day</h3>
+        <p>10 sets of bench press today</p>
+        <p>ABCDEFG - 67kg energized</p>
+        <button>Delete Journal</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

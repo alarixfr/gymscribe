@@ -264,6 +264,99 @@ main {
   display: flex !important;
 }
 
+.journals-manager, .journals-list {
+  width: 100%;
+}
+
+.journals-manager {
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.journals-manager, .journals-manager form {
+  font-size: 1.1rem;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.journals-manager form, .journals-advanced {
+  width: 80%;
+}
+
+.journals-manager form input, .journals-manager form button {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: none;
+}
+
+.journals-manager form label {
+  text-align: left;
+  align-self: flex-start;
+}
+
+.journals-list {
+  margin-top: auto;
+  height: 100%;
+  max-height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+}
+
+.journals-advanced {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.journals-advanced button {
+  width: 100%;
+}
+
+#journalsSubmit, .journals-advanced button {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  background: rgba(20, 180, 100, 0.8);
+  transition: all 0.2s ease;
+}
+
+#journalsSubmit:hover, .journals-advanced button:hover {
+  background: rgba(20, 180, 100, 0.5);
+}
+
+.journal {
+  color: white;
+  margin: 0.6rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.journal h3 {
+  font-size: 1.4rem;
+}
+
+.journal button {
+  margin-top: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.8rem;
+  background: rgba(250,71,71,0.8);
+}
+
+.journal button:hover {
+  background: rgba(250,71,71,0.6);
+}
+
 @media (max-width: 768px) {
   body, main {
     height: 100dvh;
