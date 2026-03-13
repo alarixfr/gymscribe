@@ -357,6 +357,78 @@ main {
   background: rgba(250,71,71,0.6);
 }
 
+.exercise {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.exercise-head {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+}
+
+
+.exercise-info {
+  width: 40%;
+}
+
+.exercise-info img {
+  width: 100%;
+}
+
+.exercise-data-container {
+  width: 100%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.exercise-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.exercise-data p {
+  font-size: 1.4rem;
+}
+
+.exercise-title {
+  font-size: 2.1rem;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.exercise-label {
+  font-size: 1.6rem !important;
+  font-weight: bold;
+}
+
+.exercise-intructions {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.exercise-intructions p {
+  font-size: 1.4rem;
+}
+
 @media (max-width: 768px) {
   body, main {
     height: 100dvh;
@@ -404,5 +476,22 @@ main {
   
   .chat-window-placeholder h1 {
     font-size: 1.4rem;
+  }
+  
+  .exercise-head {
+    flex-direction: column;
+  }
+  
+  .exercise-info {
+    width: 100%;
+    padding: 0.2rem 2rem;
+  }
+  
+  .exercise-label {
+    font-size: 1.1rem !important;
+  }
+  
+  .exercise-data p, .exercise-intructions p {
+    font-size: 1rem;
   }
 }
